@@ -15,4 +15,10 @@ public class BillboardContext : DbContext
     
     public required DbSet<User> Users { get; set; }
     public required DbSet<UserRole> UserRoles { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // TODO add models configuration to ModelsConfiguration folder and use them here
+        base.OnModelCreating(modelBuilder);
+    }
 }
