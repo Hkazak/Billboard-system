@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Persistence.ModelConfigurations;
 using Persistence.Models;
 
 namespace Persistence.Context;
@@ -19,6 +20,7 @@ public class BillboardContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // TODO add models configuration to ModelsConfiguration folder and use them here
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        
     }
 }

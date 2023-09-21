@@ -8,9 +8,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        // TODO add configurations to other properties
+        // TODO add configurations to other properties, 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).HasMaxLength(100);
         builder.HasIndex(e => e.Email).IsUnique();
+        builder.Property(e => e.Password).HasMaxLength(64);
+        builder.Property(e => e.RoleId);
+        builder.Property(e => e.Role);
     }
 }
