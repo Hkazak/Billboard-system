@@ -19,8 +19,9 @@ public class BillboardContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // TODO add models configuration to ModelsConfiguration folder and use them here
         modelBuilder.ApplyConfiguration(new UserConfiguration());
-        
+        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
     }
+    
+    
 }

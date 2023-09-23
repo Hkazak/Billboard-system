@@ -1,7 +1,9 @@
-﻿using Application.Services;
+﻿using System.ComponentModel.DataAnnotations;
+using Application.Services;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Persistence.Context;
 using Persistence.Enums;
 using Persistence.Models;
@@ -27,7 +29,6 @@ public class AddUserCommand : IRequest<AuthTokenResponse>
 
         public async Task<AuthTokenResponse> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
-            // TODO add validation if email already used
             var passwordHash = _passwordHasher.CalculateHash(request.Request.Password);
             var user = new User
             {

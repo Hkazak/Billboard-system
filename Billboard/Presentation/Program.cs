@@ -1,3 +1,4 @@
+using FluentValidation;
 using Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureCustomServices();
+builder.Services.ConfigureValidators();
+builder.Services.ConfigureCqrs();
 
 var app = builder.Build();
 

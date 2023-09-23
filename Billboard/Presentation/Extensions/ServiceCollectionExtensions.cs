@@ -1,5 +1,8 @@
-﻿using Application.Services;
+﻿using System.Reflection;
+using Application.Services;
 using Application.ServicesImplementations;
+using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 
@@ -23,9 +26,18 @@ public static class ServiceCollectionExtensions
         return services;
     }
     
-    public static IServiceCollection ConfigureCqrs()
+    public static IServiceCollection ConfigureCqrs(this IServiceCollection services)
     {
-        // TODO configure CQRS by MediatR
-        throw new NotImplementedException();
+        services.AddMediatR(configuration =>
+        {
+            configuration.RegisterServicesFromAssembly(Assembly.Load(nameof(Application)));
+        });
+        return services;
     }
+
+    public static IServiceCollection ConfigureValidators(this IServiceCollection services)
+    {
+        return services.AddValidatorsFromAssembly(Assembly.Load(nameof(Presentation)));
+    }
+    
 }

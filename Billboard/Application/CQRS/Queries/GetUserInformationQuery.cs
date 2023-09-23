@@ -1,5 +1,6 @@
 ﻿using Contracts.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Models;
 
@@ -20,7 +21,13 @@ public class GetUserInformationQuery : IRequest<User>
 
         public async Task<User> Handle(GetUserInformationQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(e => e.Id == request.UserId, cancellationToken);
+            if (user is null)
+            {
+                throw new NotFoundException($"User with id: {request.UserId} not found");
+            }
+
+            return user;
         }
     }
 }
