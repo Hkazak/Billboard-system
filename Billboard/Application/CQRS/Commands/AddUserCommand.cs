@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Application.Services;
+﻿using Application.Services;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Persistence.Context;
 using Persistence.Enums;
 using Persistence.Models;

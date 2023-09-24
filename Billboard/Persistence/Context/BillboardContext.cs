@@ -22,6 +22,4 @@ public class BillboardContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
     }
-    
-    
 }

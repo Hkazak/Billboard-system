@@ -1,16 +1,17 @@
-﻿using Contracts.Exceptions;
+﻿using Application.Extensions;
+using Contracts.Exceptions;
+using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using Persistence.Models;
 
 namespace Application.CQRS.Queries;
 
-public class GetUserInformationQuery : IRequest<User>
+public class GetUserInformationQuery : IRequest<UserResponse>
 {
     public required Guid UserId { get; init; }
 
-    public class GetUserInformationQueryHandler : IRequestHandler<GetUserInformationQuery, User>
+    public class GetUserInformationQueryHandler : IRequestHandler<GetUserInformationQuery, UserResponse>
     {
         private readonly BillboardContext _context;
 
@@ -19,7 +20,7 @@ public class GetUserInformationQuery : IRequest<User>
             _context = context;
         }
 
-        public async Task<User> Handle(GetUserInformationQuery request, CancellationToken cancellationToken)
+        public async Task<UserResponse> Handle(GetUserInformationQuery request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.FirstOrDefaultAsync(e => e.Id == request.UserId, cancellationToken);
             if (user is null)
@@ -27,7 +28,7 @@ public class GetUserInformationQuery : IRequest<User>
                 throw new NotFoundException($"User with id: {request.UserId} not found");
             }
 
-            return user;
+            return user.CreateResponse();
         }
     }
 }

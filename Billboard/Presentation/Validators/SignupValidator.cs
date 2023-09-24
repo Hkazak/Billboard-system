@@ -1,25 +1,20 @@
-﻿using System.Text.RegularExpressions;
+﻿using Application.Regexes;
 using Contracts.Requests;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Extensions;
 
 namespace Presentation.Validators;
 
-public class UserValidator : AbstractValidator<SignupRequest> 
+public class SignupValidator : AbstractValidator<SignupRequest> 
 {
-    private readonly BillboardContext _context;
-    
-    public UserValidator(BillboardContext context)
+    public SignupValidator(BillboardContext context)
     {
-        _context = context;
         RuleFor(x => x.Name).NotEmpty();
-        RuleFor(x => x.Password).NotEmpty().Matches(new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"));
-        RuleFor(x => x.Email).NotEmpty().EmailAddress().MustAsync(IsUniqueEmailAsync);
-    }
-
-    private async Task<bool> IsUniqueEmailAsync(string email, CancellationToken cancellationToken = default)
-    {
-        return await _context.Users.AnyAsync(e => e.Email == email, cancellationToken);
+        RuleFor(x => x.Password).NotEmpty()
+            .Matches(PasswordRegexes.Length8AtLeastOneCharAndDigitPasswordRegex());
+        RuleFor(x => x.Email).NotEmpty()
+            .EmailAddress()
+            .MustAsync(context.IsUniqueEmailAsync);
     }
 }

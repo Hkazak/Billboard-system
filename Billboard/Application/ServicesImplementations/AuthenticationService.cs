@@ -13,6 +13,12 @@ public class AuthenticationService : IAuthenticationService
 {
 
     private readonly JwtConfiguration _config;
+
+    public AuthenticationService(JwtConfiguration config)
+    {
+        _config = config;
+    }
+
     public AuthTokenResponse GenerateJwtToken(User user)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.Key));
@@ -36,5 +42,4 @@ public class AuthenticationService : IAuthenticationService
         
         return  authJwtToken;
     }
-
 }
