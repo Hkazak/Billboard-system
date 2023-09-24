@@ -29,7 +29,7 @@ public class ManagersController : ControllerBase
     {
         var cancellationToken = HttpContext.RequestAborted;
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-        if (validationResult.IsValid)
+        if (!validationResult.IsValid)
         {
             var errorMessage = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));
             var errorResponse = new ErrorResponse
@@ -48,7 +48,7 @@ public class ManagersController : ControllerBase
         return CreatedAtAction(nameof(GetManager), new
         {
             id = response.Id
-        });
+        }, response);
     }
 
     [HttpGet]
