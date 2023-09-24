@@ -51,8 +51,8 @@ public static class ServiceCollectionExtensions
             throw new InvalidOperationException("JWT Configuration is undefined");
         }
 
+        services.AddTransient<JwtConfiguration>(_ => jwtConfig);
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Key));
-        services.AddTransient<JwtConfiguration>();
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

@@ -11,7 +11,6 @@ namespace Application.ServicesImplementations;
 
 public class AuthenticationService : IAuthenticationService
 {
-
     private readonly JwtConfiguration _config;
 
     public AuthenticationService(JwtConfiguration config)
