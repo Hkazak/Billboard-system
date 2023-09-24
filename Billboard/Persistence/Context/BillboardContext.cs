@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Persistence.ModelConfigurations;
+using Persistence.Models;
 
 namespace Persistence.Context;
 
@@ -10,5 +12,14 @@ public class BillboardContext : DbContext
 
     public BillboardContext(DbContextOptions options) : base(options)
     {
+    }
+    
+    public required DbSet<User> Users { get; set; }
+    public required DbSet<UserRole> UserRoles { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
     }
 }
