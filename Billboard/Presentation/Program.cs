@@ -13,6 +13,7 @@ builder.Services.ConfigureCustomServices();
 builder.Services.ConfigureValidators();
 builder.Services.ConfigureCqrs();
 builder.Services.ConfigureAuth(builder.Configuration);
+builder.Services.ConfigureSwagger();
 
 var app = builder.Build();
 
