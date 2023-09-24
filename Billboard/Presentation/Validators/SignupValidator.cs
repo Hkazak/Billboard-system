@@ -1,5 +1,6 @@
 ﻿using Application.Regexes;
 using Contracts.Requests;
+using Contracts.ValidationMessages;
 using FluentValidation;
 using Persistence.Context;
 using Persistence.Extensions;
@@ -10,11 +11,15 @@ public class SignupValidator : AbstractValidator<SignupRequest>
 {
     public SignupValidator(BillboardContext context)
     {
-        RuleFor(x => x.Name).NotEmpty();
+        RuleFor(x => x.Name).NotEmpty()
+            .WithMessage(ValidationErrorMessages.NameIsEmpty);
         RuleFor(x => x.Password).NotEmpty()
-            .Matches(PasswordRegexes.Length8AtLeastOneCharAndDigitPasswordRegex());
+            .Matches(PasswordRegexes.Length8AtLeastOneCharAndDigitPasswordRegex())
+            .WithMessage(ValidationErrorMessages.InvalidPasswordFormat);
         RuleFor(x => x.Email).NotEmpty()
             .EmailAddress()
-            .MustAsync(context.IsUniqueEmailAsync);
+            .WithMessage(ValidationErrorMessages.InvalidEmailFormat)
+            .MustAsync(context.IsUniqueEmailAsync)
+            .WithMessage(ValidationErrorMessages.EmailAlreadyUsed);
     }
 }

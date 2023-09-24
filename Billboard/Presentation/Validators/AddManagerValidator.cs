@@ -1,5 +1,6 @@
 ﻿using Application.Regexes;
 using Contracts.Requests;
+using Contracts.ValidationMessages;
 using FluentValidation;
 using Persistence.Context;
 using Persistence.Extensions;
@@ -13,9 +14,12 @@ public class AddManagerValidator : AbstractValidator<SigninRequest>
         RuleFor(e => e.Email)
             .NotEmpty()
             .EmailAddress()
-            .MustAsync(context.IsUniqueEmailAsync);
+            .WithMessage(ValidationErrorMessages.InvalidEmailFormat)
+            .MustAsync(context.IsUniqueEmailAsync)
+            .WithMessage(ValidationErrorMessages.EmailAlreadyUsed);
         RuleFor(e => e.Password)
             .NotEmpty()
-            .Matches(PasswordRegexes.Length8AtLeastOneCharAndDigitPasswordRegex());
+            .Matches(PasswordRegexes.Length8AtLeastOneCharAndDigitPasswordRegex())
+            .WithMessage(ValidationErrorMessages.InvalidPasswordFormat);
     }
 }
