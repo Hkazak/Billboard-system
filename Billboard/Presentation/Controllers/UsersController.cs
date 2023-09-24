@@ -5,7 +5,9 @@ using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Extensions;
 
 namespace Presentation.Controllers;
 
@@ -55,6 +57,21 @@ public class UsersController : ControllerBase
         var query = new SigninQuery
         {
             Request = request
+        };
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("self")]
+    public async Task<ActionResult<UserResponse>> GetUser()
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var userId = User.GetUserId();
+        var query = new GetUserInformationQuery
+        {
+            UserId = userId
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Application.Services;
 using Contracts.Configurations;
+using Contracts.Constants;
 using Contracts.Responses;
 using Microsoft.IdentityModel.Tokens;
 using Persistence.Models;
@@ -24,8 +25,9 @@ public class AuthenticationService : IAuthenticationService
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var claims = new[]
         {
-            new Claim(ClaimTypes.Email,user.Email),
-            new Claim(ClaimTypes.Role,user.RoleId.ToString())
+            new Claim(CustomClaimTypes.UserId, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.RoleId.ToString())
         };
         var token = new JwtSecurityToken(_config.Issuer,
             _config.Audience,
@@ -38,7 +40,7 @@ public class AuthenticationService : IAuthenticationService
         {
             AccessToken = jwtToken.WriteToken(token)
         };
-        
-        return  authJwtToken;
+
+        return authJwtToken;
     }
 }

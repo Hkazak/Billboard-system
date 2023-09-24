@@ -1,4 +1,4 @@
-﻿namespace Contracts.ValidationMessages;
+﻿namespace Contracts.Constants;
 
 public static class ValidationErrorMessages
 {

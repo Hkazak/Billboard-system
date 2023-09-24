@@ -1,6 +1,6 @@
 ﻿using Application.Regexes;
+using Contracts.Constants;
 using Contracts.Requests;
-using Contracts.ValidationMessages;
 using FluentValidation;
 using Persistence.Context;
 using Persistence.Extensions;
