@@ -4,6 +4,6 @@ namespace Application.Regexes;
 
 public partial class PasswordRegexes
 {
-    [GeneratedRegex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")]
+    [GeneratedRegex(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")]
     public static partial Regex Length8AtLeastOneCharAndDigitPasswordRegex();
 }

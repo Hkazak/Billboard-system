@@ -14,9 +14,9 @@ namespace Presentation.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IValidator _validator;
+    private readonly IValidator<SignupRequest> _validator;
 
-    public UsersController(IMediator mediator, IValidator validator)
+    public UsersController(IMediator mediator, IValidator<SignupRequest> validator)
     {
         _mediator = mediator;
         _validator = validator;
@@ -27,8 +27,7 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<AuthTokenResponse>> SignupUser([FromBody] SignupRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var validationContext = new ValidationContext<SignupRequest>(request);
-        var validationResult = await _validator.ValidateAsync(validationContext, cancellationToken);
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
             var message = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));

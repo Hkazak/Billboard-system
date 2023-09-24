@@ -15,9 +15,9 @@ namespace Presentation.Controllers;
 public class ManagersController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IValidator _validator;
+    private readonly IValidator<AddManagerRequest> _validator;
 
-    public ManagersController(IMediator mediator, IValidator validator)
+    public ManagersController(IMediator mediator, IValidator<AddManagerRequest> validator)
     {
         _mediator = mediator;
         _validator = validator;
@@ -27,8 +27,8 @@ public class ManagersController : ControllerBase
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<UserResponse>> CreateManager([FromBody] AddManagerRequest request)
     {
-        var validationContext = new ValidationContext<AddManagerRequest>(request);
-        var validationResult = await _validator.ValidateAsync(validationContext);
+        var cancellationToken = HttpContext.RequestAborted;
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (validationResult.IsValid)
         {
             var errorMessage = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));
@@ -44,7 +44,7 @@ public class ManagersController : ControllerBase
         {
             Request = request
         };
-        var response = await _mediator.Send(command);
+        var response = await _mediator.Send(command, cancellationToken);
         return CreatedAtAction(nameof(GetManager), new
         {
             id = response.Id
@@ -55,11 +55,12 @@ public class ManagersController : ControllerBase
     [Route("{id:guid}")]
     public async Task<ActionResult<UserResponse>> GetManager([FromRoute] Guid id)
     {
+        var cancellationToken = HttpContext.RequestAborted;
         var query = new GetUserInformationQuery
         {
             UserId = id
         };
-        var response = await _mediator.Send(query);
+        var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }
 }
