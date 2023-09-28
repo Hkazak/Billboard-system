@@ -15,4 +15,15 @@ public static class MapperExtensions
             Role = user.RoleId.ToString()
         };
     }
+
+    public static ManagerResponse CreateResponse(this Manager user)
+    {
+        return new ManagerResponse
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FullName = $"{user.LastName} {user.FirstName} {user.MiddleName}",
+            Phone = user.Phone,
+        };
+    }
 }

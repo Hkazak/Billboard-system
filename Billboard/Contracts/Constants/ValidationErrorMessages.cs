@@ -8,4 +8,6 @@ public static class ValidationErrorMessages
     public const string InvalidEmailFormat = "Invalid email format";
     public const string EmailAlreadyUsed = "Email is already used";
     public const string NameIsEmpty = "Name must not be empty";
+    public const string PhoneAlreadyUsed = "Phone is already used";
+    public const string InvalidPhoneNumber = "Invalid Phone Number";
 }

@@ -3,16 +3,15 @@ using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
 using Persistence.Context;
-using Persistence.Enums;
 using Persistence.Models;
 
 namespace Application.CQRS.Commands;
 
-public class AddManagerCommand : IRequest<UserResponse>
+public class AddManagerCommand : IRequest<ManagerResponse>
 {
     public required AddManagerRequest Request { get; init; }
 
-    public class AddManagerCommandHandler : IRequestHandler<AddManagerCommand, UserResponse>
+    public class AddManagerCommandHandler : IRequestHandler<AddManagerCommand, ManagerResponse>
     {
         private readonly BillboardContext _context;
 
@@ -21,19 +20,21 @@ public class AddManagerCommand : IRequest<UserResponse>
             _context = context;
         }
 
-        public async Task<UserResponse> Handle(AddManagerCommand request, CancellationToken cancellationToken)
+        public async Task<ManagerResponse> Handle(AddManagerCommand request, CancellationToken cancellationToken)
         {
             const string defaultPasswordHash = "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342"; // Password: P@ssw0rd
-            var user = new User
+            var manager = new Manager
             {
-                Name = request.Request.Name,
                 Email = request.Request.Email,
                 Password = defaultPasswordHash,
-                RoleId = UserRoleId.Manager
+                Phone = request.Request.Phone,
+                FirstName = request.Request.FirstName,
+                MiddleName = request.Request.MiddleName,
+                LastName = request.Request.LastName,
             };
-            await _context.Users.AddAsync(user, cancellationToken);
+            await _context.Managers.AddAsync(manager, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            return user.CreateResponse();
+            return manager.CreateResponse();
         }
     }
 }

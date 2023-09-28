@@ -19,10 +19,6 @@ public class UserRoleConfiguration: IEntityTypeConfiguration<UserRole>
             {
                 Id = UserRoleId.Client,Role = UserRoleId.Client.ToString()
             },
-            new UserRole
-            {
-                Id = UserRoleId.Manager,Role = UserRoleId.Manager.ToString()
-            },
         };
         builder.HasKey(e => e.Id);
         builder.HasData(roles);
