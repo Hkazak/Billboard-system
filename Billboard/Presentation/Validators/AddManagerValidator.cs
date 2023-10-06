@@ -13,6 +13,10 @@ public class AddManagerValidator : AbstractValidator<AddManagerRequest>
     {
         RuleFor(x => x.FirstName).NotEmpty()
             .WithMessage(ValidationErrorMessages.NameIsEmpty);
+        RuleFor(x => x.LastName).NotEmpty()
+            .WithMessage(ValidationErrorMessages.NameIsEmpty);
+        RuleFor(x => x.MiddleName).NotEmpty()
+            .WithMessage(ValidationErrorMessages.NameIsEmpty);
         RuleFor(x => x.Email).NotEmpty()
             .EmailAddress()
             .WithMessage(ValidationErrorMessages.InvalidEmailFormat)
