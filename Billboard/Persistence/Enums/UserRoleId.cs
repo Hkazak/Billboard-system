@@ -3,6 +3,5 @@
 public enum UserRoleId
 {
     Client,
-    Manager,
     Administrator
 }

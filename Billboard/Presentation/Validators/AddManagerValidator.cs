@@ -11,12 +11,21 @@ public class AddManagerValidator : AbstractValidator<AddManagerRequest>
 {
     public AddManagerValidator(BillboardContext context)
     {
-        RuleFor(x => x.Name).NotEmpty()
+        RuleFor(x => x.FirstName).NotEmpty()
+            .WithMessage(ValidationErrorMessages.NameIsEmpty);
+        RuleFor(x => x.LastName).NotEmpty()
+            .WithMessage(ValidationErrorMessages.NameIsEmpty);
+        RuleFor(x => x.MiddleName).NotEmpty()
             .WithMessage(ValidationErrorMessages.NameIsEmpty);
         RuleFor(x => x.Email).NotEmpty()
             .EmailAddress()
             .WithMessage(ValidationErrorMessages.InvalidEmailFormat)
             .MustAsync(context.IsUniqueEmailAsync)
             .WithMessage(ValidationErrorMessages.EmailAlreadyUsed);
+        RuleFor(x => x.Phone).NotEmpty()
+            .Matches(ValidationRegexes.PhoneNumberRegex())
+            .WithMessage(ValidationErrorMessages.InvalidPhoneNumber)
+            .MustAsync(context.IsUniquePhoneAsync)
+            .WithMessage(ValidationErrorMessages.PhoneAlreadyUsed);
     }
 }

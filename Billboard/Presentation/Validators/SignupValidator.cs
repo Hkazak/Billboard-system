@@ -14,7 +14,7 @@ public class SignupValidator : AbstractValidator<SignupRequest>
         RuleFor(x => x.Name).NotEmpty()
             .WithMessage(ValidationErrorMessages.NameIsEmpty);
         RuleFor(x => x.Password).NotEmpty()
-            .Matches(PasswordRegexes.Length8AtLeastOneCharAndDigitPasswordRegex())
+            .Matches(ValidationRegexes.Length8AtLeastOneCharAndDigitPasswordRegex())
             .WithMessage(ValidationErrorMessages.InvalidPasswordFormat);
         RuleFor(x => x.Email).NotEmpty()
             .EmailAddress()
