@@ -21,5 +21,8 @@ public class SignupValidator : AbstractValidator<SignupRequest>
             .WithMessage(ValidationErrorMessages.InvalidEmailFormat)
             .MustAsync(context.IsUniqueEmailAsync)
             .WithMessage(ValidationErrorMessages.EmailAlreadyUsed);
+        RuleFor(e => e.ConfirmPassword)
+            .Equal(e => e.Password)
+            .WithMessage(ValidationErrorMessages.ConfirmPasswordShouldBeSameWithPassword);
     }
 }
