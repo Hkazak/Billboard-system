@@ -1,4 +1,5 @@
-﻿using Application.Services;
+﻿using Application.Extensions;
+using Application.Services;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
@@ -37,7 +38,7 @@ public class AddUserCommand : IRequest<AuthTokenResponse>
             };
             await _context.Users.AddAsync(user, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            var token = _authenticationService.GenerateJwtToken(user);
+            var token = _authenticationService.GenerateJwtToken(user.CreateClaims());
 
             return token;
         }

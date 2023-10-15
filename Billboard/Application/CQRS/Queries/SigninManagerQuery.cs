@@ -1,4 +1,5 @@
-﻿using Application.Services;
+﻿using Application.Extensions;
+using Application.Services;
 using Contracts.Exceptions;
 using Contracts.Requests;
 using Contracts.Responses;
@@ -8,11 +9,11 @@ using Persistence.Context;
 
 namespace Application.CQRS.Queries;
 
-public class SigninQuery : IRequest<AuthTokenResponse>
+public class SigninManagerQuery : IRequest<AuthTokenResponse>
 {
     public required SigninRequest Request { get; init; }
     
-    public class SigninQueryHandler : IRequestHandler<SigninQuery, AuthTokenResponse>
+    public class SigninQueryHandler : IRequestHandler<SigninManagerQuery, AuthTokenResponse>
     {
         private readonly BillboardContext _context;
         private readonly IPasswordHasher _passwordHasher;
@@ -26,17 +27,17 @@ public class SigninQuery : IRequest<AuthTokenResponse>
             _authenticationService = authenticationService;
         }
 
-        public async Task<AuthTokenResponse> Handle(SigninQuery request, CancellationToken cancellationToken)
+        public async Task<AuthTokenResponse> Handle(SigninManagerQuery request, CancellationToken cancellationToken)
         {
             var passwordHash = _passwordHasher.CalculateHash(request.Request.Password);
-            var user = await _context.Users.FirstOrDefaultAsync(
+            var manager = await _context.Managers.FirstOrDefaultAsync(
                 e => e.Email == request.Request.Email && e.Password == passwordHash, cancellationToken);
-            if (user is null)
+            if (manager is null)
             {
-                throw new NotFoundException($"User with email {request.Request.Email} not found");
+                throw new NotFoundException($"Manager with email {request.Request.Email} not found");
             }
 
-            var token = _authenticationService.GenerateJwtToken(user);
+            var token = _authenticationService.GenerateJwtToken(manager.CreateClaims());
             return token;
         }
     }

@@ -54,7 +54,7 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<AuthTokenResponse>> SigninUser([FromBody] SigninRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var query = new SigninQuery
+        var query = new SigninUserQuery
         {
             Request = request
         };

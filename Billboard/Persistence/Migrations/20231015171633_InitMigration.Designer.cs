@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BillboardContext))]
-    [Migration("20230924135911_InitMigration")]
+    [Migration("20231015171633_InitMigration")]
     partial class InitMigration
     {
         /// <inheritdoc />
@@ -24,6 +24,84 @@ namespace Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Persistence.Models.Manager", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Phone")
+                        .IsUnique();
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Managers");
+                });
+
+            modelBuilder.Entity("Persistence.Models.ManagerStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ManagerStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 0,
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Status = "Inactive"
+                        });
+                });
 
             modelBuilder.Entity("Persistence.Models.User", b =>
                 {
@@ -61,11 +139,11 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7006a924-5c73-431d-bc26-649dbffe3447"),
+                            Id = new Guid("f1043923-3e8d-436a-a3f7-07a466f300f7"),
                             Email = "admin@Billboard.com",
                             Name = "Admin",
                             Password = "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
-                            RoleId = 2
+                            RoleId = 1
                         });
                 });
 
@@ -85,19 +163,25 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 2,
+                            Id = 1,
                             Role = "Administrator"
                         },
                         new
                         {
                             Id = 0,
                             Role = "Client"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Role = "Manager"
                         });
+                });
+
+            modelBuilder.Entity("Persistence.Models.Manager", b =>
+                {
+                    b.HasOne("Persistence.Models.ManagerStatus", "ManagerStatus")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ManagerStatus");
                 });
 
             modelBuilder.Entity("Persistence.Models.User", b =>

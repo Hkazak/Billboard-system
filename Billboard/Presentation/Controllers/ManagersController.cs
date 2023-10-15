@@ -25,7 +25,7 @@ public class ManagersController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<UserResponse>> CreateManager([FromBody] AddManagerRequest request)
+    public async Task<ActionResult<ManagerResponse>> CreateManager([FromBody] AddManagerRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
@@ -50,17 +50,44 @@ public class ManagersController : ControllerBase
             id = response.Id
         }, response);
     }
-
-    [HttpGet]
-    [Route("{id:guid}")]
-    public async Task<ActionResult<UserResponse>> GetManager([FromRoute] Guid id)
+    
+    [HttpPost]
+    [Route("sign-in")]
+    public async Task<ActionResult<AuthTokenResponse>> SigninManager([FromBody] SigninRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var query = new GetUserInformationQuery
+        var query = new SigninManagerQuery()
         {
-            UserId = id
+            Request = request
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<ActionResult<ManagerResponse>> GetManager([FromRoute] Guid id)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new GetManagerInformationQuery
+        {
+            ManagerId = id
+        };
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    [Authorize(Roles = "Administrator")]
+    [Route("{id:guid}")]
+    public async Task<ActionResult> DeleteManager([FromRoute] Guid id)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var command = new DeleteManagerCommand
+        {
+            ManagerId = id
+        };
+        await _mediator.Send(command, cancellationToken);
+        return NoContent();
     }
 }

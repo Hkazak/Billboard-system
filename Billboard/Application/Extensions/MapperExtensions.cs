@@ -1,4 +1,5 @@
-﻿using Contracts.Responses;
+﻿using Application.InternalModels;
+using Contracts.Responses;
 using Persistence.Models;
 
 namespace Application.Extensions;
@@ -24,6 +25,26 @@ public static class MapperExtensions
             Email = user.Email,
             FullName = $"{user.LastName} {user.FirstName} {user.MiddleName}",
             Phone = user.Phone,
+        };
+    }
+
+    public static AuthenticationClaims CreateClaims(this User user)
+    {
+        return new AuthenticationClaims
+        {
+            Id = user.Id,
+            Email = user.Email,
+            Role = user.RoleId.ToString()
+        };
+    }
+    
+    public static AuthenticationClaims CreateClaims(this Manager user)
+    {
+        return new AuthenticationClaims
+        {
+            Id = user.Id,
+            Email = user.Email,
+            Role = "Manager"
         };
     }
 }

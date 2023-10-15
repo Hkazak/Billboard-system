@@ -17,5 +17,8 @@ public class ManagerConfiguration : IEntityTypeConfiguration<Manager>
         builder.HasIndex(e => e.Phone).IsUnique();
         builder.Property(e => e.Phone).HasMaxLength(16);
         builder.Property(e => e.Password).HasMaxLength(64);
+        builder.HasOne(e => e.ManagerStatus)
+            .WithMany()
+            .HasForeignKey(e => e.StatusId);
     }
 }
