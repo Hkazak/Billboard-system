@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureDbContext(builder.Configuration);
-builder.Services.ConfigureCustomServices();
+builder.Services.ConfigureEmailService(builder.Configuration);
 builder.Services.ConfigureValidators();
 builder.Services.ConfigureCqrs();
 builder.Services.ConfigureAuth(builder.Configuration);
