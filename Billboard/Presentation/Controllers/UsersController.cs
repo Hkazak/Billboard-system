@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using Application.CQRS.Commands;
 using Application.CQRS.Queries;
+using Application.Extensions;
+using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
@@ -16,12 +18,15 @@ namespace Presentation.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IValidator<SignupRequest> _validator;
+    private readonly IValidator<SignupRequest> _signupValidator;
+    private readonly IValidator<ChangePasswordRequest> _changePasswordValidator;
 
-    public UsersController(IMediator mediator, IValidator<SignupRequest> validator)
+    public UsersController(IMediator mediator, IValidator<SignupRequest> signupValidator,
+        IValidator<ChangePasswordRequest> changePasswordValidator)
     {
         _mediator = mediator;
-        _validator = validator;
+        _signupValidator = signupValidator;
+        _changePasswordValidator = changePasswordValidator;
     }
 
     [HttpPost]
@@ -29,7 +34,7 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<AuthTokenResponse>> SignupUser([FromBody] SignupRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await _signupValidator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
             var message = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));
@@ -60,6 +65,31 @@ public class UsersController : ControllerBase
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("password")]
+    public async Task<ActionResult> UpdatePassword([FromBody] ChangePasswordRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var validationResult = await _changePasswordValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            var message = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));
+            var error = new ErrorResponse
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                ErrorMessage = message
+            };
+            return BadRequest(error);
+        }
+
+        var command = new ChangeUserPasswordCommand
+        {
+            NewData = request.CreateUserPasswordData(User.GetUserId())
+        };
+        await _mediator.Send(command, cancellationToken);
+        return NoContent();
     }
 
     [HttpGet]

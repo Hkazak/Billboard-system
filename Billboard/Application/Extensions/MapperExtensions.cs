@@ -1,4 +1,6 @@
 ﻿using Application.InternalModels;
+using Contracts.DataTransferObjects;
+using Contracts.Requests;
 using Contracts.Responses;
 using Persistence.Models;
 
@@ -45,6 +47,16 @@ public static class MapperExtensions
             Id = user.Id,
             Email = user.Email,
             Role = "Manager"
+        };
+    }
+
+    public static ChangePassword CreateUserPasswordData(this ChangePasswordRequest request, Guid id)
+    {
+        return new ChangePassword
+        {
+            Id = id,
+            OldPassword = request.CurrentPassword,
+            NewPassword = request.NewPassword
         };
     }
 }
