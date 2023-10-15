@@ -3,6 +3,7 @@ using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
 using Persistence.Context;
+using Persistence.Enums;
 using Persistence.Models;
 
 namespace Application.CQRS.Commands;
@@ -31,6 +32,7 @@ public class AddManagerCommand : IRequest<ManagerResponse>
                 FirstName = request.Request.FirstName,
                 MiddleName = request.Request.MiddleName,
                 LastName = request.Request.LastName,
+                StatusId = ManagerStatusId.Active,
             };
             await _context.Managers.AddAsync(manager, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

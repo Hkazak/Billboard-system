@@ -17,11 +17,13 @@ public class BillboardContext : DbContext
     public required DbSet<User> Users { get; set; }
     public required DbSet<UserRole> UserRoles { get; set; }
     public required DbSet<Manager> Managers { get; set; }
+    public required DbSet<ManagerStatus> ManagerStatus { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         modelBuilder.ApplyConfiguration(new ManagerConfiguration());
+        modelBuilder.ApplyConfiguration(new ManagerStatusConfiguration());
     }
 }

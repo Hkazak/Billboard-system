@@ -1,12 +1,12 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.InternalModels;
 using Application.Services;
 using Contracts.Configurations;
 using Contracts.Constants;
 using Contracts.Responses;
 using Microsoft.IdentityModel.Tokens;
-using Persistence.Models;
 
 namespace Application.ServicesImplementations;
 
@@ -19,15 +19,15 @@ public class AuthenticationService : IAuthenticationService
         _config = config;
     }
 
-    public AuthTokenResponse GenerateJwtToken(User user)
+    public AuthTokenResponse GenerateJwtToken(AuthenticationClaims userInformation)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.Key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var claims = new[]
         {
-            new Claim(CustomClaimTypes.UserId, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.RoleId.ToString())
+            new Claim(CustomClaimTypes.UserId, userInformation.Id.ToString()),
+            new Claim(ClaimTypes.Email, userInformation.Email),
+            new Claim(ClaimTypes.Role, userInformation.Role)
         };
         var token = new JwtSecurityToken(_config.Issuer,
             _config.Audience,

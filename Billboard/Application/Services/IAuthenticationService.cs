@@ -1,9 +1,9 @@
-﻿using Contracts.Responses;
-using Persistence.Models;
+﻿using Application.InternalModels;
+using Contracts.Responses;
 
 namespace Application.Services;
 
 public interface IAuthenticationService
 {
-    AuthTokenResponse GenerateJwtToken(User user);
+    AuthTokenResponse GenerateJwtToken(AuthenticationClaims claims);
 }
