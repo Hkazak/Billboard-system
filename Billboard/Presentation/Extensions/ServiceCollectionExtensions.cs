@@ -23,10 +23,16 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection ConfigureCustomServices(this IServiceCollection services)
+    public static IServiceCollection ConfigureEmailService(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IPasswordHasher, PasswordHasher>();
-        services.AddScoped<IAuthenticationService, AuthenticationService>();
+        var emailConfig = configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+        if (emailConfig is null)
+        {
+            throw new InvalidOperationException("Email service configuration is undefined");
+        }
+
+        services.AddTransient<EmailConfiguration>(_ => emailConfig);
+        services.AddScoped<IEmailService, EmailService>();
         return services;
     }
     
@@ -46,6 +52,8 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
         var jwtConfig = configuration.GetSection("JwtConfiguration").Get<JwtConfiguration>();
         if (jwtConfig is null)
         {

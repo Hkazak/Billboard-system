@@ -1,4 +1,6 @@
 ﻿using Application.Extensions;
+using Application.InternalModels;
+using Application.Services;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
@@ -15,10 +17,12 @@ public class AddManagerCommand : IRequest<ManagerResponse>
     public class AddManagerCommandHandler : IRequestHandler<AddManagerCommand, ManagerResponse>
     {
         private readonly BillboardContext _context;
+        private readonly IEmailService _emailService;
 
-        public AddManagerCommandHandler(BillboardContext context)
+        public AddManagerCommandHandler(BillboardContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public async Task<ManagerResponse> Handle(AddManagerCommand request, CancellationToken cancellationToken)
@@ -36,6 +40,13 @@ public class AddManagerCommand : IRequest<ManagerResponse>
             };
             await _context.Managers.AddAsync(manager, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
+            var message = new EmailMessage
+            {
+                ReceiverEmailAddress = request.Request.Email,
+                Subject = "Signin credentials",
+                Text = $"<span>Your billboard system credentials</span> <br/>Email: {manager.Email}<br/>Password: P@ssw0rd<br/>"
+            };
+            await _emailService.SendMessageAsync(message, cancellationToken);
             return manager.CreateResponse();
         }
     }
