@@ -4,6 +4,7 @@ using Application.Services;
 using Application.ServicesImplementations;
 using Contracts.Configurations;
 using FluentValidation;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -31,8 +32,7 @@ public static class ServiceCollectionExtensions
             throw new InvalidOperationException("Email service configuration is undefined");
         }
 
-        services.AddTransient<EmailConfiguration>(_ => emailConfig);
-        services.AddScoped<IEmailService, EmailService>();
+        services.AddSingleton<IEmailService, EmailService>(_ => new EmailService(emailConfig, new SmtpClient()));
         return services;
     }
     
