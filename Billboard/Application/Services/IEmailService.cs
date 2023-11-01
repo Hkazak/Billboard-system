@@ -2,7 +2,7 @@
 
 namespace Application.Services;
 
-public interface IEmailService
+public interface IEmailService : IAsyncDisposable
 {
     Task SendMessageAsync(EmailMessage message, CancellationToken cancellationToken = default);
 }
