@@ -14,6 +14,7 @@ builder.Services.ConfigureValidators();
 builder.Services.ConfigureCqrs();
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.ConfigureSwagger();
+builder.Services.ConfigureCache();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using Application.InternalModels;
+﻿using Application.CQRS.Commands;
+using Application.InternalModels;
 using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
@@ -57,6 +58,16 @@ public static class MapperExtensions
             Id = id,
             OldPassword = request.CurrentPassword,
             NewPassword = request.NewPassword
+        };
+    }
+
+    public static CodeConfirmation CreateResetPasswordData(this ResetPasswordRequest request)
+    {
+        return new CodeConfirmation
+        {
+            Email = request.Email,
+            NewPassword = request.NewPassword,
+            ConfirmationCode = request.ConfirmationCode
         };
     }
 }

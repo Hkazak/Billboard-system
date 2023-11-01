@@ -68,7 +68,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut]
-    [Route("password")]
+    [Route("password/update")]
     public async Task<ActionResult> UpdatePassword([FromBody] ChangePasswordRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
@@ -105,5 +105,30 @@ public class UsersController : ControllerBase
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("password/forgot")]
+    public async Task<ActionResult> SendCode([FromBody] ForgotPasswordRequest request)
+    {
+        var query = new ResetPasswordQuery
+        {
+            Email = request.Email
+        };
+        await _mediator.Send(query);
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("password/reset")]
+    public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var command = new ResetPasswordCommand
+        {
+            CodeConfirmationRequest = request.CreateResetPasswordData()
+        };
+        await _mediator.Send(command, cancellationToken);
+        return NoContent();
     }
 }
