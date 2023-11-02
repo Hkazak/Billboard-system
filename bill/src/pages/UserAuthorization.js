@@ -3,9 +3,35 @@ import { useNavigate } from 'react-router'
 import Sidebar from '../components/SideBar'
 import './page_styles/UserAuthorization.css'
 import { Link } from 'react-router-dom'
+import { useRef } from 'react'
+import { AuthorizeUser } from '../lib/UserController'
 
 function UserAuthorization() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  function clearValidation(){
+    email.current.setCustomValidity('');
+    password.current.setCustomValidity('');
+  }
+
+  async function handleAuthorization(event){
+    event.preventDefault();
+    clearValidation();
+
+    const response = await AuthorizeUser(email.current.value, password.current.value);
+    const jsonResponse = response.json();
+
+    if(response.ok){
+      navigate('/');
+      return;
+    }
+
+    email.current.setCustomValidity('Электронная почта или пароль указаны неправильно');
+    event.target.form.reportValidity();
+  }
 
   return (
     <div>
@@ -25,12 +51,12 @@ function UserAuthorization() {
             <h1 className='auth-text'>Авторизация</h1>
             <div className='form-input'>
               <form>
-                <input name='email' className='input-field' placeholder='Email' type='email' required/>
-                <input name='password' className='input-field' placeholder='Password' type='password' required/>
+                <input ref={email} name='email' className='input-field' placeholder='Email' type='email' required/>
+                <input ref={password} name='password' className='input-field' placeholder='Password' type='password' required/>
                 <div className='reg-link'>
                   <Link to='/recover'>Забыли пароль???</Link>
                 </div>
-                <button className='btn-auth'>Авторизоваться</button>
+                <button onClick={handleAuthorization} className='btn-auth'>Авторизоваться</button>
               </form>
             </div>
 
