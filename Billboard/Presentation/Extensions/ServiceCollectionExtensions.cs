@@ -87,9 +87,9 @@ public static class ServiceCollectionExtensions
             const string version = "v1";
             options.SwaggerDoc(version, new OpenApiInfo
             {
-                Title = "Kaspi Bot API",
+                Title = "Billboard System API",
                 Version = version,
-                Description = "Kaspi Bot API Services"
+                Description = "Billboard System API Services"
             });
             options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
             {
@@ -116,5 +116,10 @@ public static class ServiceCollectionExtensions
             });
         });
         return services;
+    }
+
+    public static IServiceCollection ConfigureCache(this IServiceCollection services)
+    {
+        return services.AddDistributedMemoryCache();
     }
 }
