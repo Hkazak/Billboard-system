@@ -24,7 +24,17 @@ const Sidebar = ({children}) => {
             path:"/auth",
             name:"Authorization",
             icon:<FaTh/>
-        }
+        },
+        {
+            path:"/all-bills",
+            name:"AllBillboards",
+            icon:<FaTh/>
+        },
+        {
+            path:"/admin",
+            name:"Admin",
+            icon:<FaTh/>
+        },
     ]
     return (
         <div className="container">
