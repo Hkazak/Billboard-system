@@ -1,0 +1,44 @@
+.main-select-cont{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 80px;
+    margin-top: 40px;
+    background-color: #52AABC;
+}
+
+.sep{
+    height: 30px;
+}
+
+
+
+select {
+    /* appearance: none; */
+    /* safari */
+    /* -webkit-appearance: none; */
+    /* other styles for aesthetics */
+    width: 136px;
+    padding: 0.675em 6em 0.675em 1em;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+.list-wrapper{
+    border: 1px solid #52AABC;
+    border-radius: 10px;
+}
+
+.list-cont{
+    margin-top: 20px;
+    list-style: none;
+    text-align: center;
+}
+
+.list-cont li {
+    display: inline;
+    margin-right: 120px;
+}
