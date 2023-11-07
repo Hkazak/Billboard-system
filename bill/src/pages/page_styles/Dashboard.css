@@ -4,6 +4,7 @@
     height: 80px;
     margin-top: 40px;
     background-color: #52AABC;
+    font-size: 13px;
 }
 
 .sep{
@@ -17,7 +18,7 @@ select {
     /* safari */
     /* -webkit-appearance: none; */
     /* other styles for aesthetics */
-    width: 136px;
+    width: 153px;
     padding: 0.675em 6em 0.675em 1em;
     background-color: #fff;
     border: 1px solid #caced1;
