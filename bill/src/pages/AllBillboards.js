@@ -15,9 +15,9 @@ import Button from 'react-bootstrap/Button';
 import TESTING from './TESTING.js';
 import Success from './Success.js';
 import AN from './AN.js';
-import './page_styles/Admin.css'
 
-function Admin() {
+
+function AllBillboards() {
     const [isPopup1Open, setPopup1Open] = useState(false);
     const [isPopup2Open, setPopup2Open] = useState(false);
     const [isPopup3Open, setPopup3Open] = useState(false);
@@ -182,30 +182,32 @@ function Admin() {
         <>
             <Sidebar>
 
-              {/* Example */}
-
-            {/* <h1>React Distinct Pop-Up Forms</h1>
+            <h1>React Distinct Pop-Up Forms</h1>
 
             <button onClick={openPopup1}>Open Form 1</button>
             <button onClick={openPopup2}>Open Form 2</button>
 
             <AN isOpen={isPopup1Open} closeModal={closePopup1} title="Form 1">
+            {/* Customize Form 1 content here */}
             <form>
                 <label>
                 Name for Form 1:
                 <input type="text" />
                 </label>
+                {/* Additional form fields for Form 1 */}
             </form>
             </AN>
 
             <AN isOpen={isPopup2Open} closeModal={closePopup2} title="Form 2">
+            {/* Customize Form 2 content here */}
             <form>
                 <label>
                 Name for Form 2:
                 <input type="text" />
                 </label>
+                {/* Additional form fields for Form 2 */}
             </form>
-            </AN> */}
+            </AN>
 
 
 
@@ -319,4 +321,5 @@ function Admin() {
 
 }
 
-export default Admin
+
+export default AllBillboards
