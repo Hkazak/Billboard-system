@@ -7,6 +7,7 @@ import SideBar from './components/SideBar';
 import UserRegistration from './pages/UserRegistration';
 import ForgotPassword from './pages/ForgotPassword';
 import ChangePassword from './pages/ChangePassword';
+import Admin from './pages/Admin';
 
 function App(){
 
@@ -15,7 +16,7 @@ function App(){
       <BrowserRouter>
         
             <Routes>
-              <Route path='/' element={<Dashboard/>}/>
+              <Route path='/' element={<Admin/>}/>
               <Route path='/auth' element={<UserAuthorization/>}/>
               <Route path='/reg' element={<UserRegistration/>}/>
               <Route path='/recover' element={<ForgotPassword/>}></Route>

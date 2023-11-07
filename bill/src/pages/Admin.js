@@ -3,17 +3,11 @@
 import React from 'react'
 import { useState } from 'react';
 import Sidebar from '../components/SideBar'
-import Table from 'react-bootstrap/Table';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { data } from '../data.js';
 import ReactPaginate from "react-paginate";
 import './page_styles/AllBillboards.css'
 import Button from 'react-bootstrap/Button';
-import TESTING from './TESTING.js';
-import Success from './Success.js';
 import AN from './AN.js';
 import './page_styles/Admin.css'
 
