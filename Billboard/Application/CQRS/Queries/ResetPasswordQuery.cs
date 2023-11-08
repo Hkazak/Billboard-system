@@ -28,13 +28,14 @@ public class ResetPasswordQuery : IRequest
         public async Task Handle(ResetPasswordQuery request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == request.Email , cancellationToken);
-            if (user is null)
+            var manager = await _context.Managers.FirstOrDefaultAsync(e => e.Email == request.Email , cancellationToken);
+            if (user is null && manager is null)
             {
                 throw new NotFoundException($"User {request.Email} not found");
             }
             
             var randomCode = Random.Shared.Next(1000, 9999);
-            await _distributedCache.SetStringAsync(user.Email, randomCode.ToString(),cancellationToken);
+            await _distributedCache.SetStringAsync(request.Email, randomCode.ToString(),cancellationToken);
             var message = new EmailMessage
             {
                 ReceiverEmailAddress = request.Email,
