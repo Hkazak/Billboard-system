@@ -16,7 +16,7 @@ public static class DbContextExtensions
     public static async Task<bool> IsUniquePhoneAsync(this BillboardContext context, string phone,
         CancellationToken cancellationToken = default)
     {
-        var isUniquePhone = await context.Managers.AllAsync(e => e.Email != phone, cancellationToken);
+        var isUniquePhone = await context.Managers.AllAsync(e => e.Phone != phone, cancellationToken);
         return isUniquePhone;
     }
 }
