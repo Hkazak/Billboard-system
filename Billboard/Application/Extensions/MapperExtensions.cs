@@ -26,7 +26,9 @@ public static class MapperExtensions
         {
             Id = user.Id,
             Email = user.Email,
-            FullName = $"{user.LastName} {user.FirstName} {user.MiddleName}",
+            FirstName = user.FirstName,
+            MiddleName = user.MiddleName,
+            LastName = user.LastName,
             Phone = user.Phone,
         };
     }

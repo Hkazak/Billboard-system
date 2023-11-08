@@ -37,15 +37,26 @@ public class ResetPasswordCommand : IRequest
             {
                 var user = await _context.Users.FirstOrDefaultAsync(
                     e => e.Email == request.CodeConfirmationRequest.Email , cancellationToken);
-                if (user is null)
+                var manager = await _context.Managers.FirstOrDefaultAsync(
+                    e => e.Email == request.CodeConfirmationRequest.Email , cancellationToken);
+                if (user is not null)
+                {
+                    var newPasswordHash = _passwordHasher.CalculateHash(request.CodeConfirmationRequest.NewPassword);
+                    user.Password = newPasswordHash;
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+                else if (manager is not null)
+                {
+                    var newPasswordHash = _passwordHasher.CalculateHash(request.CodeConfirmationRequest.NewPassword);
+                    manager.Password = newPasswordHash;
+                    _context.Managers.Update(manager);
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+                else
                 {
                     throw new NotFoundException($"User {request.CodeConfirmationRequest.Email} not found");
                 }
-
-                var newPasswordHash = _passwordHasher.CalculateHash(request.CodeConfirmationRequest.NewPassword);
-                user.Password = newPasswordHash;
-                _context.Users.Update(user);
-                await _context.SaveChangesAsync(cancellationToken);
             }
             else
             {
