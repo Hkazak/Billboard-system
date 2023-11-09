@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom'
 import { useRef } from 'react'
 import { AuthorizeUser } from '../lib/controllers/UserController'
 import { LS } from '../lib/Consts'
-import { DashboardRoute, ForgotPasswordRoute, UserRegistrationRoute } from '../Paths'
+import { CreateManagerRoute, DashboardRoute, ForgotPasswordRoute, UserRegistrationRoute } from '../Paths'
+import { AuthorizeAdmin } from '../lib/controllers/AdministratorController'
 
-function UserAuthorization() {
+function AdminAuthorization() {
   const navigate = useNavigate();
 
   const email = useRef(null);
@@ -23,14 +24,14 @@ function UserAuthorization() {
     event.preventDefault();
     clearValidation();
 
-    const response = await AuthorizeUser(email.current.value, password.current.value);
+    const response = await AuthorizeAdmin(email.current.value, password.current.value);
     const jsonResponse = await response.json();
 
     if(response.ok){
-      console.log('User authorization feature');
+      console.log('Admin authorization feature');
       console.log(jsonResponse);
       localStorage.setItem(LS.accessToken, jsonResponse['accessToken']);
-      navigate(DashboardRoute);
+      navigate(CreateManagerRoute);
       return;
     }
 
@@ -50,17 +51,11 @@ function UserAuthorization() {
           </div>
 
           <div className='child right-cont'>
-            <div className='reg-link'>
-              <Link to={UserRegistrationRoute}>Registration</Link>
-            </div>
             <h1 className='auth-text'>Авторизация</h1>
             <div className='form-input'>
               <form>
                 <input ref={email} name='email' className='input-field' placeholder='Email' type='email' required/>
                 <input ref={password} name='password' className='input-field' placeholder='Password' type='password' required/>
-                <div className='reg-link'>
-                  <Link to={ForgotPasswordRoute}>Забыли пароль???</Link>
-                </div>
                 <button onClick={handleAuthorization} className='btn-auth'>Авторизоваться</button>
               </form>
             </div>
@@ -71,4 +66,4 @@ function UserAuthorization() {
   )
 }
 
-export default UserAuthorization
+export default AdminAuthorization

@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import { useRef } from 'react'
 import { ResetPasswordSendEmail } from '../lib/controllers/UserController'
 import { localStorageForgotPasswordEmail } from '../lib/Consts'
-import { ResetPasswordRoute, UserRegistrationRoute } from '../Paths'
+import { ManagerAuthRoute, ManagerResetPasswordRoute } from '../Paths'
 
-function ForgotPassword() {
+function ManagerForgotPassword() {
   const navigate = useNavigate();
   const email = useRef(null);
 
@@ -26,9 +26,9 @@ function ForgotPassword() {
     const response = await ResetPasswordSendEmail(email.current.value);
 
     if(response.ok){
-      console.log('User forgot password feature');
+      console.log('Manager forgot password feature');
       localStorage.setItem(localStorageForgotPasswordEmail, email.current.value);
-      navigate(ResetPasswordRoute);
+      navigate(ManagerResetPasswordRoute);
       return;
     }
 
@@ -50,7 +50,7 @@ function ForgotPassword() {
 
           <div className='child right-cont'>
             <div className='reg-link'>
-              <Link to={UserRegistrationRoute}>Registration</Link>
+              <Link to={ManagerAuthRoute}>Авторизация</Link>
             </div>
             <h1 className='auth-text'>Восстановление пароля</h1>
             <div className='form-input'>
@@ -67,4 +67,4 @@ function ForgotPassword() {
   )
 }
 
-export default ForgotPassword
+export default ManagerForgotPassword

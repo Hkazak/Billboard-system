@@ -9,19 +9,20 @@ import {
     FaThList
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-
+import { AdminAuthRoute, CreateManagerRoute, DashboardRoute, ManagerAuthRoute, UserAuthorizationRoute } from '../Paths';
+import AdminAuthorization from '../pages/AdminAuthorization';
 
 const Sidebar = ({children}) => {
     const[isOpen ,setIsOpen] = useState(false);
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/",
+            path:DashboardRoute,
             name:"Dashboard",
             icon:<FaTh/>
         },
         {
-            path:"/auth",
+            path:UserAuthorizationRoute,
             name:"Authorization",
             icon:<FaTh/>
         },
@@ -31,8 +32,18 @@ const Sidebar = ({children}) => {
             icon:<FaTh/>
         },
         {
-            path:"/admin",
-            name:"Admin",
+            path:CreateManagerRoute,
+            name:"Manage Managers",
+            icon:<FaTh/>
+        },
+        {
+            path:ManagerAuthRoute,
+            name:"ManagerAuthorization",
+            icon:<FaTh/>
+        },
+        {
+            path:AdminAuthRoute,
+            name:"AdminAuthorization",
             icon:<FaTh/>
         },
     ]

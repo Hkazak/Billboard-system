@@ -10,12 +10,12 @@ import './page_styles/AllBillboards.css'
 import Button from 'react-bootstrap/Button';
 import AN from './AN.js';
 import './page_styles/Admin.css'
+import { useRef } from 'react';
+import { CreateManager } from '../lib/controllers/AdministratorController.js';
 
 function Admin() {
     const [isPopup1Open, setPopup1Open] = useState(false);
     const [isPopup2Open, setPopup2Open] = useState(false);
-    const [isPopup3Open, setPopup3Open] = useState(false);
-
   
     const openPopup1 = () => {
       setPopup1Open(true);
@@ -32,29 +32,50 @@ function Admin() {
     const closePopup2 = () => {
       setPopup2Open(false);
     };
-  
-    const openPopup3 = () => {
-        setPopup2Open(true);
-      };
-    
-      const closePopup3 = () => {
-        setPopup2Open(false);
-      };
 
-
-
-
-
-
-    const [modalActive, setModalActive] = useState(false);
-    const [modalActive1, setModalActive1] = useState(false);
-
+    const createManager = {
+        email: useRef(null),
+        firstName: useRef(null),
+        lastName: useRef(null),
+        middleName: useRef(null),
+        phone: useRef(null),
+    };
 
     const [users, setUsers] = useState(data.slice(0, 50));
     const [pageNumber, setPageNumber] = useState(0);
   
     const usersPerPage = 2;
     const pagesVisited = pageNumber * usersPerPage;
+
+    async function handleCreateManager(event){
+        event.preventDefault();
+    
+        const isValid = event.target.form.checkValidity();
+        console.log(isValid);
+        if(!isValid)
+        {
+          event.target.form.reportValidity();
+          return;
+        }
+    
+        const response = await CreateManager(
+            createManager.email.current.value,
+            createManager.firstName.current.value,
+            createManager.lastName.current.value,
+            createManager.middleName.current.value,
+            createManager.phone.current.value);
+        
+        const jsonResponse = await response.json();
+        if(response.ok){
+            data.push(jsonResponse);
+
+            setUsers(data);
+            closePopup2();
+            return;
+        }
+
+
+    }
   
     const displayUsers = users
       .slice(pagesVisited, pagesVisited + usersPerPage)
@@ -66,11 +87,11 @@ function Admin() {
             <div className='desc-main-wrapper'>
                 <div className='pers-info'>
                     <p> 
-                        Имя: {user.first_name} {user.last_name}
+                        {user.firstName} {user.middleName} {user.lastName}
                     </p>
-                    <p>
-                        E-mail: {user.email}
-                    </p>
+                    <pre>
+                        {user.email} &#9;&#9;&#9; {user.phone}
+                    </pre>
                 </div>
 
                 <div className='arr-btn'>
@@ -141,7 +162,7 @@ function Admin() {
                                 class="input"
                                 />
                                 <input
-                                type="password"
+                                type="text"
                                 required
                                 placeholder="Мобильный телефон"
                                 id="pass1"
@@ -156,8 +177,8 @@ function Admin() {
                     </div>
                         </AN>
 
-                        <Button  variant="warning">Заморозить</Button>{' '}
-                        <Button onClick={openPopup1} variant="warning">Редактирование</Button>{' '}
+                        {/* <Button  variant="warning">Заморозить</Button>{' '} */}
+                        {/* <Button onClick={openPopup1} variant="warning">Редактирование</Button>{' '} */}
                     </div>
                 </div>
             </div>    
@@ -222,6 +243,7 @@ function Admin() {
                         
                             <form>
                                 <input
+                                ref={createManager.firstName}
                                 type="text"
                                 required
                                 placeholder="Имя"
@@ -229,6 +251,7 @@ function Admin() {
                                 class="input"
                                 />
                                 <input
+                                ref={createManager.lastName}
                                 type="text"
                                 required
                                 placeholder="Фамилия"
@@ -236,6 +259,7 @@ function Admin() {
                                 class="input"
                                 />
                                 <input
+                                ref={createManager.middleName}
                                 type="text"
                                 required
                                 placeholder="Отчество"
@@ -243,6 +267,7 @@ function Admin() {
                                 class="input"
                                 />
                                 <input
+                                ref={createManager.email}
                                 type="email"
                                 required
                                 placeholder="Email"
@@ -250,14 +275,15 @@ function Admin() {
                                 class="input"
                                 />
                                 <input
-                                type="password"
+                                ref={createManager.phone}
+                                type="text"
                                 required
                                 placeholder="Мобильный телефон"
                                 id="pass1"
                                 class="input"
                                 />
                                 <div className='pop-create'>
-                                    <Button variant="warning">Создать</Button>{' '}
+                                    <Button onClick={handleCreateManager} variant="warning">Создать</Button>{' '}
                                 </div>
                                 
                             </form>

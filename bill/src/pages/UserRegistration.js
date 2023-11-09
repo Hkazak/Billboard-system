@@ -3,8 +3,10 @@ import Sidebar from '../components/SideBar'
 import './page_styles/UserAuthorization.css'
 import { Link, json } from 'react-router-dom'
 import { useRef } from 'react'
-import { RegisterUser } from '../lib/UserController'
+import { RegisterUser } from '../lib/controllers/UserController'
 import { useNavigate } from 'react-router-dom'
+import { LS } from '../lib/Consts'
+import { UserAuthorizationRoute, UserRegistrationRoute } from '../Paths'
 
 function UserRegistration() {
   const navigate = useNavigate();
@@ -48,8 +50,10 @@ function UserRegistration() {
     const response = await RegisterUser(name.current.value, email.current.value, password.current.value, confirmPassword.current.value);
     const jsonResponse = await response.json();
     if(response.ok){
+      console.log('User registration feature');
+      localStorage.setItem(LS.accessToken, jsonResponse['accessToken']);
       console.log(jsonResponse);
-      navigate('/');
+      navigate(UserRegistrationRoute);
       return;
     }
 
@@ -75,7 +79,7 @@ function UserRegistration() {
 
           <div className='child right-cont'>
             <div className='reg-link'>
-              <Link to="/auth">Authorization</Link>
+              <Link to={UserAuthorizationRoute}>Authorization</Link>
             </div>
             <h1 className='auth-text'>Регистрация</h1>
             <div className='form-input'>

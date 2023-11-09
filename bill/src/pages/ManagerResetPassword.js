@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 import { useRef } from 'react'
 import { ResetPasswordChangePassword } from '../lib/controllers/UserController'
 import { localStorageForgotPasswordEmail } from '../lib/Consts'
-import { UserAuthorizationRoute } from '../Paths'
+import { ManagerAuthRoute } from '../Paths'
 
-function ChangePassword() {
+function ManagerResetPassword() {
   const navigate = useNavigate();
 
   const code = useRef(null);
@@ -47,9 +47,9 @@ function ChangePassword() {
     const response = await ResetPasswordChangePassword(email, code.current.value, newPassword.current.value, newPasswordConfirm.current.value);
 
     if(response.ok){
-      console.log('User reset password feature');
+      console.log('Manager reset password feature');
       localStorage.removeItem(localStorageForgotPasswordEmail);
-      navigate(UserAuthorizationRoute);
+      navigate(ManagerAuthRoute);
       return;
     }
 
@@ -71,7 +71,7 @@ function ChangePassword() {
 
           <div className='child right-cont'>
             <div className='reg-link'>
-              <Link to={UserAuthorizationRoute}>Authorization</Link>
+              <Link to={ManagerAuthRoute}>Авторизация</Link>
             </div>
             <h1 className='auth-text'>Восстановление пароля</h1>
             <div className='form-input'>
@@ -90,4 +90,4 @@ function ChangePassword() {
   )
 }
 
-export default ChangePassword
+export default ManagerResetPassword
