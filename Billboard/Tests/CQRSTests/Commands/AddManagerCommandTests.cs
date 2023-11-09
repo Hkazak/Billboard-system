@@ -8,7 +8,7 @@ using NUnit.Framework;
 using Persistence.Context;
 using Tests.TestsHelpers;
 
-namespace Tests.CQRSTests;
+namespace Tests.CQRSTests.Commands;
 
 public class AddManagerCommandTests
 {
