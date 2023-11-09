@@ -22,7 +22,7 @@ public class DeleteManagerCommand : IRequest
 
         public async Task Handle(DeleteManagerCommand request, CancellationToken cancellationToken)
         {
-            var manager = await _context.Managers.FirstOrDefaultAsync(x => x.Id == request.ManagerId, cancellationToken);
+            var manager = await _context.Managers.FirstOrDefaultAsync(x => x.Id == request.ManagerId && x.StatusId == ManagerStatusId.Active, cancellationToken);
             if (manager is null)
             {
                 throw new NotFoundException($"Manager with this id {request.ManagerId} not found");
