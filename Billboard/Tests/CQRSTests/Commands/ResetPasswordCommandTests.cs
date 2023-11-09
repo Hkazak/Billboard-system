@@ -1,7 +1,4 @@
-﻿using System.Text;
-using Application.CQRS.Commands;
-using Application.CQRS.Queries;
-using Application.InternalModels;
+﻿using Application.CQRS.Commands;
 using Application.Services;
 using Contracts.DataTransferObjects;
 using Contracts.Exceptions;
@@ -37,7 +34,9 @@ public class ResetPasswordCommandTests
         var passwordHasherMock = new Mock<IPasswordHasher>();
         passwordHasherMock.Setup(e => e.CalculateHash("P@ssw0rd"))
             .Returns("b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342");
-        passwordHasherMock.Setup(e => e.CalculateHash(It.Is<string>(password => password != "P@ssw0rd")))
+        passwordHasherMock.Setup(e => e.CalculateHash("P@ssw0rd!"))
+            .Returns("0e44ce7308af2b3de5232e4616403ce7d49ba2aec83f79c196409556422a4927");
+        passwordHasherMock.Setup(e => e.CalculateHash(It.Is<string>(password => password != "P@ssw0rd" && password != "P@ssw0rd!")))
             .Returns("0e69e6a4038df88d4c62c837edd7e04a95ea6368bca9d469e00ad766a2266770");
         var distributedCacheMock = new Mock<IDistributedCache>();
         distributedCacheMock.Setup(e => e.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
@@ -50,10 +49,11 @@ public class ResetPasswordCommandTests
     public async Task Handle_ExistedUser_ValidChangingPassword()
     {
         var user = await _context.Users.FirstAsync();
+        const string expectedPasswordHash = "0e44ce7308af2b3de5232e4616403ce7d49ba2aec83f79c196409556422a4927";
         var request = new CodeConfirmation
         {
             Email = user.Email,
-            NewPassword = "P@ssw0rd",
+            NewPassword = "P@ssw0rd!",
             ConfirmationCode = "0000"
         };
         var command = new ResetPasswordCommand
@@ -62,16 +62,18 @@ public class ResetPasswordCommandTests
         };
         var handler = new ResetPasswordCommand.ResetPasswordRequestCommandHandler(_distributedCache, _context, _passwordHasher);
         Assert.DoesNotThrowAsync(async () => await handler.Handle(command, CancellationToken.None));
+        Assert.That(user.Password, Is.EqualTo(expectedPasswordHash));
     }
     
     [Test]
     public async Task Handle_ExistedManager_ValidChangingPassword()
     {
         var manager = await _context.Managers.FirstAsync();
+        const string expectedPasswordHash = "0e44ce7308af2b3de5232e4616403ce7d49ba2aec83f79c196409556422a4927";
         var request = new CodeConfirmation
         {
             Email = manager.Email,
-            NewPassword = "P@ssw0rd",
+            NewPassword = "P@ssw0rd!",
             ConfirmationCode = "0000"
         };
         var query = new ResetPasswordCommand
@@ -80,6 +82,7 @@ public class ResetPasswordCommandTests
         };
         var handler = new ResetPasswordCommand.ResetPasswordRequestCommandHandler(_distributedCache, _context, _passwordHasher);
         Assert.DoesNotThrowAsync(async () => await handler.Handle(query, CancellationToken.None));
+        Assert.That(manager.Password, Is.EqualTo(expectedPasswordHash));
     }
     
     [Test]
