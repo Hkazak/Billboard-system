@@ -4,6 +4,7 @@ using Contracts.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Commands;
 
@@ -26,7 +27,7 @@ public class ChangeManagerPasswordCommand : IRequest
         {
             var currentPasswordHash = _passwordHasher.CalculateHash(request.NewData.OldPassword);
             var user = await _context.Managers.FirstOrDefaultAsync(
-                e => e.Id == request.NewData.Id && e.Password == currentPasswordHash, cancellationToken);
+                e => e.Id == request.NewData.Id && e.Password == currentPasswordHash && e.StatusId == ManagerStatusId.Active, cancellationToken);
             if (user is null)
             {
                 throw new InvalidCredentialsException("Incorrect password");
