@@ -13,11 +13,11 @@ public class BillboardContext : DbContext
     public BillboardContext(DbContextOptions options) : base(options)
     {
     }
-    
-    public required DbSet<User> Users { get; set; }
-    public required DbSet<UserRole> UserRoles { get; set; }
-    public required DbSet<Manager> Managers { get; set; }
-    public required DbSet<ManagerStatus> ManagerStatus { get; set; }
+
+    public DbSet<User> Users { get; init; } = default!;
+    public DbSet<UserRole> UserRoles { get; init; } = default!;
+    public DbSet<Manager> Managers { get; init; } = default!;
+    public DbSet<ManagerStatus> ManagerStatus { get; init; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

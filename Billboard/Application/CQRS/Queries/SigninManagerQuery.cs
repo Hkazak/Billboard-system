@@ -6,6 +6,7 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -31,7 +32,7 @@ public class SigninManagerQuery : IRequest<AuthTokenResponse>
         {
             var passwordHash = _passwordHasher.CalculateHash(request.Request.Password);
             var manager = await _context.Managers.FirstOrDefaultAsync(
-                e => e.Email == request.Request.Email && e.Password == passwordHash, cancellationToken);
+                e => e.Email == request.Request.Email && e.Password == passwordHash && e.StatusId == ManagerStatusId.Active, cancellationToken);
             if (manager is null)
             {
                 throw new NotFoundException($"Manager with email {request.Request.Email} not found");

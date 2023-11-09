@@ -35,7 +35,7 @@ public class ResetPasswordQuery : IRequest
             }
             
             var randomCode = Random.Shared.Next(1000, 9999);
-            await _distributedCache.SetStringAsync(request.Email, randomCode.ToString(),cancellationToken);
+            await _distributedCache.SetStringAsync(request.Email, randomCode.ToString(), cancellationToken);
             var message = new EmailMessage
             {
                 ReceiverEmailAddress = request.Email,
