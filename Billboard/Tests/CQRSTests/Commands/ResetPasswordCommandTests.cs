@@ -41,6 +41,8 @@ public class ResetPasswordCommandTests
         var distributedCacheMock = new Mock<IDistributedCache>();
         distributedCacheMock.Setup(e => e.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync("0000"u8.ToArray());
+        distributedCacheMock.Setup(e => e.GetAsync("empty key", It.IsAny<CancellationToken>()))
+            .ReturnsAsync((byte[]?)null);
         _passwordHasher = passwordHasherMock.Object;
         _distributedCache = distributedCacheMock.Object;
     }
@@ -136,6 +138,23 @@ public class ResetPasswordCommandTests
         };
         var handler = new ResetPasswordCommand.ResetPasswordRequestCommandHandler(_distributedCache, _context, _passwordHasher);
         Assert.ThrowsAsync<InvalidCredentialsException>(async () => await handler.Handle(query, CancellationToken.None));
+    }
+
+    [Test]
+    public void Handle_NotExistedKey_ThrowsInvalidOperationException()
+    {
+        var request = new CodeConfirmation
+        {
+            Email = "empty key",
+            NewPassword = "P@ssw0rd",
+            ConfirmationCode = "0001"
+        };
+        var query = new ResetPasswordCommand
+        {
+            CodeConfirmationRequest = request
+        };
+        var handler = new ResetPasswordCommand.ResetPasswordRequestCommandHandler(_distributedCache, _context, _passwordHasher);
+        Assert.ThrowsAsync<InvalidOperationException>(async () => await handler.Handle(query, CancellationToken.None));
     }
 
     [OneTimeTearDown]
