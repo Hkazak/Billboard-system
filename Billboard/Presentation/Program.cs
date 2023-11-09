@@ -2,6 +2,12 @@ using Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Configure logging
+if (builder.Environment.IsProduction())
+{
+    builder.Host.ConfigureSerilog();
+}
+
 // Add services to the container.
 
 builder.Services.AddControllers();
