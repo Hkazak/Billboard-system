@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Tests.ServicesTests;
 
-public class Tests
+public class PasswordHasherTests
 {
     [Test]
     public void CalculateHash_Psswrd_185a9d48f24c1cc0886d39a1526ee9c8656a5dc39876496cb71e27ecd4ceb11d()
