@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
 using Persistence.Context;
+using Persistence.Enums;
 using Tests.TestsHelpers;
 
 namespace Tests.CQRSTests.Commands;
@@ -84,6 +85,24 @@ public class ChangeManagerPasswordCommandTests
             Id = manager.Id,
             OldPassword = "P@ssw0rd!",
             NewPassword = "P@ssw0rd"
+        };
+        var command = new ChangeManagerPasswordCommand
+        {
+            NewData = request
+        };
+        var handler = new ChangeManagerPasswordCommand.ChangeManagerManagerPasswordCommandHandler(_context, _passwordHasher);
+        Assert.ThrowsAsync<InvalidCredentialsException>(async () => await handler.Handle(command, CancellationToken.None));
+    }
+    
+    [Test]
+    public async Task Handle_ExistedInactiveManager_ThrowsInvalidCredentialsException()
+    {
+        var manager = await _context.Managers.LastAsync(e => e.StatusId == ManagerStatusId.Inactive);
+        var request = new ChangePassword
+        {
+            Id = manager.Id,
+            OldPassword = "P@ssw0rd",
+            NewPassword = "P@ssw0rd!"
         };
         var command = new ChangeManagerPasswordCommand
         {
