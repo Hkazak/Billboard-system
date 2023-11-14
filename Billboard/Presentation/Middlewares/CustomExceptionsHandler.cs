@@ -46,6 +46,16 @@ public class CustomExceptionsHandler
                 StatusCode = HttpStatusCode.Forbidden,
                 ErrorMessage = exception.Message
             },
+            InvalidRequestDataException => new ErrorResponse
+            {
+                StatusCode  = HttpStatusCode.BadRequest, 
+                ErrorMessage = exception.Message
+            },
+            InvalidCredentialsException => new ErrorResponse
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                ErrorMessage = exception.Message
+            },
             _ => new ErrorResponse
             {
                 StatusCode = HttpStatusCode.InternalServerError,

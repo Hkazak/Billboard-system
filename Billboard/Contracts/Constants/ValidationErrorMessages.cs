@@ -11,4 +11,10 @@ public static class ValidationErrorMessages
     public const string PhoneAlreadyUsed = "Phone is already used";
     public const string InvalidPhoneNumber = "Invalid Phone Number";
     public const string ConfirmPasswordShouldBeSameWithPassword = "Your confirm password must be same with password";
+    public const string DescriptionIsEmpty = "Description must not be empty";
+    public const string AddressIsEmpty = "Address must not be empty";
+    public const string WidthIsEmpty = "Width must not be empty";
+    public const string HeightIsEmpty = "Heigh must not be empty";
+    public const string BillboardTypeIsInvalid = "Billboard type should be  SingleSide, DoubleSide or TripleSide";
+    public const string BillboardSurfaceIsInvalid = "";
 }

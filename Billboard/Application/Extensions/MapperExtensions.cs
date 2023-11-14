@@ -1,5 +1,4 @@
-﻿using Application.CQRS.Commands;
-using Application.InternalModels;
+﻿using Application.InternalModels;
 using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
@@ -20,16 +19,56 @@ public static class MapperExtensions
         };
     }
 
-    public static ManagerResponse CreateResponse(this Manager user)
+    public static ManagerResponse CreateResponse(this Manager manager)
     {
         return new ManagerResponse
         {
-            Id = user.Id,
-            Email = user.Email,
-            FirstName = user.FirstName,
-            MiddleName = user.MiddleName,
-            LastName = user.LastName,
-            Phone = user.Phone,
+            Id = manager.Id,
+            Email = manager.Email,
+            FirstName = manager.FirstName,
+            MiddleName = manager.MiddleName,
+            LastName = manager.LastName,
+            Phone = manager.Phone,
+        };
+    }
+
+    public static BillboardResponse CreateResponse(this Billboard billboard)
+    {
+        return new BillboardResponse
+        {
+            Id = billboard.Id,
+            Name = billboard.Name,
+            Description = billboard.Description,
+            Address = billboard.Address,
+            BillboardType = billboard.TypeId.ToString(),
+            BillboardSurface = billboard.BillboardSurface.Surface,
+            Width = billboard.Width,
+            Height = billboard.Height,
+            Penalty = billboard.Penalty,
+            PictureSource = billboard.Pictures.Select(e => e.Source).ToList(),
+            GroupOfTariffs = billboard.GroupOfTariffs.CreateResponse(),
+        };
+    }
+
+    public static TariffResponse CreateResponse(this Tariff tariff)
+    {
+        return new TariffResponse
+        {
+            Id = tariff.Id,
+            Title = tariff.Title,
+            StartTime = tariff.StartTime,
+            EndTime = tariff.EndTime,
+            Price = tariff.Price
+        };
+    }
+
+    public static GroupOfTariffsResponse CreateResponse(this GroupOfTariffs groupOfTariffs)
+    {
+        return new GroupOfTariffsResponse
+        {
+            Id = groupOfTariffs.Id,
+            Name = groupOfTariffs.Name,
+            Tariffs = groupOfTariffs.Tariffs.Select(e => e.CreateResponse()).ToList()
         };
     }
 
@@ -43,12 +82,12 @@ public static class MapperExtensions
         };
     }
     
-    public static AuthenticationClaims CreateClaims(this Manager user)
+    public static AuthenticationClaims CreateClaims(this Manager manager)
     {
         return new AuthenticationClaims
         {
-            Id = user.Id,
-            Email = user.Email,
+            Id = manager.Id,
+            Email = manager.Email,
             Role = "Manager"
         };
     }
