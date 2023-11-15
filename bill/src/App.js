@@ -31,7 +31,7 @@ function App(){
               <Route path={ManagerAuthRoute} element={<ManagerAuthorization/>}></Route>
               <Route path={ManagerResetPasswordRoute} element={<ManagerResetPassword/>}></Route>
               <Route path={ManagerForgotPasswordRoute} element={<ManagerForgotPassword/>}></Route>
-              
+              <Route path='/cr-bills' element={<CreateBill/>}></Route>
               <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
               <Route path={CreateManagerRoute} element={<Admin/>}></Route>
             </Routes>
