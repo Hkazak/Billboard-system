@@ -14,10 +14,14 @@ public class BillboardContext : DbContext
     {
     }
 
-    public DbSet<User> Users { get; init; } = default!;
-    public DbSet<UserRole> UserRoles { get; init; } = default!;
-    public DbSet<Manager> Managers { get; init; } = default!;
-    public DbSet<ManagerStatus> ManagerStatus { get; init; } = default!;
+    public DbSet<User> Users { get; set; } = default!;
+    public DbSet<UserRole> UserRoles { get; set; } = default!;
+    public DbSet<Manager> Managers { get; set; } = default!;
+    public DbSet<ManagerStatus> ManagerStatus { get; set; } = default!;
+    public DbSet<Tariff> Tariffs { get; set; } = default!;
+    public DbSet<Billboard> Billboards { get; set; } = default!;
+    public DbSet<BillboardSurface> BillboardSurfaces { get; set; } = default!;
+    public DbSet<GroupOfTariffs> GroupOfTariffs { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,5 +29,8 @@ public class BillboardContext : DbContext
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         modelBuilder.ApplyConfiguration(new ManagerConfiguration());
         modelBuilder.ApplyConfiguration(new ManagerStatusConfiguration());
+        modelBuilder.ApplyConfiguration(new TariffConfiguration());
+        modelBuilder.ApplyConfiguration(new BillboardConfiguration());
+        modelBuilder.ApplyConfiguration(new GroupOfTariffsConfiguration());
     }
 }

@@ -2,7 +2,6 @@
 using Application.CQRS.Commands;
 using Application.CQRS.Queries;
 using Application.Extensions;
-using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
@@ -82,6 +81,15 @@ public class ManagersController : ControllerBase
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<ManagerResponse>> GetManagers()
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new GetManagersInformationQuery();
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
     
     [HttpPut]
     [Route("password")]
@@ -121,4 +129,5 @@ public class ManagersController : ControllerBase
         await _mediator.Send(command, cancellationToken);
         return NoContent();
     }
+    
 }
