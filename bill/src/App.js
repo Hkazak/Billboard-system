@@ -14,6 +14,8 @@ import { ResetPasswordChangePassword } from './lib/controllers/UserController';
 import AdminAuthorization from './pages/AdminAuthorization';
 import ManagerResetPassword from './pages/ManagerResetPassword';
 import ManagerForgotPassword from './pages/ManagerForgotPassword';
+import BillPages from './pages/BillPages';
+import CreateBill from './pages/CreateBill';
 
 function App(){
 
@@ -32,6 +34,7 @@ function App(){
               <Route path={ManagerResetPasswordRoute} element={<ManagerResetPassword/>}></Route>
               <Route path={ManagerForgotPasswordRoute} element={<ManagerForgotPassword/>}></Route>
               <Route path='/cr-bills' element={<CreateBill/>}></Route>
+              <Route path='/billboards' element={<BillPages/>}></Route>
               <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
               <Route path={CreateManagerRoute} element={<Admin/>}></Route>
             </Routes>
