@@ -61,7 +61,7 @@ function Dashboard() {
               </div>
             </div>
             <div className='sep'></div>
-            <iframe src="https://www.google.com/maps/d/embed?mid=1DayHk74XQHB1StkXz5_yeCdlzeo&hl=en&ehbc=2E312F" width="1000" height="550"></iframe>
+            <iframe className='map' src="https://www.google.com/maps/d/embed?mid=1DayHk74XQHB1StkXz5_yeCdlzeo&hl=en&ehbc=2E312F" width="1000" height="550"></iframe>
             <br></br>
             <div className='cr-btn'>
               <Button variant='warning' onClick={() => {
