@@ -1,0 +1,125 @@
+
+.decription-main-wrapper {
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 2rem 2rem;
+    text-align: center;
+  }
+  .array-img-bills {
+    margin-left: 110px;
+    margin-right: 200px;
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    border: 3px solid black;
+    border-radius: 7px;
+  }
+
+  .pad-img-move{
+    margin-bottom: 1000px;
+  }
+
+  .pad-move{
+    padding-bottom: 230px;
+    width: 600px;
+  }
+
+  .paragr-bill{
+    width: 100px;
+  }
+
+  .charac-bill{
+    width: 540px;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 150px;
+  }
+
+  .charac-bill p {
+    margin-top: 30px;
+    float: left;
+  }
+
+  .tarif-bill{
+    padding-left: 30px;
+    width: 190px;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 140px;
+  }
+
+  .tarif-bill p {
+    margin-top: 10px;
+    float: left;
+  }
+  
+  .tarif-bill h4{
+    font-size: 30px;
+  }
+
+  .discount-p{
+    margin-right: 400px;
+    
+  }
+
+  .discount-p p {
+    font-size: 14px;
+  }
+
+  .tarif-bill1{
+    width: 190px;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 180px;
+  }
+
+  .tarif-bill1 p {
+    margin-top: 10px;
+    float: left;
+  }
+  
+  .tarif-bill1 h4{
+    font-size: 14px;
+  }
+
+  .price-tagg{
+    width: 188px;
+    height: 71px;
+    background-color: #52AABC;
+    border-radius: 4px;
+  }
+
+  .price-tagg p {
+    padding-left: 70px;
+    padding-top: 10px;
+    color: white;
+  }
+  
+  .total-pricee{
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: start;
+    margin-top: 30px;
+    padding-right: 100px;
+    float: left;
+  }
+
+  .total-pricee p{
+    margin-top: 30px;
+  }
+
+  .download{
+    width: 400px;
+    border: 1px solid black;
+  }
+
+  .verify-btn{
+    text-align: center;
+  }
+
+  .child{
+    display: inline-block;
+    width: 200px;
+    padding: 10px 20px;
+    margin: 10px 10px;
+  }
