@@ -61,7 +61,7 @@ function CreateBill() {
         <label for="file">Фотография</label>
         <input type="file" id="file" name="file" accept=".pdf, .doc, .docx"/>
 
-        <div className='cr-bills-btn'><Button variant='warning' type="submit">Submit</Button></div>
+        <div className='cr-bills-btn'><Button onClick={()=>{navigate('/billboards')}} variant='warning' type="submit">Submit</Button></div>
 
         
 
