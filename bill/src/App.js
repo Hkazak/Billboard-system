@@ -16,6 +16,7 @@ import ManagerResetPassword from './pages/ManagerResetPassword';
 import ManagerForgotPassword from './pages/ManagerForgotPassword';
 import BillPages from './pages/BillPages';
 import CreateBill from './pages/CreateBill';
+import BillDescr from './pages/BillDescr';
 
 function App(){
 
@@ -37,6 +38,7 @@ function App(){
               <Route path='/billboards' element={<BillPages/>}></Route>
               <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
               <Route path={CreateManagerRoute} element={<Admin/>}></Route>
+              <Route path='/bill-descr' element={<BillDescr/>}></Route>
             </Routes>
         
       </BrowserRouter>
