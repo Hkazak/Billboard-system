@@ -82,8 +82,8 @@ function BillDescr() {
 
             <br/><br/><br/><br/><br/><br/>
             <div className='verify-btn'>
-              <Button className='child' variant='warning'>Подтвердить заказ</Button>
-              <Button className='child' variant='danger'>Отклонить заказ</Button>
+              <Button className='childsss' variant='warning'>Подтвердить заказ</Button>
+              <Button className='childsss' variant='danger'>Отклонить заказ</Button>
             </div>
           </div>  
 
