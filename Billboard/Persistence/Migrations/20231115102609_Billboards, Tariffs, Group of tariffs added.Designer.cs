@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Context;
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BillboardContext))]
-    partial class BillboardContextModelSnapshot : ModelSnapshot
+    [Migration("20231115102609_Billboards, Tariffs, Group of tariffs added")]
+    partial class BillboardsTariffsGroupoftariffsadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,7 +317,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("13a80f98-a5fd-4cb7-85c6-57569089e2ee"),
+                            Id = new Guid("3ad92bd3-975b-4dfc-9690-ac53bdc280a8"),
                             Email = "admin@Billboard.com",
                             Name = "Admin",
                             Password = "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
