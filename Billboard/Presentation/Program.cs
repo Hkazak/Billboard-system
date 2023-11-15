@@ -2,6 +2,12 @@ using Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Configure logging
+if (builder.Environment.IsProduction())
+{
+    builder.Host.ConfigureSerilog();
+}
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -16,16 +22,23 @@ builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.ConfigureSwagger();
 builder.Services.ConfigureCache();
 
+builder.Services.AddCors(options => {
+    options.AddDefaultPolicy(policy => {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+app.UseCors();
+
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -13,15 +13,15 @@ public class BillboardContext : DbContext
     public BillboardContext(DbContextOptions options) : base(options)
     {
     }
-    
-    public required DbSet<User> Users { get; set; }
-    public required DbSet<UserRole> UserRoles { get; set; }
-    public required DbSet<Manager> Managers { get; set; }
-    public required DbSet<ManagerStatus> ManagerStatus { get; set; }
-    public required DbSet<Tariff> Tariffs { get; set; }
-    public required DbSet<Billboard> Billboards { get; set; }
-    public required DbSet<BillboardSurface> BillboardSurfaces { get; set; }
-    public required DbSet<GroupOfTariffs> GroupOfTariffs { get; set; }
+
+    public DbSet<User> Users { get; set; } = default!;
+    public DbSet<UserRole> UserRoles { get; set; } = default!;
+    public DbSet<Manager> Managers { get; set; } = default!;
+    public DbSet<ManagerStatus> ManagerStatus { get; set; } = default!;
+    public DbSet<Tariff> Tariffs { get; set; } = default!;
+    public DbSet<Billboard> Billboards { get; set; } = default!;
+    public DbSet<BillboardSurface> BillboardSurfaces { get; set; } = default!;
+    public DbSet<GroupOfTariffs> GroupOfTariffs { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

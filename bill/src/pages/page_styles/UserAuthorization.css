@@ -1,0 +1,106 @@
+.main-cont {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 900px;
+    height: 550px;
+    border-radius: 30px;
+    position: absolute;
+    left: 400px;
+    top: 70px;
+    /* text-align: center; */
+}
+
+/* .fuller{
+    width: 50%;
+    height: 50%;
+} */
+
+.child {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.left-cont{
+    border-top-left-radius: 20px 20px;
+    border-bottom-left-radius: 40px 40px;
+    height: 550px;
+    width: 500px;
+    background-color: rgb(166,98,10);
+    color: #ffff;
+}
+
+.right-cont {
+    border-top-right-radius: 20px 20px;
+    border-bottom-right-radius: 40px 40px;
+    border: 1px solid darkblue;
+    height: 550px;
+    width: 380px;
+    background-color: #52AABC;
+}
+
+.greet-cont{
+    margin-top: 100px;
+    margin-left: 60px;
+}
+
+.gree {
+    font-size: 18px;
+    color: #ffff;
+}
+
+.desc-text{
+    font-size: 14px;
+    color: #ffff;
+}
+
+.reg-link {
+    margin-left: 250px;
+    font-size: 12px;
+    color: azure;
+}
+
+.policy-link{
+    font-size: 12px;
+    padding-left: 70px;
+}
+
+.auth-text{
+    margin-top: 85px;
+    text-align: center;
+    color: #ffff;
+}
+
+.form-input{
+    margin-top: 30px;
+    text-align: center;
+    color: #ffff;
+}
+
+.input-field{
+    border: 1px solid rgb(211, 211, 211);
+    box-sizing: border-box;
+    width: 80%;   
+    margin: 8px 0;  
+    padding: 10px 20px; 
+    border-radius: 10px;
+}
+
+.btn-auth{
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 65%;   
+    margin: 8px 0;  
+    padding: 10px 20px; 
+    text-align: center;
+    margin-top: 30px;
+    background-color: #F8BC43;
+    border: 1px solid #F8BC43;
+}
+
+.btn-auth:hover {
+    background-color: black;
+    color: #fff;
+    border: 1px solid black;
+
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;;
+}
