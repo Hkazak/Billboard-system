@@ -72,6 +72,15 @@ public static class MapperExtensions
         };
     }
 
+    public static BillboardSurfaceResponse CreateResponse(this BillboardSurface billboardSurface)
+    {
+        return new BillboardSurfaceResponse
+        {
+            Id = billboardSurface.Id,
+            Surface = billboardSurface.Surface
+        };
+    }
+
     public static AuthenticationClaims CreateClaims(this User user)
     {
         return new AuthenticationClaims
