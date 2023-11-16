@@ -11,4 +11,5 @@ public class Tariff
     public required decimal Price { get; set; }
     public required ArchiveStatusId ArchiveStatusId { get; set; }
     public ArchiveStatus? ArchiveStatus { get; set; }
+    public ICollection<GroupOfTariffs> Groups { get; init; } = new List<GroupOfTariffs>();
 }

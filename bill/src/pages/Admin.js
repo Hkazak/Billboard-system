@@ -4,16 +4,33 @@ import React from 'react'
 import { useState } from 'react';
 import Sidebar from '../components/SideBar'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { data } from '../data.js';
 import ReactPaginate from "react-paginate";
 import './page_styles/AllBillboards.css'
 import Button from 'react-bootstrap/Button';
 import AN from './AN.js';
 import './page_styles/Admin.css'
 import { useRef } from 'react';
-import { CreateManager } from '../lib/controllers/AdministratorController.js';
+import { CreateManager, GetManagersList } from '../lib/controllers/AdministratorController.js';
+import { useEffect } from 'react';
+
+const data = [];
 
 function Admin() {
+    const [users, setUsers] = useState(data.slice(0, 50));
+    
+    async function initialize(){
+        const response = await GetManagersList();
+        const jsonResponse = await response.json();
+    
+        if(response.ok){
+            data.push(...jsonResponse);
+        }
+    }
+
+    useEffect(() => {
+        initialize();
+    });
+
     const [isPopup1Open, setPopup1Open] = useState(false);
     const [isPopup2Open, setPopup2Open] = useState(false);
   
@@ -41,7 +58,6 @@ function Admin() {
         phone: useRef(null),
     };
 
-    const [users, setUsers] = useState(data.slice(0, 50));
     const [pageNumber, setPageNumber] = useState(0);
   
     const usersPerPage = 2;

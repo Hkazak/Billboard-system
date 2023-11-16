@@ -25,9 +25,9 @@ public class GroupOfTariffsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "{Manager}")]
+    [Authorize(Roles = "Manager")]
     public async Task<ActionResult<GroupOfTariffsResponse>> CreateGroupOfTariffs(
-        [FromRoute] AddGroupOfTariffsRequest request)
+        [FromBody] AddGroupOfTariffsRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
         var validationResult = await _addGroupOfTariffsValidator.ValidateAsync(request, cancellationToken);
@@ -46,8 +46,8 @@ public class GroupOfTariffsController : ControllerBase
         {
             Request = request
         };
-        var response = _mediator.Send(command, cancellationToken);
-        return Ok();
+        var response = await _mediator.Send(command, cancellationToken);
+        return Ok(response);
     }
 
     [HttpGet]
@@ -68,7 +68,7 @@ public class GroupOfTariffsController : ControllerBase
     {
         var cancellationToken = HttpContext.RequestAborted;
         var query = new GetGroupOfTariffsListQuery();
-        var response = _mediator.Send(query, cancellationToken);
+        var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }
 

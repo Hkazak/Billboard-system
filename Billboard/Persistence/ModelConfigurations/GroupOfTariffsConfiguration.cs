@@ -10,7 +10,8 @@ public class GroupOfTariffsConfiguration : IEntityTypeConfiguration<GroupOfTarif
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).HasMaxLength(64);
-        builder.HasMany(e => e.Tariffs);
+        builder.HasMany(e => e.Tariffs)
+            .WithMany(e => e.Groups);
         builder.HasOne(e => e.ArchiveStatus)
             .WithMany()
             .HasForeignKey(e => e.ArchiveStatusId);

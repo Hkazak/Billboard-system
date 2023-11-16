@@ -2,6 +2,7 @@ import { LS, baseUrl } from "../Consts";
 
 export const adminAuthorizationEndpoint = `${baseUrl}/Users/sign-in`;
 export const createManagerEndpoint = `${baseUrl}/Managers`;
+export const getManagersEndpoint = `${baseUrl}/Managers`;
 
 export async function AuthorizeAdmin(userEmail, userPassword){
     let body = {
@@ -45,6 +46,22 @@ export async function CreateManager(email, firstName, lastName, middleName, phon
             'Authorization': `bearer ${accessToken}`
         },
         body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+export async function GetManagersList() {
+    const accessToken = localStorage.getItem(LS.accessToken);
+
+    const response = await fetch(getManagersEndpoint, {
+        method: 'GET',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `bearer ${accessToken}`
+        }
     });
 
     return response;

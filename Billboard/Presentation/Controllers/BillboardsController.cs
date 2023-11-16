@@ -44,8 +44,8 @@ public class BillboardsController : ControllerBase
         {
             Request = request
         };
-        var response = _mediator.Send(command, cancellationToken);
-        return Ok();
+        var response = await _mediator.Send(command, cancellationToken);
+        return Ok(response);
     }
 
     [HttpGet]

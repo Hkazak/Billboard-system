@@ -4,8 +4,11 @@ import './page_styles/CreateBill.css'
 import Sidebar from '../components/SideBar'
 import Button from 'react-bootstrap/esm/Button'
 import './page_styles/CreateBill.css'
+import { useNavigate } from 'react-router'
 
 function CreateBill() {
+
+  const navigate = useNavigate();
   
   return (
     <div>
