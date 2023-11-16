@@ -32,5 +32,6 @@ public class BillboardContext : DbContext
         modelBuilder.ApplyConfiguration(new TariffConfiguration());
         modelBuilder.ApplyConfiguration(new BillboardConfiguration());
         modelBuilder.ApplyConfiguration(new GroupOfTariffsConfiguration());
+        modelBuilder.ApplyConfiguration(new ArchiveStatusConfiguration());
     }
 }

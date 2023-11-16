@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Sidebar from '../components/SideBar'
 import './page_styles/Dashboard.css'
 import {useNavigate} from 'react-router-dom'
+import Button from 'react-bootstrap/esm/Button'
  
 function Dashboard() {
   const navigate = useNavigate();

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Context;
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BillboardContext))]
-    partial class BillboardContextModelSnapshot : ModelSnapshot
+    [Migration("20231116072000_FixTarrifsCreation")]
+    partial class FixTarrifsCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,18 +52,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ArchiveStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Status = "Archived"
-                        },
-                        new
-                        {
-                            Id = 0,
-                            Status = "NonArchived"
-                        });
                 });
 
             modelBuilder.Entity("Persistence.Models.Billboard", b =>
@@ -336,7 +327,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5e35a183-46c7-4325-816e-85be677ee13a"),
+                            Id = new Guid("1e356e57-bd29-40d6-9578-63cb0578625d"),
                             Email = "admin@Billboard.com",
                             Name = "Admin",
                             Password = "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",

@@ -24,7 +24,7 @@ public class TariffsController : ControllerBase
     }
     
     [HttpPost]
-    [Authorize(Roles = "{Manager}")]
+    [Authorize(Roles = "Manager")]
     public async Task<ActionResult<TariffResponse>> CreateTariff([FromBody] AddTariffRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
@@ -44,8 +44,8 @@ public class TariffsController : ControllerBase
         {
             Request = request
         };
-        var response = _mediator.Send(request, cancellationToken);
-        return Ok();
+        var response = await _mediator.Send(command, cancellationToken);
+        return Ok(response);
     }
 
     [HttpGet]
