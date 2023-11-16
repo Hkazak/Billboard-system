@@ -4,6 +4,7 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -25,7 +26,7 @@ public class GetBillboardInformationQuery : IRequest<BillboardResponse>
             CancellationToken cancellationToken)
         {
             var billboard =
-                await _context.Billboards.FirstOrDefaultAsync(e => e.Id == request.BillboardId, cancellationToken);
+                await _context.Billboards.FirstOrDefaultAsync(e => e.Id == request.BillboardId && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
             if (billboard is null)
             {
                 throw new NotFoundException($"Billboard with id: {request.BillboardId} not found");

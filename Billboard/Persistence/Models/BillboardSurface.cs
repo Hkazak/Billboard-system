@@ -2,6 +2,6 @@
 
 public class BillboardSurface
 {
-    public required Guid Id { get; init; }
+    public Guid Id { get; private set; } = Guid.NewGuid();
     public required string Surface { get; init; }
 }
