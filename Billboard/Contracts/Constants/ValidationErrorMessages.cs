@@ -17,6 +17,7 @@ public static class ValidationErrorMessages
     public const string HeightIsEmpty = "Heigh must not be empty";
     public const string BillboardTypeIsInvalid = "Billboard type should be  SingleSide, DoubleSide or TripleSide";
     public const string BillboardSurfaceIsInvalid = "";
+    public const string SurfaceIsEmpty = "Surface must not be empty";
     public const string TitleIsEmpty = "Title must not be empty";
     public const string PriceIsEmpty = "Price must not be empty";
     public const string EndTimeIsEmpty = "End time must not be empty";
