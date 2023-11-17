@@ -43,4 +43,41 @@ public static class DataSeeder
         await context.Managers.AddRangeAsync(inactiveManagerFaker.Generate(5));
         await context.SaveChangesAsync();
     }
+    
+    public static async Task SeedTariffsAsync(this BillboardContext context)
+    {
+        await context.Tariffs.AddRangeAsync(GenerateTariffs(5, ArchiveStatusId.Archived));
+        await context.Tariffs.AddRangeAsync(GenerateTariffs(5, ArchiveStatusId.NonArchived));
+
+        await context.SaveChangesAsync();
+    }
+
+    public static async Task SeedGroupOfTariffsAsync(this BillboardContext context)
+    {
+        var archivedGroupOfTariffs = new Faker<GroupOfTariffs>();
+        var nonArchivedGroupOfTariffs = new Faker<GroupOfTariffs>();
+        archivedGroupOfTariffs.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Name, faker => faker.Name.JobTitle())
+            .RuleFor(e => e.ArchiveStatusId, ArchiveStatusId.Archived)
+            .RuleFor(e => e.Tariffs, GenerateTariffs(5, ArchiveStatusId.Archived));
+        nonArchivedGroupOfTariffs.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Name, faker => faker.Name.JobTitle())
+            .RuleFor(e => e.ArchiveStatusId, ArchiveStatusId.NonArchived)
+            .RuleFor(e => e.Tariffs, GenerateTariffs(10, ArchiveStatusId.NonArchived));
+        await context.GroupOfTariffs.AddRangeAsync(archivedGroupOfTariffs.Generate(5));
+        await context.GroupOfTariffs.AddRangeAsync(nonArchivedGroupOfTariffs.Generate(10));
+        await context.SaveChangesAsync();
+    }
+
+    private static List<Tariff> GenerateTariffs(int count, ArchiveStatusId statusId)
+    {
+        var tariffsFaker = new Faker<Tariff>();
+        tariffsFaker.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Title, faker => faker.Name.JobTitle())
+            .RuleFor(e => e.StartTime, faker => faker.Date.Timespan(TimeSpan.FromHours(12)))
+            .RuleFor(e => e.EndTime, faker => faker.Date.Timespan(TimeSpan.FromHours(12)))
+            .RuleFor(e => e.ArchiveStatusId,  statusId);
+
+        return tariffsFaker.Generate(count);
+    }
 }
