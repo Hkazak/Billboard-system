@@ -4,6 +4,7 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -22,7 +23,7 @@ public class GetTariffInformationQuery : IRequest<TariffResponse>
 
         public async Task<TariffResponse> Handle(GetTariffInformationQuery request, CancellationToken cancellationToken)
         {
-            var tariff = await _context.Tariffs.FirstOrDefaultAsync(e => e.Id == request.TariffId, cancellationToken);
+            var tariff = await _context.Tariffs.FirstOrDefaultAsync(e => e.Id == request.TariffId && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
             if (tariff is null)
             {
                 throw new NotFoundException($"Billboard with id: {request.TariffId} not found");
