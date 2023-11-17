@@ -12,7 +12,7 @@ public class DeleteGroupOfTariffsCommand : IRequest
     
     public class DeleteGroupOfTariffsCommandHandler : IRequestHandler<DeleteGroupOfTariffsCommand>
     {
-        public readonly BillboardContext _context;
+        private readonly BillboardContext _context;
 
         public DeleteGroupOfTariffsCommandHandler(BillboardContext context)
         {
@@ -22,7 +22,7 @@ public class DeleteGroupOfTariffsCommand : IRequest
         public async Task Handle(DeleteGroupOfTariffsCommand request, CancellationToken cancellationToken)
         {
             var groupOfTariffs =
-                await _context.GroupOfTariffs.FirstOrDefaultAsync(e => e.Id == request.GroupId, cancellationToken);
+                await _context.GroupOfTariffs.FirstOrDefaultAsync(e => e.Id == request.GroupId && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
             
             if (groupOfTariffs is null)
             {
