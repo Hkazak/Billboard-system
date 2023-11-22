@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import Sidebar from '../components/SideBar'
-import './page_styles/TarifPages.css'
+import './page_styles/TariffPages.css'
 import im from './logo.png'
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';

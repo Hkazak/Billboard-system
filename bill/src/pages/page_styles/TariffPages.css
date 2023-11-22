@@ -1,0 +1,378 @@
+a,p,h1,h2{
+	font-family: 'Inter', serif;
+}
+
+.logo{
+	width: 28%;
+}
+.header-top{
+	width:66.6%;
+}
+header{
+	margin-top: 2%;
+	margin-left: 1%;
+	display: flex;
+	align-items: center;
+}
+.inner{
+	display: flex;
+	margin-top: 1%;	
+	justify-content: space-between;
+}
+.menu{
+    border-top-right-radius: 1.5rem;
+	width: 25%;
+	height: 100vh;
+	background-color:#52AABC;
+}
+a{
+	font-size:20px;
+}
+
+.nav-bar a{	
+	padding: 5% 2% 2% 7%;
+	display:flex;
+	align-items: center;
+	text-decoration: none;
+	color:#000000;
+}
+.nav-secondary a{
+	margin-left: 25%;
+	display:flex;
+	align-items: center;
+	text-decoration: none;
+	color:#000000;
+}
+.nav-icons{
+	padding-right: 2%
+}
+.main-content{
+	width:71%;
+}
+.search-add-tarif{
+	width: 100%;
+	height: 60%;
+	background-color:#52AABC;
+	display: flex;
+    align-items: center; 
+    justify-content: space-around; 
+    border-top-left-radius: 1.5rem;
+}
+.search-add-tarif1{
+    margin-top: 20px;
+	width: 71%;
+	height: 6%;
+	background-color:#52AABC;
+	display: flex;
+    align-items: center; 
+    justify-content: space-around; 
+    border-top-left-radius: 1.5rem;
+}
+.search-container {
+	background-color: white;
+	width: 50%;
+	margin-right: 20%;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.search-btn {
+    background-color: white; /* Устанавливаем белый цвет фона для кнопки */
+    border: none; /* Убираем границу кнопки (если необходимо) */
+}
+#search-input{
+	width: 100%;
+	border:none;
+}
+.btn.btn-primary{
+	all:unset;
+	background-color: white;
+	width: 20%;
+	height: 2rem;
+	display: flex;
+	border:none;
+	text-align: center;
+	border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.btn.btn-primary:hover{
+  background-color: #ffffff !important; /* Новый цвет фона при наведении */
+  color: #000000 !important;
+}
+
+.new-tarif {
+    margin:0;/* Чтобы можно было центрировать по горизонтали */
+}
+.pagination-div{
+	margin-top: 2%;
+	width: 100%;
+	height: 6%;
+	background-color:#52AABC;
+	display: flex;
+    align-items: center; 
+    justify-content: flex-start;
+    border-bottom-left-radius: 0.8rem;
+}
+.text-in-page{
+	margin-left: 1%;
+}
+.count-in-page{
+	width: 8%;
+	margin-left: 2%;
+	height: 60%;
+	background-color: #ffffff;
+	border-radius:0.5rem;
+	text-align: center;
+	border: 1px solid black;
+}
+.pagination-div p{
+	font-size: 16px;
+	margin:0;
+	color:#000000;
+}
+.pagination-div button{
+	border: none;
+}
+.back-icon{
+	margin-left: 65%;
+}
+.page-number{
+	width: 3%;
+	height: 50%;
+	background-color: #ffffff;
+	border-radius:0.5rem;
+	border: 1px solid black;
+	text-align: center;
+}
+.tarifs{
+	margin-top: 2%;
+	display: flex;
+	justify-content: flex-start;
+}
+.tarif{
+	background-color: rgba(82, 170, 188, 0.58);
+	margin-left: 8.5vh;
+	width: 29vh;
+	height: 22vh;
+	border-radius:0.5rem;
+	outline: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+}
+.tarif p{
+	margin-top: 1%;
+	font-size: 20px;
+	color:#000000;
+}
+.tarif:first-child {
+  margin-left: 0;
+}
+.modal-content{
+	width: 60vh;
+	height: 6vh;
+}
+
+.modal-content1{
+	width: 80vh;
+	height: 21vh;
+}
+
+.header-new-tarif{
+	margin-top: 2%;	
+	display: flex;
+	justify-content: space-between;
+}
+.header-new-tarif h2{
+	margin-left: 30%;
+}
+.btn-close{
+	margin-right: 2%;
+}
+.new-tarif-info p{
+	margin:0;
+	margin-left: 10%;
+}
+.new-tarif-name,.new-tarif-cost{
+	margin-left: 10%;
+	padding-left: 5%;
+	width:70%;
+	height: 20%;
+	border-radius:0.5rem;
+}
+.checkbox-allday p{
+	font-size: 13px;
+	margin:0;
+}
+.checkbox-allday a{
+  display: block; /* Делаем ссылку блочным элементом */
+}
+.new-tarif-cost{
+	margin-top: 2%;
+}
+.checkbox-allday{
+	margin-left: 10%;
+	display: flex;
+	justify-content: space-between;
+	width:20%;
+	align-items: center;
+}
+.time-interval p{
+	margin:0;
+}
+.time-interval{
+	margin-left: 10%;
+	display: flex;
+	justify-content: space-between;
+	width:34%;
+	align-items: center;
+}
+.start-time-input,.end-time-input{
+	border-radius:0.5rem;
+	text-align: center;
+	height: 2.5rem;
+}
+.create-new-tarif{
+	background-color: #F8BC43;
+	width:40%;
+	height: 20%;
+	border-radius:0.5rem;
+	display: block;
+    margin: 0 auto;
+    margin-top: 4%;
+}
+.accordion-item:first-child{
+	margin-top: 2%;
+}
+.accordion-item{
+	margin-bottom: 2%;
+	border-radius: 1rem;
+}
+.accordion-button{
+	background-color: #96C9D3 !important;
+	border-radius:1rem;
+	font-size: 20px;
+}
+.accordion-button:focus{
+	border-color: black !important;
+}
+.accordion-button:not(.collapsed){
+	font-size: 20px;
+	border-bottom: 2px solid black;
+	box-shadow: none !important;
+}
+.accordion-button.collapsed{
+	background-color: #96C9D3;
+	box-shadow: none !important;
+	border-radius:1rem;
+	font-size: 20px;
+}	
+.accordion-button.collapse{
+	background-color: #96C9D3
+}
+.accordion-body{
+	background-color: #96C9D3;
+}
+.tarif-in-group{
+	background-color: #ffffff;
+	width: 27vh;
+	height: 18vh;
+	border-radius:0.5rem;
+	outline: 1px solid black;
+	margin-right: 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+}
+.accordion-body{
+	display: flex;
+	justify-content: flex-start;
+}
+.modal-content.modal-content-2{
+	height: 700px !important;
+}
+.header-new-tarif.groups h2{
+	margin-left:15%;
+	font-size:30px;
+}
+.new-group-name,.new-group-cost{
+	margin-left: 10%;
+	padding-left: 5%;
+	width:80%;
+	height:5%;
+	border-radius:0.5rem;
+}
+.new-tarif-info.groups p{
+	font-size:20px;
+}
+.search-container.groups{
+	background-color: white;
+	width: 80%;
+	height: 1.8rem;
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	overflow: hidden;
+	margin-left: 10%;
+	border:1px solid black;
+}
+.search-new-group{
+	display: flex;
+}
+.pagination-new-group{
+	display: flex;
+	widows: 20%;
+}
+.page-number-tarifs{
+	border: 1px solid black;
+}
+.pagination-new-group.back-icon{
+	margin:0;
+}
+.tarifs-new-group{
+	display: flex;
+	margin-left: 10%;
+	margin-right: 5%;
+	margin-top: 5%;
+	justify-content: space-between;
+}
+.tarif-in-new-group{
+	background-color: #96C9D3;
+	width: 26vh;
+	height: 24vh;
+	border-radius:0.5rem;
+	outline: 1px solid black;
+	margin-right: 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+}
+.tarif-in-new-group p{
+	font-size: 18px;
+	margin:0;
+}
+.create-new-group{
+	background-color: #F8BC43;
+	width:40%;
+	height:8%;
+	border-radius:0.5rem;
+	display: block;
+    margin: 0 auto;
+    margin-top: 4%;
+}
+.new-tarif-info.groups p:nth-child(6){
+	margin-top: 2%;
+}
+
+
+.main-content-forses{
+    width: 70%;
+    margin-top: 10px;
+    height: 8%;
+  }
