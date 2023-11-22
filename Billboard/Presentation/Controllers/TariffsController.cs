@@ -45,7 +45,10 @@ public class TariffsController : ControllerBase
             Request = request
         };
         var response = await _mediator.Send(command, cancellationToken);
-        return Ok(response);
+        return CreatedAtAction(nameof(GetTariff), new
+        {
+            id = response.Id
+        }, response);
     }
 
     [HttpGet]

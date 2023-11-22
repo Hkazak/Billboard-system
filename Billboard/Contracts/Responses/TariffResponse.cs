@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Responses;
 
-public class TariffResponse
+public record TariffResponse
 {
     public required Guid Id { get; init; }
     public required string Title { get; init; }
