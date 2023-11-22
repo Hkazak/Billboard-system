@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Commands;
-using Contracts.Requests;
+using Contracts.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Persistence.Context;
@@ -24,7 +24,7 @@ public class AddTariffCommandTests
     [Test]
     public async Task Handle_ValidTariff_SuccessfullyAdded()
     {
-        var request = new AddTariffRequest()
+        var request = new AddTariff()
         {
             Title = "Test",
             StartTime = TimeSpan.FromHours(5),

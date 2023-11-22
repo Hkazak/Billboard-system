@@ -130,4 +130,15 @@ public static class MapperExtensions
             ConfirmationCode = request.ConfirmationCode
         };
     }
+
+    public static AddTariff CreateAddTariff(this AddTariffRequest request)
+    {
+        return new AddTariff
+        {
+            Title = request.Title,
+            StartTime = TimeSpan.Parse(request.StartTime),
+            EndTime = TimeSpan.Parse(request.EndTime),
+            Price = request.Price
+        };
+    }
 }

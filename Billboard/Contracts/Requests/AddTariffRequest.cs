@@ -3,7 +3,7 @@
 public record AddTariffRequest
 {
     public required string Title { get; init; }
-    public required TimeSpan StartTime { get; init; }
-    public required TimeSpan EndTime { get; init; }
+    public required string StartTime { get; init; }
+    public required string EndTime { get; init; }
     public required decimal Price { get; init; }
 }
