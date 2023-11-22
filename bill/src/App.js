@@ -17,6 +17,8 @@ import ManagerForgotPassword from './pages/ManagerForgotPassword';
 import BillPages from './pages/BillPages';
 import CreateBill from './pages/CreateBill';
 import BillDescr from './pages/BillDescr';
+import TarifPage from './pages/TarifPage';
+import TarifGroup from './pages/TarifGroup';
 
 function App(){
 
@@ -39,6 +41,8 @@ function App(){
               <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
               <Route path={CreateManagerRoute} element={<Admin/>}></Route>
               <Route path='/bill-descr' element={<BillDescr/>}></Route>
+              <Route path='/tarifs' element={<TarifPage/>}></Route>
+              <Route path='/tarif-group' element={<TarifGroup/>}></Route>
             </Routes>
         
       </BrowserRouter>
