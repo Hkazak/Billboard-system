@@ -61,31 +61,31 @@ function TarifGroup() {
       .map((user) => {
         return (
           <>
-            <div class="inner">
+            <div className="inner">
 			
             <div className="main-content">
             
                
-                <div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div className="accordion" id="accordionExample">
+      <div className="accordion-item">
+        <h2 className="accordion-header">
+          <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             Название
           </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div class="tarif-in-group">
+        <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div className="accordion-body">
+            <div className="tarif-in-group">
             <p>Имя: {user.first_name} {user.last_name}</p>
                     <p>10:00-14:00 <br/>20:00-23:59</p>
                     <p>18.000 тенге</p>
                 </div>
-            <div class="tarif-in-group">
+            <div className="tarif-in-group">
                     <p>Название тарифа</p>
                     <p>10:00-14:00 <br/>20:00-23:59</p>
                     <p>18.000 тенге</p>
                 </div>
-            <div class="tarif-in-group">
+            <div className="tarif-in-group">
                     <p>Название тарифа</p>
                     <p>10:00-14:00 <br/>20:00-23:59</p>
                     <p>18.000 тенге</p>
@@ -141,73 +141,73 @@ function TarifGroup() {
     <div>
         <Sidebar>
         <header>
-            <div class="logo"><img src={im} alt=""/></div>
-            <div class="header-top"><h1>Тарифы</h1></div>
+            <div className="logo"><img src={im} alt=""/></div>
+            <div className="header-top"><h1>Тарифы</h1></div>
 	    </header>
 
         <div className="main-content-forses">
-        <div class="search-add-tarif">
-				<div class="search-container">
-					<button class="search-btn"><img src="./static/search-icon.png" alt=""/></button>
+        <div className="search-add-tarif">
+				<div className="search-container">
+					<button className="search-btn"><img src="./static/search-icon.png" alt=""/></button>
    					<input type="text" id="search-input" placeholder="Search"/>
 				</div>
-                <button onClick={openPopup1} type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-					<p class="new-tarif">Новая группа</p>
+                <button onClick={openPopup1} type="button" className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+					<p className="new-tarif">Новая группа</p>
 				</button>
 			</div>
         </div>
 
   {/* POP UP */}
             <AN isOpen={isPopup1Open} closeModal={closePopup1} title="Form 1">
-            <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content modal-content-2">
-      <div class="header-new-tarif groups">
+            <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content modal-content-2">
+      <div className="header-new-tarif groups">
        <h2>Новая группа тарифов</h2> 
     </div>
-    <div class="new-tarif-info groups">
+    <div className="new-tarif-info groups">
     	<p>Общая информация</p>
-    	<input type="text" placeholder="Название" class="new-group-name"/>
+    	<input type="text" placeholder="Название" className="new-group-name"/>
     	<p>Тарифы</p>
-    	<div class="search-new-group">
-    		<div class="search-container groups">
-					<button class="search-btn"><img src="./static/search-icon.png" alt=""/></button>
+    	<div className="search-new-group">
+    		<div className="search-container groups">
+					<button className="search-btn"><img src="./static/search-icon.png" alt=""/></button>
    					<input type="text" id="search-input" placeholder="Search"/>
 			</div>
-			<div class="pagination-new-group">
-				<div class="back-icon-tarifs">
+			<div className="pagination-new-group">
+				<div className="back-icon-tarifs">
 					<a href=""><img src="./static/left_icon.png" alt=""/></a>
 				</div>
-				<div class="forward-icon-tarifs">
+				<div className="forward-icon-tarifs">
 					<a href="#"><img src="./static/right_icon.png" alt=""/></a>
 				</div>
 			</div>
     	</div>
-    	<div class="tarifs-new-group">
-    		<div class="tarif-in-new-group">
+    	<div className="tarifs-new-group">
+    		<div className="tarif-in-new-group">
 				<p>Название тарифа</p>
 				<p>10:00-14:00 <br/>20:00-23:59</p>
 				<p>18.000 тенге</p>
 			</div>
-			<div class="tarif-in-new-group">
+			<div className="tarif-in-new-group">
 				<p>Название тарифа</p>
 				<p>10:00-14:00 <br/>20:00-23:59</p>
 				<p>18.000 тенге</p>
 			</div>
     	</div>
     	<p>Выбранные Тарифы</p>
-    	<div class="tarifs-new-group">
-    		<div class="tarif-in-new-group">
+    	<div className="tarifs-new-group">
+    		<div className="tarif-in-new-group">
 				<p>Название тарифа</p>
 				<p>10:00-14:00 <br/>20:00-23:59</p>
 				<p>18.000 тенге</p>
 			</div>
-			<div class="tarif-in-new-group">
+			<div className="tarif-in-new-group">
 				<p>Название тарифа</p>
 				<p>10:00-14:00 <br/>20:00-23:59</p>
 				<p>18.000 тенге</p>
 			</div>
     	</div>
-    	<button class="create-new-group">
+    	<button className="create-new-group">
     		Создать
     	</button>
     </div>

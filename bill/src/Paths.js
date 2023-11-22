@@ -10,3 +10,8 @@ export const ManagerResetPasswordRoute = '/manager-reset-password';
 
 export const AdminAuthRoute = '/admin-auth';
 export const CreateManagerRoute = '/create-manager';
+export const CreateBillboardRoute = '/cr-bills';
+export const BillboardsRoute = '/billboards';
+export const BillboardDescriptionRoute = '/billboards-description';
+export const TariffRoute = '/tariffs';
+export const TariffGroupRoute = '/tariff-group';

@@ -68,22 +68,22 @@ function TarifPage() {
         return (
           <>
 
-<div class="inner">
-		<div class="main-content">
+<div className="inner">
+		<div className="main-content">
 			
-			<div class="tarifs">
-			<div class="tarif">
+			<div className="tarifs">
+			<div className="tarif">
 				<p>Имя: {user.first_name} {user.last_name}</p>
 				<p>10:00-14:00 <br/>20:00-23:59</p>
 				<p>18.000 тенге</p>
 			</div>
-			<div class="tarif">
+			<div className="tarif">
 				
 			</div>
-			<div class="tarif">
+			<div className="tarif">
 				
 			</div>
-			<div class="tarif">
+			<div className="tarif">
 				
 			</div>
 			</div>
@@ -104,18 +104,18 @@ function TarifPage() {
         
         <Sidebar>
         <header>
-            <div class="logo"><img src={im} alt=""/></div>
-            <div class="header-top"><h1>Тарифы</h1></div>
+            <div className="logo"><img src={im} alt=""/></div>
+            <div className="header-top"><h1>Тарифы</h1></div>
 	    </header>
 
 
-        <div class="search-add-tarif1">
-				<div class="search-container">
-					<button class="search-btn"><img src="./static/search-icon.png" alt=""/></button>
+        <div className="search-add-tarif1">
+				<div className="search-container">
+					<button className="search-btn"><img src="./static/search-icon.png" alt=""/></button>
    					<input type="text" id="search-input" placeholder="Search"/>
 				</div>
-				<button onClick={openPopup1} type="button" class="btn btn-primary" >
-					<p class="new-tarif">Новый тариф</p>
+				<button onClick={openPopup1} type="button" className="btn btn-primary" >
+					<p className="new-tarif">Новый тариф</p>
 				</button>
 			</div>
 
@@ -124,30 +124,30 @@ function TarifPage() {
 
     {/* POP UP */}
 
-    {/* <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="header-new-tarif">
+    {/* <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="header-new-tarif">
        <h2>Новый тариф</h2> 
-       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
-    <div class="new-tarif-info">
+    <div className="new-tarif-info">
     	<p>Общая информация</p>
-    	<input type="text" placeholder="Название" class="new-tarif-name"/>
-    	<input type="text" placeholder="Цена" class="new-tarif-cost"/>
+    	<input type="text" placeholder="Название" className="new-tarif-name"/>
+    	<input type="text" placeholder="Цена" className="new-tarif-cost"/>
     	<p>Временные отрезки</p>
-    	<div class="checkbox-allday">
+    	<div className="checkbox-allday">
     		<a href="">
     			<img src="./static/checkbox_icon.png" alt="" width="17px" height="17px"/>
     		</a>
     		<p>Целый день</p>
     	</div>
-    	<div class="time-interval">
-    		<input type="time" placeholder="00:00" class="start-time-input"/>
+    	<div className="time-interval">
+    		<input type="time" placeholder="00:00" className="start-time-input"/>
     		<img src="./static/line-time-icon.png" alt="" width="12px"/>
-    		<input type="time" class= "end-time-input"/>
+    		<input type="time" className= "end-time-input"/>
 
     	</div>
-    	<button class="create-new-tarif">
+    	<button className="create-new-tarif">
     		Создать
     	</button>
     </div>
@@ -158,29 +158,29 @@ function TarifPage() {
 
 
 <AN isOpen={isPopup1Open} closeModal={closePopup1} title="">
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="header-new-tarif">
+<div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="header-new-tarif">
        <h2>Новый тариф</h2> 
     </div>
-    <div class="new-tarif-info">
+    <div className="new-tarif-info">
     	<p>Общая информация</p>
-    	<input type="text" placeholder="Название" class="new-tarif-name"/>
-    	<input type="text" placeholder="Цена" class="new-tarif-cost"/>
+    	<input type="text" placeholder="Название" className="new-tarif-name"/>
+    	<input type="text" placeholder="Цена" className="new-tarif-cost"/>
     	<p>Временные отрезки</p>
-    	<div class="checkbox-allday">
+    	<div className="checkbox-allday">
     		<a href="">
     			<img src="./static/checkbox_icon.png" alt="" width="17px" height="17px"/>
     		</a>
     		<p>Целый день</p>
     	</div>
-    	<div class="time-interval">
-    		<input type="time" placeholder="00:00" class="start-time-input"/>
+    	<div className="time-interval">
+    		<input type="time" placeholder="00:00" className="start-time-input"/>
     		<img src="./static/line-time-icon.png" alt="" width="12px"/>
-    		<input type="time" class= "end-time-input"/>
+    		<input type="time" className= "end-time-input"/>
 
     	</div>
-    	<button class="create-new-tarif">
+    	<button className="create-new-tarif">
     		Создать
     	</button>
     </div>

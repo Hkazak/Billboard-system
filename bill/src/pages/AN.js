@@ -18,6 +18,7 @@ const AN = ({ isOpen, closeModal, title, children }) => {
       onRequestClose={closeModal}
       contentLabel={title}
       style={customStyles}
+      ariaHideApp={false}
     >
         <div className='m-cont'>
             <div className="modal-content">

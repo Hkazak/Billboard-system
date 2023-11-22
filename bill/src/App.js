@@ -9,7 +9,19 @@ import ForgotPassword from './pages/ForgotPassword';
 import ChangePassword from './pages/ChangePassword';
 import Admin from './pages/Admin';
 import ManagerAuthorization from './pages/ManagerAuthorization';
-import { AdminAuthRoute, CreateManagerRoute, DashboardRoute, ForgotPasswordRoute, ManagerAuthRoute, ManagerForgotPasswordRoute, ManagerResetPasswordRoute, ResetPasswordRoute, UserAuthorizationRoute, UserRegistrationRoute } from './Paths';
+import {
+  AdminAuthRoute, BillboardDescriptionRoute, BillboardsRoute, CreateBillboardRoute,
+  CreateManagerRoute,
+  DashboardRoute,
+  ForgotPasswordRoute,
+  ManagerAuthRoute,
+  ManagerForgotPasswordRoute,
+  ManagerResetPasswordRoute,
+  ResetPasswordRoute, TariffGroupRoute,
+  TariffRoute,
+  UserAuthorizationRoute,
+  UserRegistrationRoute
+} from './Paths';
 import { ResetPasswordChangePassword } from './lib/controllers/UserController';
 import AdminAuthorization from './pages/AdminAuthorization';
 import ManagerResetPassword from './pages/ManagerResetPassword';
@@ -32,17 +44,16 @@ function App(){
               <Route path={UserRegistrationRoute} element={<UserRegistration/>}/>
               <Route path={ForgotPasswordRoute} element={<ForgotPassword/>}></Route>
               <Route path={ResetPasswordRoute} element={<ChangePassword/>}></Route>
-              
               <Route path={ManagerAuthRoute} element={<ManagerAuthorization/>}></Route>
               <Route path={ManagerResetPasswordRoute} element={<ManagerResetPassword/>}></Route>
               <Route path={ManagerForgotPasswordRoute} element={<ManagerForgotPassword/>}></Route>
-              <Route path='/cr-bills' element={<CreateBill/>}></Route>
-              <Route path='/billboards' element={<BillPages/>}></Route>
+              <Route path={CreateBillboardRoute} element={<CreateBill/>}></Route>
+              <Route path={BillboardsRoute} element={<BillPages/>}></Route>
               <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
               <Route path={CreateManagerRoute} element={<Admin/>}></Route>
-              <Route path='/bill-descr' element={<BillDescr/>}></Route>
-              <Route path='/tarifs' element={<TarifPage/>}></Route>
-              <Route path='/tarif-group' element={<TarifGroup/>}></Route>
+              <Route path={BillboardDescriptionRoute} element={<BillDescr/>}></Route>
+              <Route path={TariffRoute} element={<TarifPage/>}></Route>
+              <Route path={TariffGroupRoute} element={<TarifGroup/>}></Route>
             </Routes>
         
       </BrowserRouter>
