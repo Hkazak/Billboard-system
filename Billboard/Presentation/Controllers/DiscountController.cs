@@ -6,31 +6,31 @@ using Contracts.Responses;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Validators;
 
 namespace Presentation.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class GroupOfTariffsController : ControllerBase
+
+public class DiscountController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IValidator<AddGroupOfTariffsRequest> _addGroupOfTariffsValidator;
+    private readonly IValidator<AddDiscountRequest> _addDiscountValidator;
 
-    public GroupOfTariffsController(IMediator mediator, IValidator<AddGroupOfTariffsRequest> addGroupOfTariffsValidator)
+    public DiscountController(IMediator mediator, IValidator<AddDiscountRequest> addDiscountValidator)
     {
         _mediator = mediator;
-        _addGroupOfTariffsValidator = addGroupOfTariffsValidator;
+        _addDiscountValidator = addDiscountValidator;
     }
-
+    
     [HttpPost]
     [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<GroupOfTariffsResponse>> CreateGroupOfTariffs(
-        [FromBody] AddGroupOfTariffsRequest request)
+    public async Task<ActionResult<DiscountResponse>> createDiscount([FromBody] AddDiscountRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var validationResult = await _addGroupOfTariffsValidator.ValidateAsync(request, cancellationToken);
+        var validationResult = await _addDiscountValidator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
             var errorMessage = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));
@@ -42,35 +42,36 @@ public class GroupOfTariffsController : ControllerBase
             return BadRequest(errorResponse);
         }
 
-        var command = new AddGroupOfTariffsCommand
+        var command = new AddDiscountCommand
         {
             Request = request
         };
-        var response = await _mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetGroupOfTariffs), new
+        var response = _mediator.Send(request, cancellationToken);
+        return CreatedAtAction(nameof(GetDiscount), new
         {
             id = response.Id
         }, response);
-    }
 
+    }
+    
     [HttpGet]
     [Route("{id:guid}")]
-    public async Task<ActionResult<GroupOfTariffsResponse>> GetGroupOfTariffs([FromRoute] Guid id)
+    public async Task<ActionResult<DiscountResponse>> GetDiscount([FromRoute] Guid id)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var query = new GetGroupOfTariffsQuery
+        var query = new GetDiscountQuery
         {
             Id = id
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }
-
+    
     [HttpGet]
-    public async Task<ActionResult<GroupOfTariffsResponse>> GetGroupOfTariffsList()
+    public async Task<ActionResult<DiscountResponse>> GetDiscountList()
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var query = new GetGroupOfTariffsListQuery();
+        var query = new GetDiscountListQuery();
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }
@@ -78,12 +79,12 @@ public class GroupOfTariffsController : ControllerBase
     [HttpDelete]
     [Authorize(Roles = "Manager")]
     [Route("{id:guid}")]
-    public async Task<ActionResult> DeleteGroupOfTariffs([FromRoute] Guid id)
+    public async Task<ActionResult> DeleteDiscount([FromBody] Guid id)
     {
         var cancellationToken = HttpContext.RequestAborted;
-        var command = new DeleteGroupOfTariffsCommand
+        var command = new DeleteDiscountCommand
         {
-            GroupId = id
+            DiscountId = id
         };
         await _mediator.Send(command, cancellationToken);
         return NoContent();

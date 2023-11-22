@@ -7,11 +7,11 @@ using Persistence.Models;
 
 namespace Application.CQRS.Commands;
 
-public class AddBillboardSurfaceCommand : IRequest<Contracts.Responses.BillboardSurfaceResponse>
+public class AddBillboardSurfaceCommand : IRequest<BillboardSurfaceResponse>
 {
     public required AddBillboardSurfaceRequest Request { get; init; }
 
-    public class AddBillboardSurfaceHandler : IRequestHandler<AddBillboardSurfaceCommand, Contracts.Responses.BillboardSurfaceResponse>
+    public class AddBillboardSurfaceHandler : IRequestHandler<AddBillboardSurfaceCommand, BillboardSurfaceResponse>
     {
         private readonly BillboardContext _context;
 

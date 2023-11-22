@@ -81,6 +81,16 @@ public static class MapperExtensions
         };
     }
 
+    public static DiscountResponse CreateResponse(this Discount discount)
+    {
+        return new DiscountResponse
+        {
+            Id = discount.Id,
+            Name = discount.Name,
+            SalesOf = discount.SalesOf
+        };
+    }
+
     public static AuthenticationClaims CreateClaims(this User user)
     {
         return new AuthenticationClaims
