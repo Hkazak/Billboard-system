@@ -1,85 +1,140 @@
-import React from 'react'
-import {useState} from 'react';
+import React, { useRef } from 'react'
+import { useState } from 'react';
 import Sidebar from '../components/SideBar'
 import './page_styles/TariffPages.css'
 import im from './logo.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {data} from '../data.js';
+import { data } from '../data.js';
 import ReactPaginate from "react-paginate";
 import './page_styles/AllBillboards.css'
 
-import {useNavigate} from 'react-router';
+import { useNavigate } from 'react-router';
 import CreateTariff from "../components/CreateTariff";
+import { useEffect } from 'react';
+import { GetTariffs } from '../lib/controllers/TariffController.js';
+
+var isInitialized = false;
+var lastSearch = '';
 
 function TariffPage() {
 
     const [isCreation, setIsCreation] = useState(false);
-    function openCreateTariff()
-    {
+    function openCreateTariff() {
         setIsCreation(!isCreation);
     }
 
     const navigate = useNavigate();
 
-    const [users, setUsers] = useState(data.slice(0, 50));
+    const [users, setUsers] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
 
-    const usersPerPage = 2;
+    const search = useRef(null);
+    async function onSearch(ev) {
+        lastSearch = search.current.value;
+        console.log(search.current.value);
+        let tariffsListResponse = await GetTariffs();
+        if (tariffsListResponse.ok) {
+            let json = await tariffsListResponse.json();
+
+            if (lastSearch === search.current.value) {
+                let searchResult = json.filter((tariff) => tariff.title.toLowerCase().includes(search.current.value.toLowerCase()));
+                setUsers(searchResult);
+            }
+        }
+    }
+
+    async function initialize() {
+        let tariffsListResponse = await GetTariffs();
+        if (tariffsListResponse.ok) {
+            let json = await tariffsListResponse.json();
+            setUsers(json);
+        }
+    }
+
+    useEffect(() => {
+        if (isInitialized) {
+            return;
+        }
+
+        initialize();
+        isInitialized = true;
+    });
+
+    const usersPerPage = 8;
     const pagesVisited = pageNumber * usersPerPage;
 
     const pageCount = Math.ceil(users.length / usersPerPage);
 
-    const changePage = ({selected}) => {
+    const changePage = ({ selected }) => {
         setPageNumber(selected);
     };
 
-    const displayUsers = users
-        .slice(pagesVisited, pagesVisited + usersPerPage)
+    const displayUsers1 = users
+        .slice(pagesVisited, pagesVisited + usersPerPage / 2)
         .map((user) => {
             return (
                 <>
-                    <div className="inner">
-                        <div className="main-content">
-
-                            <div className="tarifs">
-                                <div className="tarif">
-                                    <p>Имя: {user.first_name} {user.last_name}</p>
-                                    <p>10:00-14:00 <br/>20:00-23:59</p>
-                                    <p>18.000 тенге</p>
-                                </div>
-                                <div className="tarif">
-
-                                </div>
-                                <div className="tarif">
-
-                                </div>
-                                <div className="tarif">
-
-                                </div>
-                            </div>
-                        </div>
+                    <div className="tarif">
+                        <p>{user.title} {user.last_name}</p>
+                        <p>{user.startTime.slice(0, 5)}-{user.endTime.slice(0, 5)}</p>
+                        <p>{user.price} тенге</p>
                     </div>
 
                 </>
             );
         });
 
+    const displayUsers2 = users
+        .slice(pagesVisited + usersPerPage / 2, pagesVisited + usersPerPage)
+        .map((user) => {
+            return (
+                <>
+                    <div className="tarif">
+                        <p>{user.title} {user.last_name}</p>
+                        <p>{user.startTime.slice(0, 5)}-{user.endTime.slice(0, 5)}</p>
+                        <p>{user.price} тенге</p>
+                    </div>
+
+                </>
+            );
+        });
+
+    const tariffs =
+        <>
+            <div className='inner'>
+                <div className='main-content'>
+                    <div className='tarifs'>
+                        {displayUsers1}
+                    </div>
+                </div>
+            </div>
+
+
+            <div className='inner'>
+                <div className='main-content'>
+                    <div className='tarifs'>
+                        {displayUsers2}
+                    </div>
+                </div>
+            </div>
+        </>
+
 
     return (
         <div>
 
-            <CreateTariff isEnabled={isCreation}/>
+            <CreateTariff isEnabled={isCreation} setIsEnabled={setIsCreation} tariffs={users} setTariffs={setUsers} setPage={setPageNumber} />
             <Sidebar>
                 <header>
-                    <div className="logo"><img src={im} alt=""/></div>
+                    <div className="logo"><img src={im} alt="" /></div>
                     <div className="header-top"><h1>Тарифы</h1></div>
                 </header>
 
 
                 <div className="search-add-tarif1">
                     <div className="search-container">
-                        <button className="search-btn"><img src="./static/search-icon.png" alt=""/></button>
-                        <input type="text" id="search-input" placeholder="Search"/>
+                        <button className="search-btn"><img src="./static/search-icon.png" alt="" /></button>
+                        <input onChange={onSearch} ref={search} type="text" id="search-input" placeholder="Search" />
                     </div>
                     <button onClick={openCreateTariff} type="button" className="btn btn-primary">
                         <p className="new-tarif">Новый тариф</p>
@@ -122,7 +177,7 @@ function TariffPage() {
                 {/* END POP */}
 
 
-                {displayUsers}
+                {tariffs}
                 <ReactPaginate
                     previousLabel={"Previous"}
                     nextLabel={"Next"}
@@ -133,6 +188,7 @@ function TariffPage() {
                     nextLinkClassName={"nextBttn"}
                     disabledClassName={"paginationDisabled"}
                     activeClassName={"paginationActive"}
+                    forcePage={pageNumber}
                 />
 
             </Sidebar>

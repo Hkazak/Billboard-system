@@ -37,7 +37,8 @@
 }
 
 .modal-content{
-    width: 900px;
+    margin: auto;
+    width: fit-content;
     background-color: white;
 }
 

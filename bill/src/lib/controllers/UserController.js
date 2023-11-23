@@ -1,4 +1,4 @@
-import { baseUrl } from "../Consts";
+import { LS, baseUrl } from "../Consts";
 
 export const userSignUpEndpoint = `${baseUrl}/Users/sign-up`;
 export const userSignInEndpoint = `${baseUrl}/Users/sign-in`;

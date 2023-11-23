@@ -160,6 +160,7 @@ a{
 	border-radius:0.5rem;
 	outline: 1px solid black;
 	display: flex;
+	width: 19%;
 	flex-direction: column;
 	justify-content: space-between;
 	text-align: center;

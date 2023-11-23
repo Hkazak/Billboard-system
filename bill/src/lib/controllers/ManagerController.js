@@ -1,4 +1,4 @@
-import { baseUrl } from "../Consts";
+import { LS, baseUrl } from "../Consts";
 
 export const managerSignInEndpoint = `${baseUrl}/Managers/sign-in`;
 export const userResetPasswordSendEmailEndpoint = `${baseUrl}/Users/password/forgot`;

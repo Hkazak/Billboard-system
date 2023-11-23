@@ -83,11 +83,28 @@
     margin-left: 5px;
 }
 
+.two-buttons {
+    margin-top: 10px;
+    display: flex;
+}
+
 .create-tariff
 {
     display: block;
     text-align: center;
     background: #F8BC43;
+    width: 40%;
+    height: 50px;
+    margin: auto;
+    border: none;
+    border-radius: 8px;
+}
+
+.cancel {
+    display: block;
+    text-align: center;
+    color: white;
+    background: rgb(248, 67, 67);
     width: 40%;
     height: 50px;
     margin: auto;
