@@ -39,7 +39,7 @@ function BillPages() {
           <>
           
           <div className="user">
-            <div className='desc-main-wrapper'>
+            <div className='desc-main-wrapper3'>
                 {/* <div className='pers-info'>
 
                     <p> 
