@@ -14,7 +14,7 @@
     height: 100vw;
     display: flex;
     flex-wrap: wrap;
-    
+    background-color: #96C9D3;
   }
 
   .arr-btn{
