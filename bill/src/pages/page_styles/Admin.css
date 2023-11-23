@@ -9,8 +9,8 @@
     text-decoration: none;
   }
 
-  .desc-main-wrapper{
-    width: 100vw;
+  .desc-main-wrapper1{
+    width: 70vw;
     height: 100vw;
     display: flex;
     flex-wrap: wrap;
