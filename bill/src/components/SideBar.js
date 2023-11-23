@@ -9,7 +9,7 @@ import {
     FaThList
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-import { AdminAuthRoute, CreateManagerRoute, DashboardRoute, ManagerAuthRoute, UserAuthorizationRoute } from '../Paths';
+import { AdminAuthRoute, CreateManagerRoute, DashboardRoute, ManagerAuthRoute, TariffRoute, UserAuthorizationRoute } from '../Paths';
 import AdminAuthorization from '../pages/AdminAuthorization';
 
 const Sidebar = ({children}) => {
@@ -23,29 +23,34 @@ const Sidebar = ({children}) => {
         },
         {
             path:UserAuthorizationRoute,
-            name:"Authorization",
+            name:"Авторизация",
             icon:<FaTh/>
         },
         {
             path:"/all-bills",
-            name:"AllBillboards",
+            name:"Билборды",
             icon:<FaTh/>
         },
         {
             path:CreateManagerRoute,
-            name:"Manage Managers",
+            name:"Менеджеры",
             icon:<FaTh/>
         },
         {
             path:ManagerAuthRoute,
-            name:"ManagerAuthorization",
+            name:"Авторизация Менеджера",
             icon:<FaTh/>
         },
         {
             path:AdminAuthRoute,
-            name:"AdminAuthorization",
+            name:"Авторизация Администратора",
             icon:<FaTh/>
         },
+        {
+            path:TariffRoute,
+            name:"Тарифы",
+            icon:<FaTh/>
+        }
     ]
     return (
         <div className="container">
