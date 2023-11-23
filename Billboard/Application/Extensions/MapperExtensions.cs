@@ -56,8 +56,8 @@ public static class MapperExtensions
         {
             Id = tariff.Id,
             Title = tariff.Title,
-            StartTime = tariff.StartTime,
-            EndTime = tariff.EndTime,
+            StartTime = tariff.StartTime.ToString(@"hh\:mm"),
+            EndTime = tariff.EndTime.ToString(@"hh\:mm"),
             Price = tariff.Price
         };
     }

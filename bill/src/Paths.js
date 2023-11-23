@@ -14,4 +14,4 @@ export const CreateBillboardRoute = '/cr-bills';
 export const BillboardsRoute = '/billboards';
 export const BillboardDescriptionRoute = '/billboards-description';
 export const TariffRoute = '/tariffs';
-export const TariffGroupRoute = '/tariff-group';
+export const TariffGroupRoute = '/tariffs-group';

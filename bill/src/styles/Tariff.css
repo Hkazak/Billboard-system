@@ -1,0 +1,42 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.tariff-block
+{
+    display: inline-block;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 8px;
+    margin: 0 15px;
+    background: white;
+    width: 20%;
+}
+
+.tariff-title
+{
+    display: block;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 5px 0 0.95em 0;
+}
+
+.tariff-time-period
+{
+    display: block;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 5px 0 0.95em 0;
+}
+
+.tariff-price
+{
+    display: block;
+    text-align: center;
+}

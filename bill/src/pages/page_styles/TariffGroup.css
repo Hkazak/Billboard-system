@@ -1,0 +1,36 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.control-panel
+{
+    background: #52AABC;
+    border: 1px solid #52AABC;
+    border-top-left-radius: 16px;
+    padding: 20px 25px;
+}
+
+.search
+{
+    border: none;
+    border-radius: 8px;
+    width: 50%;
+    height: 35px;
+    display: inline-block;
+    margin: 0;
+}
+
+.create-new-group-of-tariffs-button
+{
+    background: white;
+    border: none;
+    border-radius: 8px;
+    width: 200px;
+    height: 35px;
+    display: inline-block;
+    float: right;
+    margin: 0;
+}
+
