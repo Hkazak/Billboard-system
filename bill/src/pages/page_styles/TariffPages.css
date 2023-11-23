@@ -6,6 +6,7 @@ a,p,h1,h2{
 	width: 28%;
 }
 .header-top{
+	margin-left: 120px;
 	width:66.6%;
 }
 header{
@@ -47,7 +48,7 @@ a{
 	padding-right: 2%
 }
 .main-content{
-	width:71%;
+	width:100%;
 }
 .search-add-tarif{
 	width: 100%;
@@ -60,7 +61,7 @@ a{
 }
 .search-add-tarif1{
     margin-top: 20px;
-	width: 71%;
+	width: 100%;
 	height: 6%;
 	background-color:#52AABC;
 	display: flex;
@@ -83,6 +84,7 @@ a{
     border: none; /* Убираем границу кнопки (если необходимо) */
 }
 #search-input{
+	margin-top: 15px;
 	width: 100%;
 	border:none;
 }
