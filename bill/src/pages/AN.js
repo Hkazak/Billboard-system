@@ -24,7 +24,7 @@ const AN = ({ isOpen, closeModal, title, children }) => {
             <div className="modal-content">
                 <h2>{title}</h2>
                 {children}
-                <button className='close-btnnn' type="button" onClick={closeModal}>
+                <button hidden className='close-btnnn' type="button" onClick={closeModal}>
                 Close
                 </button>
             </div>
