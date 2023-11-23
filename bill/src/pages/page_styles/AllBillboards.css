@@ -9,13 +9,22 @@
     text-decoration: none;
   }
 
-  .desc-main-wrapper{
+    .desc-main-wrapper{
     width: 94vw;
     height: 100vw;
     display: flex;
     flex-wrap: wrap;
     background-color: #96C9D3;
     border: 1px solid black;
+    
+  }
+
+  .desc-main-wrapper3{
+    width: 90vw;
+    height: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #96C9D3;
   }
 
   .arr-btn{
