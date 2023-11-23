@@ -59,7 +59,7 @@ function AllBillboards() {
     const [users, setUsers] = useState(data.slice(0, 50));
     const [pageNumber, setPageNumber] = useState(0);
   
-    const usersPerPage = 2;
+    const usersPerPage = 3;
     const pagesVisited = pageNumber * usersPerPage;
   
     const displayUsers = users
