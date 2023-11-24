@@ -4,7 +4,7 @@ using Persistence.Models;
 
 namespace Persistence.ModelConfigurations;
 
-public class DiscountCobfiguration : IEntityTypeConfiguration<Discount>
+public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
 {
     public void Configure(EntityTypeBuilder<Discount> builder)
     {
