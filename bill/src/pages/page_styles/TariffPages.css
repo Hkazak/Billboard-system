@@ -329,7 +329,7 @@ a{
 }
 .pagination-new-group{
 	display: flex;
-	widows: 20%;
+	widows: 20;
 }
 .page-number-tarifs{
 	border: 1px solid black;

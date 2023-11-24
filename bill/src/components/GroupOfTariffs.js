@@ -6,7 +6,6 @@ import {useState} from "react";
 function GroupOfTariffs({name, tariffs})
 {
     const [hideTariffs, setHideTariffs] = useState(true);
-    const tariffsList = tariffs.map(t=><Tariff key={t.id} tariffTitle={t.title} startTime={t.startTime} endTime={t.endTime} tariffPrice={t.price} />)
     return (
         <div className="group-of-tariffs-block">
             <span className="group-name">
@@ -17,7 +16,7 @@ function GroupOfTariffs({name, tariffs})
             </button>
             <div className="tariffs-list-content" hidden={hideTariffs}>
             <hr/>
-                {tariffsList}
+                {tariffs.map(t=><Tariff key={t.id} tariffTitle={t.title} startTime={t.startTime} endTime={t.endTime} tariffPrice={t.price} />)}
             </div>
         </div>
     );

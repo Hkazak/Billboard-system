@@ -8,32 +8,41 @@ import {useNavigate} from 'react-router';
 import {GetGroupOfTariffsList} from "../lib/controllers/TariffGroupController";
 import GroupOfTariffs from "../components/GroupOfTariffs";
 import Header from "../components/Header";
+import CreateGroupOfTariff from "../components/CreateGroupOfTariff";
 
 function TariffGroup() {
     const [groups, setGroups] = useState([]);
+    const [hideCreateGroupOfTariffsBlock, setHideCreateGroupOfTariffsBlock] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
+        refreshGroupOfTariffsList();
+    }, []);
+
+    function refreshGroupOfTariffsList()
+    {
         GetGroupOfTariffsList()
             .then(e => e.json())
-            .then(e => {
-                console.log(e);
-                setGroups(e.map(g => <GroupOfTariffs name={g.name} key={g.id} tariffs={g.tariffs}/>))
-            });
-    }, []);
+            .then(e => setGroups(e));
+    }
+
+    function handleCreateGroupOfTariffsBlock()
+    {
+        setHideCreateGroupOfTariffsBlock(!hideCreateGroupOfTariffsBlock);
+    }
 
     return (
         <div className="page-content">
+            <CreateGroupOfTariff show={hideCreateGroupOfTariffsBlock} groupsOfTariffs={groups} setGroupsOfTariffs={setGroups} />
             <Header title={"Группа тарифов"}/>
             <Sidebar>
                 <div className="control-panel">
                     <input type="text" placeholder="Search" className="search"/>
-                    // TODO add feature to create new group of tariffs
-                    <button type="button" className="create-new-group-of-tariffs-button" data-toggle="modal"
-                            data-target="#staticBackdrop">
+                    <button type="button" className="open-panel-create-new-group-of-tariffs-button" data-toggle="modal"
+                            data-target="#staticBackdrop" onClick={(e)=>handleCreateGroupOfTariffsBlock()}>
                         <span className="new-tarif">Новая группа</span>
                     </button>
                 </div>
-                {groups}
+                {groups.map(g => <GroupOfTariffs name={g.name} key={g.id} tariffs={g.tariffs}/>)}
             </Sidebar>
         </div>
     )

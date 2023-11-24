@@ -4,7 +4,6 @@ import Sidebar from '../components/SideBar'
 import './page_styles/TariffPages.css'
 import im from './logo.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { data } from '../data.js';
 import ReactPaginate from "react-paginate";
 import './page_styles/AllBillboards.css'
 
@@ -12,6 +11,7 @@ import { useNavigate } from 'react-router';
 import CreateTariff from "../components/CreateTariff";
 import { useEffect } from 'react';
 import { GetTariffs } from '../lib/controllers/TariffController.js';
+import Header from "../components/Header";
 
 var isInitialized = false;
 var lastSearch = '';
@@ -123,14 +123,9 @@ function TariffPage() {
     return (
         <div>
 
+            <Header title={"Тарифы"} />
             <CreateTariff isEnabled={isCreation} setIsEnabled={setIsCreation} tariffs={users} setTariffs={setUsers} setPage={setPageNumber} />
             <Sidebar>
-                <header>
-                    <div className="logo"><img src={im} alt="" /></div>
-                    <div className="header-top"><h1>Тарифы</h1></div>
-                </header>
-
-
                 <div className="search-add-tarif1">
                     <div className="search-container">
                         <button className="search-btn"><img src="./static/search-icon.png" alt="" /></button>
@@ -140,41 +135,6 @@ function TariffPage() {
                         <p className="new-tarif">Новый тариф</p>
                     </button>
                 </div>
-
-
-                {/* POP UP */}
-
-                {/* <div className="modal-dialog modal-dialog-centered">
-    <div className="modal-content">
-      <div className="header-new-tarif">
-       <h2>Новый тариф</h2> 
-       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div className="new-tarif-info">
-    	<p>Общая информация</p>
-    	<input type="text" placeholder="Название" className="new-tarif-name"/>
-    	<input type="text" placeholder="Цена" className="new-tarif-cost"/>
-    	<p>Временные отрезки</p>
-    	<div className="checkbox-allday">
-    		<a href="">
-    			<img src="./static/checkbox_icon.png" alt="" width="17px" height="17px"/>
-    		</a>
-    		<p>Целый день</p>
-    	</div>
-    	<div className="time-interval">
-    		<input type="time" placeholder="00:00" className="start-time-input"/>
-    		<img src="./static/line-time-icon.png" alt="" width="12px"/>
-    		<input type="time" className= "end-time-input"/>
-
-    	</div>
-    	<button className="create-new-tarif">
-    		Создать
-    	</button>
-    </div>
-  </div>
-</div> */}
-
-                {/* END POP */}
 
 
                 {tariffs}

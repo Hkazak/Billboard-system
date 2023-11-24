@@ -1,9 +1,9 @@
 import '../styles/Tariff.css'
 
-function Tariff({tariffTitle, tariffPrice, startTime, endTime})
+function Tariff({tariffTitle, tariffPrice, startTime, endTime, onClickCallback})
 {
     return (
-            <div className="tariff-block">
+            <div className="tariff-block" onClick={onClickCallback}>
                 <span className="tariff-title">
                     {tariffTitle}
                 </span>

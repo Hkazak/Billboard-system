@@ -8,7 +8,7 @@
 {
     background: #96C9D3;
     display: inline-block;
-    width: 80%;
+    width: 98%;
     border: 1px solid black;
     border-radius: 8px;
     padding: 5px 30px 20px;
@@ -31,4 +31,9 @@
     float: right;
     line-height: 30px;
     outline: none;
+}
+
+.tariffs-list-content .tariff-block
+{
+    margin: 10px 15px;
 }
