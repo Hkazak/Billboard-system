@@ -73,6 +73,16 @@ public class BillboardsController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet]
+    [Route("/short")]
+    public async Task<ActionResult<BillboardResponse>> GetShortBillboards()
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new GetShortBillboardsQuery();
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+
     [HttpDelete]
     [Authorize(Roles = "Manager")]
     [Route("{id:guid}")]

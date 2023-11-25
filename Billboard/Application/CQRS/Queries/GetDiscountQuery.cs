@@ -23,8 +23,10 @@ public class GetDiscountQuery : IRequest<DiscountResponse>
 
         public async Task<DiscountResponse> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
-            var discount = await _context.Discounts.FirstOrDefaultAsync(
-                e => e.Id == request.Id && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
+            var discount = await _context.Discounts
+                .Include(e => e.Billboards.Where(b => b.ArchiveStatusId == ArchiveStatusId.NonArchived))
+                .FirstOrDefaultAsync(e => e.Id == request.Id && e.ArchiveStatusId == ArchiveStatusId.NonArchived,
+                    cancellationToken);
             if (discount is null)
             {
                 throw new NotFoundException($"Discount with id: {request.Id} not found");

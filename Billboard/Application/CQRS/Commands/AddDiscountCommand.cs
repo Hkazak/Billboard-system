@@ -3,6 +3,7 @@ using Contracts.Constants;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Enums;
 using Persistence.Models;
@@ -24,13 +25,17 @@ public class AddDiscountCommand : IRequest<DiscountResponse>
 
         public async Task<DiscountResponse> Handle(AddDiscountCommand request, CancellationToken cancellationToken)
         {
+            var billboards = await _context.Billboards
+                .Where(e => request.Request.BillboardIds.Any(id => id == e.Id))
+                .ToListAsync(cancellationToken);
             var discount = new Discount
             {
                 Name = request.Request.Name,
-                SalesOf = request.Request.SalesOf,
+                SalesOf = request.Request.DiscountPercentage / 100m,
                 MinRentCount = request.Request.MinRentCount,
                 EndDate = DateTime.ParseExact(request.Request.EndDate, ValidationConstants.ValidDateFormat, null).ToUniversalTime(),
-                ArchiveStatusId = ArchiveStatusId.NonArchived
+                ArchiveStatusId = ArchiveStatusId.NonArchived,
+                Billboards = billboards
             };
             await _context.Discounts.AddAsync(discount, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

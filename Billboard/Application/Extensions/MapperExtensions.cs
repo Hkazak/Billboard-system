@@ -88,9 +88,19 @@ public static class MapperExtensions
         {
             Id = discount.Id,
             Name = discount.Name,
-            SalesOf = discount.SalesOf,
+            SalesOf = discount.SalesOf * 100m,
             MinRentCount = discount.MinRentCount,
-            EndDate = discount.EndDate.ToLocalTime().ToString(ValidationConstants.ValidDateFormat)
+            EndDate = discount.EndDate.ToLocalTime().ToString(ValidationConstants.ValidDateFormat),
+            Billboards = discount.Billboards.Select(e=>e.CreateShortResponse()).ToList()
+        };
+    }
+
+    public static ShortBillboardResponse CreateShortResponse(this Billboard billboard)
+    {
+        return new ShortBillboardResponse
+        {
+            Id = billboard.Id,
+            Name = billboard.Name
         };
     }
 

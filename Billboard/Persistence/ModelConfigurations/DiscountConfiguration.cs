@@ -15,5 +15,7 @@ public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
         builder.HasOne(e => e.ArchiveStatus)
             .WithMany()
             .HasForeignKey(e => e.ArchiveStatusId);
+        builder.HasMany(e => e.Billboards)
+            .WithMany(e => e.Discounts);
     }
 }

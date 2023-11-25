@@ -7,4 +7,5 @@ public record DiscountResponse
     public required decimal SalesOf { get; init; }
     public required int MinRentCount { get; init; }
     public required string EndDate { get; init; }
+    public ICollection<ShortBillboardResponse> Billboards { get; init; } = new List<ShortBillboardResponse>();
 }

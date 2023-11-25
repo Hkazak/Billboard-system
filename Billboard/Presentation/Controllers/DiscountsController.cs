@@ -7,19 +7,17 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Presentation.Validators;
 
 namespace Presentation.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-
-public class DiscountController : ControllerBase
+public class DiscountsController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IValidator<AddDiscountRequest> _addDiscountValidator;
 
-    public DiscountController(IMediator mediator, IValidator<AddDiscountRequest> addDiscountValidator)
+    public DiscountsController(IMediator mediator, IValidator<AddDiscountRequest> addDiscountValidator)
     {
         _mediator = mediator;
         _addDiscountValidator = addDiscountValidator;
