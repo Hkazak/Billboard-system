@@ -4,4 +4,6 @@ public record AddDiscountRequest
 {
     public required string Name { get; init; }
     public required decimal SalesOf { get; init; }
+    public required int MinRentCount { get; init; }
+    public required DateTime EndDate { get; init; }
 }

@@ -24,7 +24,7 @@ public class AddTariffCommandTests
     [Test]
     public async Task Handle_ValidTariff_SuccessfullyAdded()
     {
-        var request = new AddTariff()
+        var request = new AddTariff
         {
             Title = "Test",
             StartTime = TimeSpan.FromHours(5),
@@ -40,8 +40,8 @@ public class AddTariffCommandTests
         Assert.Multiple(() =>
         {
             Assert.That(response.Title, Is.EqualTo(request.Title));
-            Assert.That(response.StartTime, Is.EqualTo(request.StartTime));
-            Assert.That(response.EndTime, Is.EqualTo(request.EndTime));
+            Assert.That(response.StartTime, Is.EqualTo(request.StartTime.ToString(@"hh:\mm")));
+            Assert.That(response.EndTime, Is.EqualTo(request.EndTime.ToString(@"hh:\mm")));
             Assert.That(response.Price, Is.EqualTo(request.Price));
         });
     }

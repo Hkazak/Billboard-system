@@ -27,6 +27,8 @@ public class AddDiscountCommand : IRequest<DiscountResponse>
             {
                 Name = request.Request.Name,
                 SalesOf = request.Request.SalesOf,
+                MinRentCount = request.Request.MinRentCount,
+                EndDate = request.Request.EndDate,
                 ArchiveStatusId = ArchiveStatusId.NonArchived
             };
             await _context.Discounts.AddAsync(discount, cancellationToken);

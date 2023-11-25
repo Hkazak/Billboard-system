@@ -27,7 +27,7 @@ public class DiscountController : ControllerBase
     
     [HttpPost]
     [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<DiscountResponse>> createDiscount([FromBody] AddDiscountRequest request)
+    public async Task<ActionResult<DiscountResponse>> CreateDiscount([FromBody] AddDiscountRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
         var validationResult = await _addDiscountValidator.ValidateAsync(request, cancellationToken);
@@ -46,7 +46,7 @@ public class DiscountController : ControllerBase
         {
             Request = request
         };
-        var response = _mediator.Send(request, cancellationToken);
+        var response = _mediator.Send(command, cancellationToken);
         return CreatedAtAction(nameof(GetDiscount), new
         {
             id = response.Id

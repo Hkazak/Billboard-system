@@ -10,7 +10,8 @@ public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).HasMaxLength(64);
-        builder.Property(e => e.SalesOf).HasMaxLength(4);
+        builder.Property(e => e.SalesOf).HasPrecision(5, 2);
+        builder.Property(e => e.EndDate).IsRequired();
         builder.HasOne(e => e.ArchiveStatus)
             .WithMany()
             .HasForeignKey(e => e.ArchiveStatusId);
