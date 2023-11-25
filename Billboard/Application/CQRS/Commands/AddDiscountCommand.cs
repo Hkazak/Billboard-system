@@ -1,4 +1,5 @@
 ﻿using Application.Extensions;
+using Contracts.Constants;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
@@ -28,7 +29,7 @@ public class AddDiscountCommand : IRequest<DiscountResponse>
                 Name = request.Request.Name,
                 SalesOf = request.Request.SalesOf,
                 MinRentCount = request.Request.MinRentCount,
-                EndDate = request.Request.EndDate,
+                EndDate = DateTime.ParseExact(request.Request.EndDate, ValidationConstants.ValidDateFormat, null).ToUniversalTime(),
                 ArchiveStatusId = ArchiveStatusId.NonArchived
             };
             await _context.Discounts.AddAsync(discount, cancellationToken);

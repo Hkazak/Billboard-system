@@ -46,7 +46,7 @@ public class DiscountController : ControllerBase
         {
             Request = request
         };
-        var response = _mediator.Send(command, cancellationToken);
+        var response = await _mediator.Send(command, cancellationToken);
         return CreatedAtAction(nameof(GetDiscount), new
         {
             id = response.Id

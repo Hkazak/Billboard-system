@@ -1,4 +1,5 @@
 ﻿using Application.InternalModels;
+using Contracts.Constants;
 using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
@@ -87,7 +88,9 @@ public static class MapperExtensions
         {
             Id = discount.Id,
             Name = discount.Name,
-            SalesOf = discount.SalesOf
+            SalesOf = discount.SalesOf,
+            MinRentCount = discount.MinRentCount,
+            EndDate = discount.EndDate.ToLocalTime().ToString(ValidationConstants.ValidDateFormat)
         };
     }
 
