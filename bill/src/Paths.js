@@ -15,3 +15,4 @@ export const BillboardsRoute = '/billboards';
 export const BillboardDescriptionRoute = '/billboards-description';
 export const TariffRoute = '/tariffs';
 export const TariffGroupRoute = '/tariffs-group';
+export const DiscountRoute = '/discounts';

@@ -3,16 +3,17 @@ import {useState} from 'react';
 import Sidebar from '../components/SideBar';
 import './page_styles/TariffPages.css';
 import './page_styles/AllBillboards.css'
-import './page_styles/TariffGroup.css'
 import {useNavigate} from 'react-router';
 import {GetGroupOfTariffsList} from "../lib/controllers/TariffGroupController";
 import GroupOfTariffs from "../components/GroupOfTariffs";
 import Header from "../components/Header";
 import CreateGroupOfTariff from "../components/CreateGroupOfTariff";
+import ControlPanel from "../components/ControlPanel";
 
 function TariffGroup() {
     const [groups, setGroups] = useState([]);
     const [hideCreateGroupOfTariffsBlock, setHideCreateGroupOfTariffsBlock] = useState(true);
+    const [searchText, setSearchText] = useState('');
     const navigate = useNavigate();
     useEffect(() => {
         refreshGroupOfTariffsList();
@@ -25,9 +26,14 @@ function TariffGroup() {
             .then(e => setGroups(e));
     }
 
-    function handleCreateGroupOfTariffsBlock()
+    function handleCreateGroupOfTariffsBlock(e)
     {
         setHideCreateGroupOfTariffsBlock(!hideCreateGroupOfTariffsBlock);
+    }
+
+    function handleSearch(e)
+    {
+        setSearchText(e.target.value);
     }
 
     return (
@@ -35,14 +41,8 @@ function TariffGroup() {
             <CreateGroupOfTariff show={hideCreateGroupOfTariffsBlock} groupsOfTariffs={groups} setGroupsOfTariffs={setGroups} />
             <Header title={"Группа тарифов"}/>
             <Sidebar>
-                <div className="control-panel">
-                    <input type="text" placeholder="Search" className="search"/>
-                    <button type="button" className="open-panel-create-new-group-of-tariffs-button" data-toggle="modal"
-                            data-target="#staticBackdrop" onClick={(e)=>handleCreateGroupOfTariffsBlock()}>
-                        <span className="new-tarif">Новая группа</span>
-                    </button>
-                </div>
-                {groups.map(g => <GroupOfTariffs name={g.name} key={g.id} tariffs={g.tariffs}/>)}
+                <ControlPanel handleCreateItem={handleCreateGroupOfTariffsBlock} handleSearch={handleSearch} createButtonText={"Новая группа"} placeholderSearchText={"Название"} />
+                {groups.filter(e=>e.name.includes(searchText)).map(g => <GroupOfTariffs name={g.name} key={g.id} tariffs={g.tariffs}/>)}
             </Sidebar>
         </div>
     )

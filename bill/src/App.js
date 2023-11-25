@@ -10,7 +10,7 @@ import ManagerAuthorization from './pages/ManagerAuthorization';
 import {
   AdminAuthRoute, BillboardDescriptionRoute, BillboardsRoute, CreateBillboardRoute,
   CreateManagerRoute,
-  DashboardRoute,
+  DashboardRoute, DiscountRoute,
   ForgotPasswordRoute,
   ManagerAuthRoute,
   ManagerForgotPasswordRoute,
@@ -28,6 +28,7 @@ import CreateBill from './pages/CreateBill';
 import BillDescr from './pages/BillDescr';
 import TariffPage from './pages/TariffPage';
 import TariffGroup from './pages/TariffGroup';
+import DiscountPage from "./pages/DiscountPage";
 
 function App(){
 
@@ -50,6 +51,7 @@ function App(){
             <Route path={BillboardDescriptionRoute} element={<BillDescr/>}></Route>
             <Route path={TariffRoute} element={<TariffPage/>}></Route>
             <Route path={TariffGroupRoute} element={<TariffGroup/>}></Route>
+            <Route path={DiscountRoute} element={<DiscountPage/>}></Route>
           </Routes>
 
     </BrowserRouter>
