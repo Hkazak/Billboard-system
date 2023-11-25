@@ -5,9 +5,11 @@ namespace Persistence.Models;
 public class Order
 {
     public Guid Id { get; private set; } = Guid.NewGuid();
-    public required DateTime StartTime { get; init; }
-    public required DateTime EndTime { get; init; }
-    public required double ProductPrice { get; init; }
+    public required decimal ProductPrice { get; init; }
+    public required GroupOfTariffs GroupOfTariffs { get; init; }
+    public required DateTime StartDate { get; init; }
+    public required DateTime EndDate { get; init; }
+    public IEnumerable<Discount> Discounts { get; set; }
     public OrderStatusId StatusId { get; init; }
     public OrderStatus? OrderStatus { get; private set; }
 }
