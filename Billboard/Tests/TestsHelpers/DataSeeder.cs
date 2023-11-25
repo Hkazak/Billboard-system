@@ -69,9 +69,44 @@ public static class DataSeeder
         await context.SaveChangesAsync();
     }
 
+
+    
+    public static async Task SeedBillboardsAsync(this BillboardContext context)
+    {
+        var archivedBillboards = new Faker<Billboard>();
+        var nonArchivedBillboards = new Faker<Billboard>();
+        archivedBillboards.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Name, faker => faker.Name.JobTitle())
+            .RuleFor(e => e.ArchiveStatusId, ArchiveStatusId.Archived)
+            .RuleFor(e => e.Address, faker => faker.Address.Random.String())
+            .RuleFor(e => e.Description, faker => faker.Person.FullName.ToString())
+            .RuleFor(e => e.Height, faker => faker.Random.Number())
+            .RuleFor(e => e.Width, faker => faker.Random.Number())
+            .RuleFor(e => e.Penalty, faker => faker.Random.Number())
+            .RuleFor(e => e.Pictures , GeneratePictures(5))
+            .RuleFor(e => e.TypeId, BillboardTypeId.DoubleSide)
+            .RuleFor(e => e.BillboardSurface, GenerateBillboardSurface)
+            .RuleFor(e => e.GroupOfTariffs, GenerateGroupOfTariffs(ArchiveStatusId.NonArchived));
+        nonArchivedBillboards.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Name, faker => faker.Name.JobTitle())
+            .RuleFor(e => e.ArchiveStatusId, ArchiveStatusId.NonArchived)
+            .RuleFor(e => e.Address, faker => faker.Address.Random.String())
+            .RuleFor(e => e.Description, faker => faker.Person.FullName.ToString())
+            .RuleFor(e => e.Height, faker => faker.Random.Number())
+            .RuleFor(e => e.Width, faker => faker.Random.Number())
+            .RuleFor(e => e.Penalty, faker => faker.Random.Number())
+            .RuleFor(e => e.TypeId, BillboardTypeId.DoubleSide)
+            .RuleFor(e => e.Pictures , faker =>  GeneratePictures(5))
+            .RuleFor(e => e.GroupOfTariffs, GenerateGroupOfTariffs(ArchiveStatusId.NonArchived));
+        
+        await context.Billboards.AddRangeAsync(archivedBillboards.Generate(5));
+        await context.Billboards.AddRangeAsync(nonArchivedBillboards.Generate(5));
+        await context.SaveChangesAsync();
+    }    
+    
     private static List<Tariff> GenerateTariffs(int count, ArchiveStatusId statusId)
     {
-        var tariffsFaker = new Faker<Tariff>();
+        var tariffsFaker = new Faker<Tariff>(); 
         tariffsFaker.RuleFor(e => e.Id, faker => faker.Random.Guid())
             .RuleFor(e => e.Title, faker => faker.Name.JobTitle())
             .RuleFor(e => e.StartTime, faker => faker.Date.Timespan(TimeSpan.FromHours(12)))
@@ -79,5 +114,34 @@ public static class DataSeeder
             .RuleFor(e => e.ArchiveStatusId,  statusId);
 
         return tariffsFaker.Generate(count);
+    }
+
+    private static GroupOfTariffs GenerateGroupOfTariffs( ArchiveStatusId statusId)
+    {
+        var groupOfTariffsFaker = new Faker<GroupOfTariffs>();
+        groupOfTariffsFaker.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Name, faker => faker.Name.JobTitle())
+            .RuleFor(e => e.Tariffs, GenerateTariffs(5, ArchiveStatusId.NonArchived))
+            .RuleFor(e => e.ArchiveStatusId, statusId);
+
+        return groupOfTariffsFaker.Generate();
+    }
+
+    private static List<Picture> GeneratePictures(int count)
+    {
+        var picturesFaker = new Faker<Picture>();
+        picturesFaker.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Source, faker => faker.Image.DataUri(0, 0, "blue"));
+
+        return picturesFaker.Generate(count);
+    }
+
+    private static BillboardSurface GenerateBillboardSurface()
+    {
+        var billboardSurface = new Faker<BillboardSurface>();
+        billboardSurface.RuleFor(e => e.Id, faker => faker.Random.Guid())
+            .RuleFor(e => e.Surface, faker => faker.Name.JobType());
+
+        return billboardSurface.Generate();
     }
 }

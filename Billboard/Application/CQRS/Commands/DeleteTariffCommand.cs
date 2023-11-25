@@ -21,7 +21,7 @@ public class DeleteTariffCommand : IRequest
 
         public async Task Handle(DeleteTariffCommand request, CancellationToken cancellationToken)
         {
-            var tariff = await _context.Tariffs.FirstOrDefaultAsync(e => e.Id == request.TariffId, cancellationToken);
+            var tariff = await _context.Tariffs.FirstOrDefaultAsync(e => e.Id == request.TariffId && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
             if (tariff is null)
             {
                 throw new NotFoundException($"Tariff with id: {request.TariffId} not found");
