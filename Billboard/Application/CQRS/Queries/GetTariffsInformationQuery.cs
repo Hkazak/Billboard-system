@@ -3,7 +3,9 @@ using Application.Extensions;
 using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver.Linq;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -20,7 +22,7 @@ public class GetTariffsInformationQuery : IRequest<IEnumerable<TariffResponse>>
 
         public async Task<IEnumerable<TariffResponse>> Handle(GetTariffsInformationQuery request, CancellationToken cancellationToken)
         {
-            var tariffs = await _context.Tariffs.ToListAsync(cancellationToken);
+            var tariffs = await _context.Tariffs.Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived).ToListAsync(cancellationToken);
             return tariffs.Select(e => e.CreateResponse());
         }
     }

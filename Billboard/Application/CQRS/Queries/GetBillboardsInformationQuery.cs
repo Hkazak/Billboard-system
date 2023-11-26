@@ -2,7 +2,9 @@
 using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver.Linq;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -20,7 +22,7 @@ public class GetBillboardsInformationQuery : IRequest<IEnumerable<BillboardRespo
         public async Task<IEnumerable<BillboardResponse>> Handle(GetBillboardsInformationQuery request,
             CancellationToken cancellationToken)
         {
-            var billboards = await _context.Billboards.Include(e => e.GroupOfTariffs).ThenInclude(e => e.Tariffs).Include(e => e.BillboardSurface).Include(e => e.BillboardType).Include(e => e.Pictures).Include(e => e.ArchiveStatus).ToListAsync(cancellationToken);
+            var billboards = await _context.Billboards.Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived).ToListAsync(cancellationToken);
             return billboards.Select(e => e.CreateResponse());
         }
     }
