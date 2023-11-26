@@ -9,7 +9,7 @@ import {
     FaThList
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-import { AdminAuthRoute, CreateManagerRoute, DashboardRoute, ManagerAuthRoute, UserAuthorizationRoute } from '../Paths';
+import { AdminAuthRoute, CreateManagerRoute, DashboardRoute, ManagerAuthRoute, TariffRoute, UserAuthorizationRoute } from '../Paths';
 import AdminAuthorization from '../pages/AdminAuthorization';
 
 const Sidebar = ({children}) => {
@@ -23,49 +23,53 @@ const Sidebar = ({children}) => {
         },
         {
             path:UserAuthorizationRoute,
-            name:"Authorization",
+            name:"Авторизация",
             icon:<FaTh/>
         },
         {
             path:"/all-bills",
-            name:"AllBillboards",
+            name:"Билборды",
             icon:<FaTh/>
         },
         {
             path:CreateManagerRoute,
-            name:"Manage Managers",
+            name:"Менеджеры",
             icon:<FaTh/>
         },
         {
             path:ManagerAuthRoute,
-            name:"ManagerAuthorization",
+            name:"Авторизация Менеджера",
             icon:<FaTh/>
         },
         {
             path:AdminAuthRoute,
-            name:"AdminAuthorization",
+            name:"Авторизация Администратора",
             icon:<FaTh/>
         },
+        {
+            path:TariffRoute,
+            name:"Тарифы",
+            icon:<FaTh/>
+        }
     ]
     return (
         <div className="container">
            <div style={{width: isOpen ? "450px" : "50px"}} className="sidebar">
-               <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Logo</h1>
+               <div className="top-section">
                    <div style={{marginLeft: isOpen ? "150px" : "0px"}} className="bars">
                        <FaBars onClick={toggle}/>
                    </div>
                </div>
                {
                    menuItem.map((item, index)=>(
-                       <NavLink to={item.path} key={index} className="link" activeclassName="active">
+                       <NavLink to={item.path} key={index} className="link">
                            <div className="icon">{item.icon}</div>
-                           <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
+                           <div style={{display: isOpen ? "block" : "none"}} className="link-text">{item.name}</div>
                        </NavLink>
                    ))
                }
            </div>
-           <main>{children}</main>
+           <main className="main-content">{children}</main>
         </div>
     );
 };

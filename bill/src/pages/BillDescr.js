@@ -63,7 +63,7 @@ function BillDescr() {
           <br/><br/>
           <div>
             <div>
-              <label for="dob">Начало:</label>
+              <label htmlFor="dob">Начало:</label>
               <input type="date" id="dob" name="dob" required/>
             </div>
             <br/>

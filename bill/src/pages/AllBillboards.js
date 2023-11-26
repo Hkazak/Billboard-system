@@ -59,7 +59,7 @@ function AllBillboards() {
     const [users, setUsers] = useState(data.slice(0, 50));
     const [pageNumber, setPageNumber] = useState(0);
   
-    const usersPerPage = 2;
+    const usersPerPage = 3;
     const pagesVisited = pageNumber * usersPerPage;
   
     const displayUsers = users
@@ -90,11 +90,11 @@ function AllBillboards() {
                     <header className="App-header">
                     <AN isOpen={isPopup1Open} closeModal={closePopup1} title="Form 1">
                        
-                        <div class="conteiner">
-                            <div class="form">
+                        <div className="conteiner">
+                            <div className="form">
                             
                                 <form>
-                                    <p class="input"> <i class="gg-check">   </i> Менеджер успешно создан</p>
+                                    <p className="input"> <i className="gg-check">   </i> Менеджер успешно создан</p>
                                     <div className='pop-create'>
                                 
                                     </div>
@@ -113,9 +113,9 @@ function AllBillboards() {
                         {/* UPDATE */}
 
                         <AN isOpen={isPopup1Open} closeModal={closePopup1} >
-                        <div class="conteiner">
+                        <div className="conteiner">
                         <h3>Редактирование менеджера</h3>
-                        <div class="form">
+                        <div className="form">
                         
                             <form>
                                 <input
@@ -123,35 +123,35 @@ function AllBillboards() {
                                 required
                                 placeholder="Имя"
                                 id="name1"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="text"
                                 required
                                 placeholder="Фамилия"
                                 id="name2"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="text"
                                 required
                                 placeholder="Отчество"
                                 id="name3"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="email"
                                 required
                                 placeholder="Email"
                                 id="email"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="password"
                                 required
                                 placeholder="Мобильный телефон"
                                 id="pass1"
-                                class="input"
+                                className="input"
                                 />
                                 <div className='pop-create'>
                                     <Button variant="warning">Редактировать</Button>{' '}
@@ -224,9 +224,9 @@ function AllBillboards() {
 
                 <AN isOpen={isPopup2Open} closeModal={closePopup2} >
                     {/* Customize Form 2 content here */}
-                    <div class="conteiner">
+                    <div className="conteiner">
                         <h3>Добавление менеджера</h3>
-                        <div class="form">
+                        <div className="form">
                         
                             <form>
                                 <input
@@ -234,35 +234,35 @@ function AllBillboards() {
                                 required
                                 placeholder="Имя"
                                 id="name1"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="text"
                                 required
                                 placeholder="Фамилия"
                                 id="name2"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="text"
                                 required
                                 placeholder="Отчество"
                                 id="name3"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="email"
                                 required
                                 placeholder="Email"
                                 id="email"
-                                class="input"
+                                className="input"
                                 />
                                 <input
                                 type="password"
                                 required
                                 placeholder="Мобильный телефон"
                                 id="pass1"
-                                class="input"
+                                className="input"
                                 />
                                 <div className='pop-create'>
                                     <Button variant="warning">Создать</Button>{' '}
@@ -285,10 +285,10 @@ function AllBillboards() {
                         </div> */}
 
                         
-                        <div class="search">
-                            <input type="text" class="searchTerm" placeholder="What are you looking for?"/>
-                            <button type="submit" class="searchButton">
-                                <i class="fa fa-search">🛃</i>
+                        <div className="search">
+                            <input type="text" className="searchTerm" placeholder="What are you looking for?"/>
+                            <button type="submit" className="searchButton">
+                                <i className="fa fa-search">🛃</i>
                             </button>
                         </div>
                         

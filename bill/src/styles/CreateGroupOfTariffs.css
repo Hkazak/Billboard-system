@@ -1,0 +1,134 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.create-new-group-of-tariffs-block
+{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-left: calc(50vw - 22.5%);
+    z-index: 3;
+    padding: 5px;
+    background: white;
+}
+
+.create-new-group-of-tariffs-title
+{
+    font-size: 30px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: center;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.create-new-group-of-tariffs-general-span
+{
+    margin: 10px 5%;
+    font-size: 20px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    display: block;
+}
+
+.group-of-tariffs-name-input
+{
+    display: inline-block;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 35px;
+    margin: 10px 5%;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+    outline: none;
+}
+
+.create-new-group-of-tariffs-button
+{
+    display: block;
+    text-align: center;
+    background: #F8BC43;
+    width: 40%;
+    height: 50px;
+    margin: 20px auto 10px;
+    border: none;
+    border-radius: 8px;
+}
+
+.tariffs-list .tariff-block
+{
+    background: #52AABC94;
+    margin: 5px 5%;
+    width: 40%;
+}
+
+.selected-tariffs-list .tariff-block
+{
+    background: #52AABC94;
+    margin: 0 2% 0 0;
+    min-width: 40%;
+}
+
+.selected-tariffs-list
+{
+    overflow-x: auto;
+    display: inline-flex;
+    align-items: baseline;
+    margin: 5px 5%;
+}
+
+.search-tariff-input
+{
+    display: inline-block;
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 35px;
+    margin: 10px 5%;
+    font-size: 12px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    outline: none;
+}
+
+.pagination-controller-block
+{
+    display: inline-block;
+    max-width: 20%;
+    text-align: center;
+}
+
+.current-page-change-button
+{
+    border: none;
+    background: white;
+    width: 10px;
+}
+
+.pagination-set-page
+{
+    display: inline-block;
+    width: 30%;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+    outline: none;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.reverse-arrow
+{
+    rotate: 180deg;
+}

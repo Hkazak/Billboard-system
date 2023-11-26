@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Requests;
 
-public class AddBillboardSurfaceRequest
+public record AddBillboardSurfaceRequest
 {
     public required string Surface { get; init; }
 }

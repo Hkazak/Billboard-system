@@ -47,7 +47,10 @@ public class GroupOfTariffsController : ControllerBase
             Request = request
         };
         var response = await _mediator.Send(command, cancellationToken);
-        return Ok(response);
+        return CreatedAtAction(nameof(GetGroupOfTariffs), new
+        {
+            id = response.Id
+        }, response);
     }
 
     [HttpGet]

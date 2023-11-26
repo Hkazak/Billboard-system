@@ -39,7 +39,7 @@ function BillPages() {
           <>
           
           <div className="user">
-            <div className='desc-main-wrapper'>
+            <div className='desc-main-wrapper3'>
                 {/* <div className='pers-info'>
 
                     <p> 
@@ -70,11 +70,11 @@ function BillPages() {
                     <header className="App-header">
                     <AN isOpen={isPopup1Open} closeModal={closePopup1} title="Form 1">
                        
-                        <div class="conteiner">
-                            <div class="form">
+                        <div className="conteiner">
+                            <div className="form">
                             
                                 <form>
-                                    <p class="input"> <i class="gg-check">   </i> Менеджер успешно создан</p>
+                                    <p className="input"> <i className="gg-check">   </i> Менеджер успешно создан</p>
                                     <div className='pop-create'>
                                 
                                     </div>
@@ -147,10 +147,10 @@ function BillPages() {
                         </div> */}
 
                         
-                        <div class="search">
-                            <input type="text" class="searchTerm" placeholder="What are you looking for?"/>
-                            <button type="submit" class="searchButton">
-                                <i class="fa fa-search">🛃</i>
+                        <div className="search">
+                            <input type="text" className="searchTerm" placeholder="What are you looking for?"/>
+                            <button type="submit" className="searchButton">
+                                <i className="fa fa-search">🛃</i>
                             </button>
                         </div>
                         

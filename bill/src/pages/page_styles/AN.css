@@ -15,6 +15,11 @@
     pointer-events: none;
 }
 
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    margin-left: 0 !important;
+    --bs-gutter-x: 0 !important;
+}
+
 .modal.active {
     opacity: 1;
     pointer-events: all;
@@ -37,7 +42,8 @@
 }
 
 .modal-content{
-    width: 900px;
+    margin: auto;
+    width: fit-content;
     background-color: white;
 }
 

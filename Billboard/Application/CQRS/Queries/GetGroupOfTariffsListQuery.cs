@@ -21,6 +21,7 @@ public class GetGroupOfTariffsListQuery : IRequest<IEnumerable<GroupOfTariffsRes
         public async Task<IEnumerable<GroupOfTariffsResponse>> Handle(GetGroupOfTariffsListQuery request, CancellationToken cancellationToken)
         {
             var groupOfTariffs = await _context.GroupOfTariffs.Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived).ToListAsync(cancellationToken);
+
             return groupOfTariffs.Select(e => e.CreateResponse());
         }
     }

@@ -22,6 +22,21 @@ namespace Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("BillboardDiscount", b =>
+                {
+                    b.Property<Guid>("BillboardsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DiscountsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("BillboardsId", "DiscountsId");
+
+                    b.HasIndex("DiscountsId");
+
+                    b.ToTable("BillboardDiscount");
+                });
+
             modelBuilder.Entity("GroupOfTariffsTariff", b =>
                 {
                     b.Property<Guid>("GroupsId")
@@ -165,6 +180,37 @@ namespace Persistence.Migrations
                             Id = 2,
                             Type = "TripleSide"
                         });
+                });
+
+            modelBuilder.Entity("Persistence.Models.Discount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ArchiveStatusId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("MinRentCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<decimal>("SalesOf")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArchiveStatusId");
+
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("Persistence.Models.GroupOfTariffs", b =>
@@ -353,7 +399,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d513dcc7-8ba7-4736-9a21-f033a3d5c760"),
+                            Id = new Guid("202c6d22-36e6-47ce-8420-7c7c4651c685"),
                             Email = "admin@Billboard.com",
                             Name = "Admin",
                             Password = "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
@@ -385,6 +431,21 @@ namespace Persistence.Migrations
                             Id = 0,
                             Role = "Client"
                         });
+                });
+
+            modelBuilder.Entity("BillboardDiscount", b =>
+                {
+                    b.HasOne("Persistence.Models.Billboard", null)
+                        .WithMany()
+                        .HasForeignKey("BillboardsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Persistence.Models.Discount", null)
+                        .WithMany()
+                        .HasForeignKey("DiscountsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GroupOfTariffsTariff", b =>
@@ -435,6 +496,17 @@ namespace Persistence.Migrations
                     b.Navigation("BillboardType");
 
                     b.Navigation("GroupOfTariffs");
+                });
+
+            modelBuilder.Entity("Persistence.Models.Discount", b =>
+                {
+                    b.HasOne("Persistence.Models.ArchiveStatus", "ArchiveStatus")
+                        .WithMany()
+                        .HasForeignKey("ArchiveStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArchiveStatus");
                 });
 
             modelBuilder.Entity("Persistence.Models.GroupOfTariffs", b =>

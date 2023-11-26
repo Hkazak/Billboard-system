@@ -12,7 +12,6 @@ namespace Presentation.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-
 public class BillboardSurfaceController : ControllerBase
 {
     private readonly IMediator _mediator;

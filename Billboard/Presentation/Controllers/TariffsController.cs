@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Application.CQRS.Commands;
 using Application.CQRS.Queries;
+using Application.Extensions;
 using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
@@ -42,10 +43,13 @@ public class TariffsController : ControllerBase
         
         var command = new AddTariffCommand
         {
-            Request = request
+            Request = request.CreateAddTariff()
         };
         var response = await _mediator.Send(command, cancellationToken);
-        return Ok(response);
+        return CreatedAtAction(nameof(GetTariff), new
+        {
+            id = response.Id
+        }, response);
     }
 
     [HttpGet]

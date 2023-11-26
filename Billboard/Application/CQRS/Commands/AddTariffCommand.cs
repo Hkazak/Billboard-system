@@ -1,4 +1,5 @@
 ﻿using Application.Extensions;
+using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
@@ -11,7 +12,7 @@ namespace Application.CQRS.Commands;
 
 public class AddTariffCommand : IRequest<TariffResponse>
 {
-    public required AddTariffRequest Request { get; init; }
+    public required AddTariff Request { get; init; }
 
     public class AddTariffCommandHandler : IRequestHandler<AddTariffCommand, TariffResponse>
     {
