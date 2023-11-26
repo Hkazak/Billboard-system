@@ -1,4 +1,4 @@
-import { LS, baseUrl } from "../Consts";
+import {baseUrl, LS} from "../Consts";
 
 export const getGroupOfTariffsListEndpoint = `${baseUrl}/GroupOfTariffs`;
 export const getBillboardSurfacesListEndpoint = `${baseUrl}/BillboardSurface`;
@@ -20,7 +20,7 @@ export async function GetGroupOfTariffs(){
 
 export async function getBillboardSurfacesList(){
     const accessToken = localStorage.getItem(LS.accessToken);
-    const response = await fetch(getBillboardSurfacesListEndpoint, {
+    return await fetch(getBillboardSurfacesListEndpoint, {
         method: 'GET',
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -29,6 +29,4 @@ export async function getBillboardSurfacesList(){
             'Authorization': `bearer ${accessToken}`
         }
     });
-
-    return response;
 }

@@ -1,0 +1,33 @@
+.control-panel-options-list
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+
+.control-panel-options-list-item
+{
+    list-style-type: none;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.control-panel-input
+{
+    border: none;
+    background: white;
+    border-radius: 8px;
+    height: 35px;
+    vertical-align: middle;
+    width: 175px;
+    text-align: center;
+    font-size: 12px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 5px 0 0;
+}

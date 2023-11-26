@@ -4,7 +4,7 @@ import {CreateDiscountRequest} from "../lib/controllers/DiscountController";
 import {GetShortBillboardList} from "../lib/controllers/BillboardController";
 
 let selectedBillboards = [];
-function CreateDiscount({show, handleNewDiscount})
+function CreateDiscount({hide, handleNewDiscount})
 {
     const [name, setName] = useState('');
     const [minRent, setMinRent] = useState(0);
@@ -42,7 +42,7 @@ function CreateDiscount({show, handleNewDiscount})
     }
 
     return (
-        <div className="create-discount-block" hidden={show}>
+        <div className="create-discount-block" hidden={hide}>
             <span className="create-discount-title">
                 Новая акция
             </span>

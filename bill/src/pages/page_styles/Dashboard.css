@@ -42,7 +42,9 @@ select:focus {
 }
 
 .map{
-    margin-left: 40px;
+    margin: 20px 0;
+    width: 95%;
+    height: 70vh;
 }
 
 .cr-btn{

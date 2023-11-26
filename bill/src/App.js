@@ -5,7 +5,7 @@ import UserAuthorization from './pages/UserAuthorization'
 import UserRegistration from './pages/UserRegistration';
 import ForgotPassword from './pages/ForgotPassword';
 import ChangePassword from './pages/ChangePassword';
-import Admin from './pages/Admin';
+import ManagerPage from './pages/ManagerPage';
 import ManagerAuthorization from './pages/ManagerAuthorization';
 import {
   AdminAuthRoute, BillboardDescriptionRoute, BillboardsRoute, CreateBillboardRoute,
@@ -23,7 +23,7 @@ import {
 import AdminAuthorization from './pages/AdminAuthorization';
 import ManagerResetPassword from './pages/ManagerResetPassword';
 import ManagerForgotPassword from './pages/ManagerForgotPassword';
-import BillPages from './pages/BillPages';
+import BillboardPage from './pages/BillboardPage';
 import CreateBill from './pages/CreateBill';
 import BillDescr from './pages/BillDescr';
 import TariffPage from './pages/TariffPage';
@@ -45,9 +45,9 @@ function App(){
             <Route path={ManagerResetPasswordRoute} element={<ManagerResetPassword/>}></Route>
             <Route path={ManagerForgotPasswordRoute} element={<ManagerForgotPassword/>}></Route>
             <Route path={CreateBillboardRoute} element={<CreateBill/>}></Route>
-            <Route path={BillboardsRoute} element={<BillPages/>}></Route>
+            <Route path={BillboardsRoute} element={<BillboardPage/>}></Route>
             <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
-            <Route path={CreateManagerRoute} element={<Admin/>}></Route>
+            <Route path={CreateManagerRoute} element={<ManagerPage/>}></Route>
             <Route path={BillboardDescriptionRoute} element={<BillDescr/>}></Route>
             <Route path={TariffRoute} element={<TariffPage/>}></Route>
             <Route path={TariffGroupRoute} element={<TariffGroup/>}></Route>

@@ -28,7 +28,7 @@ function AdminAuthorization() {
     const jsonResponse = await response.json();
 
     if(response.ok){
-      console.log('Admin authorization feature');
+      console.log('ManagerPage authorization feature');
       console.log(jsonResponse);
       localStorage.setItem(LS.accessToken, jsonResponse['accessToken']);
       navigate(CreateManagerRoute);
