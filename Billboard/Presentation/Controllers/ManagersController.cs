@@ -129,5 +129,18 @@ public class ManagersController : ControllerBase
         await _mediator.Send(command, cancellationToken);
         return NoContent();
     }
-    
+
+    [HttpPatch]
+    [Route("activate/{id:guid}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult> ActivateManager([FromRoute] Guid id)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var command = new ActivateManagerCommand
+        {
+            ManagerId = id
+        };
+        await _mediator.Send(command, cancellationToken);
+        return NoContent();
+    }
 }

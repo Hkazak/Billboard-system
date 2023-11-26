@@ -8,4 +8,5 @@ public record ManagerResponse
     public required string MiddleName { get; init; }
     public required string LastName { get; init; }
     public required string Phone { get; init; }
+    public required string Status { get; init; }
 }

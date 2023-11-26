@@ -30,6 +30,7 @@ public static class MapperExtensions
             MiddleName = manager.MiddleName,
             LastName = manager.LastName,
             Phone = manager.Phone,
+            Status = manager.StatusId.ToString()
         };
     }
 
