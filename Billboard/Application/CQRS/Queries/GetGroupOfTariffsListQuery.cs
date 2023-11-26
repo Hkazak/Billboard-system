@@ -3,6 +3,7 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -19,9 +20,8 @@ public class GetGroupOfTariffsListQuery : IRequest<IEnumerable<GroupOfTariffsRes
 
         public async Task<IEnumerable<GroupOfTariffsResponse>> Handle(GetGroupOfTariffsListQuery request, CancellationToken cancellationToken)
         {
-            var groupOfTariffs = await _context.GroupOfTariffs
-                .Include(e=>e.Tariffs)
-                .ToListAsync(cancellationToken);
+            var groupOfTariffs = await _context.GroupOfTariffs.Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived).ToListAsync(cancellationToken);
+
             return groupOfTariffs.Select(e => e.CreateResponse());
         }
     }
