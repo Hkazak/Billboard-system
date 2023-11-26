@@ -74,7 +74,7 @@ public class BillboardsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/short")]
+    [Route("short")]
     public async Task<ActionResult<BillboardResponse>> GetShortBillboards()
     {
         var cancellationToken = HttpContext.RequestAborted;
