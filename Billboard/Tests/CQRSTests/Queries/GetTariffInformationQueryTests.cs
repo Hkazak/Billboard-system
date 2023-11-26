@@ -52,8 +52,8 @@ public class GetTariffInformationQueryTests
         {
             Assert.That(tariff.Id, Is.EqualTo(response.Id));
             Assert.That(tariff.Price, Is.EqualTo(response.Price));
-            Assert.That(tariff.StartTime, Is.EqualTo(response.StartTime));
-            Assert.That(tariff.EndTime, Is.EqualTo(response.EndTime));
+            Assert.That(tariff.StartTime.ToString(@"hh\:mm"), Is.EqualTo(response.StartTime));
+            Assert.That(tariff.EndTime.ToString(@"hh\:mm"), Is.EqualTo(response.EndTime));
         });
     }
 

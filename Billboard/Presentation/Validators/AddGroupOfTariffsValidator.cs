@@ -5,5 +5,5 @@ namespace Presentation.Validators;
 
 public class AddGroupOfTariffsValidator : AbstractValidator<AddGroupOfTariffsRequest>
 {
-    //TODO
+    
 }

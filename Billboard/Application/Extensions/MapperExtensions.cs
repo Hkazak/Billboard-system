@@ -1,4 +1,5 @@
 ﻿using Application.InternalModels;
+using Contracts.Constants;
 using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
@@ -56,8 +57,8 @@ public static class MapperExtensions
         {
             Id = tariff.Id,
             Title = tariff.Title,
-            StartTime = tariff.StartTime,
-            EndTime = tariff.EndTime,
+            StartTime = tariff.StartTime.ToString(@"hh\:mm"),
+            EndTime = tariff.EndTime.ToString(@"hh\:mm"),
             Price = tariff.Price
         };
     }
@@ -78,6 +79,28 @@ public static class MapperExtensions
         {
             Id = billboardSurface.Id,
             Surface = billboardSurface.Surface
+        };
+    }
+
+    public static DiscountResponse CreateResponse(this Discount discount)
+    {
+        return new DiscountResponse
+        {
+            Id = discount.Id,
+            Name = discount.Name,
+            SalesOf = discount.SalesOf * 100m,
+            MinRentCount = discount.MinRentCount,
+            EndDate = discount.EndDate.ToLocalTime().ToString(ValidationConstants.ValidDateFormat),
+            Billboards = discount.Billboards.Select(e=>e.CreateShortResponse()).ToList()
+        };
+    }
+
+    public static ShortBillboardResponse CreateShortResponse(this Billboard billboard)
+    {
+        return new ShortBillboardResponse
+        {
+            Id = billboard.Id,
+            Name = billboard.Name
         };
     }
 
@@ -118,6 +141,17 @@ public static class MapperExtensions
             Email = request.Email,
             NewPassword = request.NewPassword,
             ConfirmationCode = request.ConfirmationCode
+        };
+    }
+
+    public static AddTariff CreateAddTariff(this AddTariffRequest request)
+    {
+        return new AddTariff
+        {
+            Title = request.Title,
+            StartTime = TimeSpan.Parse(request.StartTime),
+            EndTime = TimeSpan.Parse(request.EndTime),
+            Price = request.Price
         };
     }
 }

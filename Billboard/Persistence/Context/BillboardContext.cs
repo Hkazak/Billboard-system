@@ -26,6 +26,7 @@ public class BillboardContext : DbContext
     public DbSet<ArchiveStatus> ArchiveStatusEnumerable { get; set; } = default!;
     public DbSet<Order> Orders { get; set; } = default!;
     public DbSet<OrderStatus> OrderStatusEnumerable { get; set; } = default!;
+    public DbSet<Discount> Discounts { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -40,5 +41,6 @@ public class BillboardContext : DbContext
         modelBuilder.ApplyConfiguration(new BillboardTypeConfiguration());
         modelBuilder.ApplyConfiguration(new OrderConfiguration());
         modelBuilder.ApplyConfiguration(new OrderStatusConfiguration());
+        modelBuilder.ApplyConfiguration(new DiscountConfiguration());
     }
 }

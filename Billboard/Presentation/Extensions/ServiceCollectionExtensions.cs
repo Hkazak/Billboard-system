@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<BillboardContext>(builder =>
+        services.AddDbContextPool<BillboardContext>(builder =>
         {
             builder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });

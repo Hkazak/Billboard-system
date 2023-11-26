@@ -1,0 +1,14 @@
+.tariff-page-block .tariff-block
+{
+	margin: 10px 15px;
+	background: #52AABC94;
+	width: 15%;
+	min-height: 175px;
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.tariff-page-block .tariff-block .tariff-time-period
+{
+	flex-grow: 2;
+}

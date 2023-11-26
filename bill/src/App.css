@@ -1,14 +1,21 @@
+body
+{
+  overflow-x: hidden;
+}
 *{
   margin:0;
   padding:0;
   text-decoration: none;
 }
 .container{
-  display:flex;
+  display: flex;
+  min-width: 100%;
 }
-main{
+.main-content
+{
+  display: inline-block;
   width: 100%;
-  padding: 20px;
+  padding-left: 20px;
 }
 .sidebar{
   background: #52AABC;
@@ -16,14 +23,12 @@ main{
   height: 100vh;
   width: 200px;
   transition: all 0.5s;
+  display: inline-block;
 }
-.top_section{
+.top-section{
   display: flex;
   align-items:center;
   padding:20px 15px;
-}
-.logo{
-  font-size: 30px;
 }
 .bars{
   display: flex;
@@ -47,6 +52,6 @@ main{
   background: lightskyblue;
   color: #000;
 }
-.icon, .link_text{
+.icon, .link-text{
   font-size: 20px;
 }

@@ -1,0 +1,101 @@
+.create-discount-block
+{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-left: calc(50vw - 22.5%);
+    z-index: 3;
+    padding: 5px;
+    background: white;
+}
+
+.create-discount-title
+{
+    font-size: 30px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: center;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.create-discount-general-span
+{
+    margin: 10px 5%;
+    font-size: 20px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    display: block;
+}
+
+.discount-name-input
+{
+    display: inline-block;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 35px;
+    margin: 10px 5%;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+    outline: none;
+}
+
+.create-discount-button
+{
+    display: block;
+    text-align: center;
+    background: #F8BC43;
+    width: 40%;
+    height: 50px;
+    margin: 20px auto 10px;
+    border: none;
+    border-radius: 8px;
+}
+
+.select-billboards-block
+{
+    display: block;
+    margin: 10px 5%;
+}
+
+.select-billboards-block input
+{
+    width: 17px;
+    height: 17px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.select-billboards-block input:checked {
+    background-color: #aaa;
+}
+
+.select-billboards-block label
+{
+    display: inline;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.selected-billboard-name
+{
+    display: block;
+    margin: 1px 0;
+    background: #52AABC;
+}

@@ -7,28 +7,6 @@
     font-size: 13px;
 }
 
-.sep{
-    height: 30px;
-}
-
-
-
-select {
-    /* appearance: none; */
-    /* safari */
-    /* -webkit-appearance: none; */
-    /* other styles for aesthetics */
-    border: 1px solid red;
-    width: 153px;
-    padding: 0.675em 6em 0.675em 1em;
-    background-color: #fff;
-    border: 1px solid #caced1;
-    border-radius: 0.25rem;
-    color: #000;
-    cursor: pointer;
-    font-size: 6px;
-  }
-
 .list-wrapper{
     border: 1px solid #52AABC;
     border-radius: 10px;
@@ -42,7 +20,25 @@ select {
 
 .list-cont li {
     display: inline-block;
-    margin-right: 60px;
+    width: 18%;
+    margin: 0 1%;
+}
+
+select:focus {
+    outline: none;
+}
+
+.select-cont select{
+    border: none;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.select-cont option {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-size: 1.1em;
+    border-radius: 0;
 }
 
 .map{
@@ -50,10 +46,11 @@ select {
 }
 
 .cr-btn{
+    margin-top: 40px;
     margin-left: 600px;
     align-items: center;
 }
 
 .cr-btn button{
-    width: 200px;
+    width: 300px;
 }

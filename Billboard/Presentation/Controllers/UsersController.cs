@@ -2,7 +2,6 @@
 using Application.CQRS.Commands;
 using Application.CQRS.Queries;
 using Application.Extensions;
-using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;

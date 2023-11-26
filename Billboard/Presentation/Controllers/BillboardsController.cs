@@ -45,7 +45,10 @@ public class BillboardsController : ControllerBase
             Request = request
         };
         var response = await _mediator.Send(command, cancellationToken);
-        return Ok(response);
+        return CreatedAtAction(nameof(GetBillboard), new
+        {
+            id = response.Id
+        }, response);
     }
 
     [HttpGet]
@@ -66,6 +69,16 @@ public class BillboardsController : ControllerBase
     {
         var cancellationToken = HttpContext.RequestAborted;
         var query = new GetBillboardsInformationQuery();
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("short")]
+    public async Task<ActionResult<BillboardResponse>> GetShortBillboards()
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new GetShortBillboardsQuery();
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }

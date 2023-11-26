@@ -1,0 +1,39 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.group-of-tariffs-block
+{
+    background: #96C9D3;
+    display: inline-block;
+    width: 98%;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 5px 30px 20px;
+    margin: 10px 0;
+}
+
+.group-name
+{
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.hide-group-of-tariffs-button
+{
+    border: none;
+    background: none;
+    rotate: 90deg;
+    float: right;
+    line-height: 30px;
+    outline: none;
+}
+
+.tariffs-list-content .tariff-block
+{
+    margin: 10px 15px;
+}

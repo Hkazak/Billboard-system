@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Responses;
 
-public class GroupOfTariffsResponse
+public record GroupOfTariffsResponse
 {
     public required Guid Id { get; init; }
     public required string Name { get; init; }
