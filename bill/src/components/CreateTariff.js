@@ -2,7 +2,7 @@ import '../styles/CreateTariff.css'
 import { useState } from "react";
 import { SendTariff } from "../lib/controllers/TariffController";
 
-function CreateTariff({ isEnabled, setIsEnabled, tariffs, setTariffs, setPage }) {
+function CreateTariff({ isEnabled, setIsEnabled, handleNewTariff, setPage }) {
     const [tariffName, setTariffName] = useState('');
     const [tariffPrice, setTariffPrice] = useState(0);
     const [timeStart, setTimeStart] = useState('00:00');
@@ -31,25 +31,17 @@ function CreateTariff({ isEnabled, setIsEnabled, tariffs, setTariffs, setPage })
         setTimeEnd(ev.target.value);
     }
 
-    async function createTariff(ev) {
+    function createTariff(ev) {
         ev.preventDefault();
 
         const isValid = ev.target.form.checkValidity();
-        console.log(isValid);
         if (!isValid) {
             ev.target.form.reportValidity();
             return;
         }
-        const response = await SendTariff(tariffName, timeStart, timeEnd, tariffPrice);
-        console.log(response);
-
-        if(response.ok){
-            let json = await response.json();
-
-            setTariffs([json, ...tariffs]);
-            setIsEnabled(false);
-            setPage(0);
-        }
+        SendTariff(tariffName, timeStart, timeEnd, tariffPrice)
+            .then(e=>e.json())
+            .then(e=>handleNewTariff(e));
     }
 
     return (

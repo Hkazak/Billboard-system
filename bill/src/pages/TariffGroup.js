@@ -36,9 +36,14 @@ function TariffGroup() {
         setSearchText(e.target.value);
     }
 
+    function handleNewGroupOfTariffs(groupOfTariffs)
+    {
+        setGroups([...groups, groupOfTariffs]);
+    }
+
     return (
         <div className="page-content">
-            <CreateGroupOfTariff show={hideCreateGroupOfTariffsBlock} groupsOfTariffs={groups} setGroupsOfTariffs={setGroups} />
+            <CreateGroupOfTariff show={hideCreateGroupOfTariffsBlock}  />
             <Header title={"Группа тарифов"}/>
             <Sidebar>
                 <ControlPanel handleCreateItem={handleCreateGroupOfTariffsBlock} handleSearch={handleSearch} createButtonText={"Новая группа"} placeholderSearchText={"Название"} />

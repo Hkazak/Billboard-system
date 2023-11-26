@@ -2,6 +2,7 @@ import { LS, baseUrl } from "../Consts";
 
 export const createBillboardEndpoint = `${baseUrl}/Billboards`;
 export const getBillboardListEndpoint = `${baseUrl}/Billboards`;
+export const getShortBillboardListEndpoint = `${baseUrl}/Billboards/short`;
 
 export async function CreateBillboard(name, address, description, groupOfTariffs, billboardType, billboardSurfaceId, penalty, height, width, pictureSource) {
     let body = {
@@ -48,4 +49,19 @@ export async function GetBillboardList(name, address, description, groupOfTariff
     });
 
     return response;
+}
+
+export function GetShortBillboardList()
+{
+    const accessToken = localStorage.getItem(LS.accessToken);
+    const requestInfo = {
+        method: 'GET',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `bearer ${accessToken}`
+        }
+    };
+    return fetch(getShortBillboardListEndpoint, requestInfo);
 }

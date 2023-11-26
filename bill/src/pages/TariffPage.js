@@ -37,10 +37,15 @@ function TariffPage() {
             .then(e=>setTariffs(e));
     }, []);
 
+    function handleNewTariff(tariff)
+    {
+        setTariffs([...tariffs, tariff]);
+    }
+
     return (
         <div className="tariff-page-block">
             <Header title={"Тарифы"} />
-            <CreateTariff isEnabled={isCreation} setIsEnabled={setIsCreation} tariffs={tariffs} setTariffs={setTariffs} setPage={setPageNumber} />
+            <CreateTariff isEnabled={isCreation} setIsEnabled={setIsCreation} handleNewTariff={handleNewTariff} setPage={setPageNumber} />
             <Sidebar>
                 <ControlPanel handleCreateItem={handleCreatePanel} handleSearch={handleSearch} createButtonText={"Новый тариф"} placeholderSearchText={"Название"} />
                 {tariffs.filter(e=>e.title.includes(searchText)).map(t=><Tariff tariffTitle={t.title} startTime={t.startTime} endTime={t.endTime} tariffPrice={t.price} />)}

@@ -5,7 +5,7 @@ import "../styles/CreateGroupOfTariffs.css";
 import {CreateGroupOfTariffs} from "../lib/controllers/TariffGroupController";
 import arrow from "../assets/arrow.png"
 
-function CreateGroupOfTariff({show, groupsOfTariffs, setGroupsOfTariffs})
+function CreateGroupOfTariff({show, handleNewGroupOfTariffs})
 {
     const [selectedTariffs, setSelectedTariffs] = useState([]);
     const [allTariffs, setAllTariffs] = useState([]);
@@ -34,7 +34,7 @@ function CreateGroupOfTariff({show, groupsOfTariffs, setGroupsOfTariffs})
     {
         CreateGroupOfTariffs(name, selectedTariffs)
             .then(e=>e.json())
-            .then(e=>setGroupsOfTariffs([...groupsOfTariffs, e]));
+            .then(e=>handleNewGroupOfTariffs(e));
         setSelectedTariffs([]);
     }
 
