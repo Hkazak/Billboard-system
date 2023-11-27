@@ -14,7 +14,7 @@ import {
   ForgotPasswordRoute,
   ManagerAuthRoute,
   ManagerForgotPasswordRoute,
-  ManagerResetPasswordRoute,
+  ManagerResetPasswordRoute, PriceRuleRoute,
   ResetPasswordRoute, TariffGroupRoute,
   TariffRoute,
   UserAuthorizationRoute,
@@ -29,6 +29,7 @@ import BillDescr from './pages/BillDescr';
 import TariffPage from './pages/TariffPage';
 import TariffGroup from './pages/TariffGroup';
 import DiscountPage from "./pages/DiscountPage";
+import PriceRulePage from "./pages/PriceRulePage";
 
 function App(){
 
@@ -52,6 +53,7 @@ function App(){
             <Route path={TariffRoute} element={<TariffPage/>}></Route>
             <Route path={TariffGroupRoute} element={<TariffGroup/>}></Route>
             <Route path={DiscountRoute} element={<DiscountPage/>}></Route>
+            <Route path={PriceRuleRoute} element={<PriceRulePage/>}/>
           </Routes>
 
     </BrowserRouter>
