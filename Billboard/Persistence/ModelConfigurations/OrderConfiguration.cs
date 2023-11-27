@@ -13,6 +13,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.HasOne(e => e.OrderStatus)
             .WithMany()
             .HasForeignKey(e => e.StatusId);
-        builder.HasMany(e => e.Discounts);
+        builder.HasOne(e => e.Discount)
+            .WithMany()
+            .HasForeignKey(e => e.DiscountId);
     }
 }
