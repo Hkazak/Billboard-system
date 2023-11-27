@@ -1,4 +1,5 @@
 ﻿using Application.Extensions;
+using Contracts.Exceptions;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
@@ -29,6 +30,16 @@ public class AddBillboardCommand : IRequest<BillboardResponse>
                 e => e.Id == request.Request.BillboardSurfaceId, cancellationToken);
             var groupOfTariffs = await _context.GroupOfTariffs.FirstOrDefaultAsync(
                     e => e.Id == request.Request.GroupOfTariffs, cancellationToken);
+            if (billboardType is null)
+            {
+                throw new NotFoundException($"Billboard surface with id {request.Request.BillboardSurfaceId} not found");
+            }
+
+            if (groupOfTariffs is null)
+            {
+                throw new NotFoundException($"Group of tariffs with id {request.Request.GroupOfTariffs} not found");
+            }
+
             var billboard = new Billboard
             {
                 Name = request.Request.Name,

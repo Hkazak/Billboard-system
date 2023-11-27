@@ -20,6 +20,17 @@ public static class MapperExtensions
         };
     }
 
+    public static PriceRuleResponse CreateResponse(this PriceRule priceRule)
+    {
+        return new PriceRuleResponse
+        {
+            Id = priceRule.Id,
+            BillboardSurface = priceRule.BillboardSurface!.CreateResponse(),
+            BillboardType = priceRule.BillboardTypeId.ToString(),
+            Price = priceRule.Price
+        };
+    }
+
     public static ManagerResponse CreateResponse(this Manager manager)
     {
         return new ManagerResponse

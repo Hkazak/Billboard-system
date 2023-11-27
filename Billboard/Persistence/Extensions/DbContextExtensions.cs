@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Persistence.Extensions;
 
@@ -18,5 +19,12 @@ public static class DbContextExtensions
     {
         var isUniquePhone = await context.Managers.AllAsync(e => e.Phone != phone, cancellationToken);
         return isUniquePhone;
+    }
+
+    public static async Task<bool> IsUniquePriceRuleAsync(this BillboardContext context, Guid billboardSurfaceId,
+        BillboardTypeId billboardTypeId, CancellationToken cancellationToken = default)
+    {
+        return await context.PriceRules
+            .AnyAsync(e => e.BillboardSurfaceId == billboardSurfaceId && e.BillboardTypeId == billboardTypeId);
     }
 }

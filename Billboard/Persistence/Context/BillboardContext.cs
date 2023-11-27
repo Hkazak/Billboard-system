@@ -27,6 +27,7 @@ public class BillboardContext : DbContext
     public DbSet<Order> Orders { get; set; } = default!;
     public DbSet<OrderStatus> OrderStatusEnumerable { get; set; } = default!;
     public DbSet<Discount> Discounts { get; set; } = default!;
+    public DbSet<PriceRule> PriceRules { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,5 +43,6 @@ public class BillboardContext : DbContext
         modelBuilder.ApplyConfiguration(new OrderConfiguration());
         modelBuilder.ApplyConfiguration(new OrderStatusConfiguration());
         modelBuilder.ApplyConfiguration(new DiscountConfiguration());
+        modelBuilder.ApplyConfiguration(new PriceRuleConfiguration());
     }
 }
