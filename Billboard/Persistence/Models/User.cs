@@ -10,4 +10,5 @@ public class User
     public required string Password { get; set; }
     public required UserRoleId RoleId { get; init; }
     public UserRole? Role { get; private set; }
+    public ICollection<Order> Orders { get; init; } = new List<Order>();
 }

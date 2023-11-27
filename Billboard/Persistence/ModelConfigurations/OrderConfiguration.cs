@@ -10,11 +10,19 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.ProductPrice).HasPrecision(12, 2);
+        builder.Property(e => e.RentPrice).HasPrecision(12, 2);
+        builder.Property(e => e.PenaltyPrice).HasPrecision(12, 2);
+        builder.HasOne(e => e.Billboard)
+            .WithMany();
         builder.HasOne(e => e.OrderStatus)
             .WithMany()
             .HasForeignKey(e => e.StatusId);
         builder.HasOne(e => e.Discount)
             .WithMany()
             .HasForeignKey(e => e.DiscountId);
+        builder.HasOne(e => e.SelectedTariff)
+            .WithMany();
+        builder.HasOne(e => e.User)
+            .WithMany(e => e.Orders);
     }
 }

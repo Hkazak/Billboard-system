@@ -107,6 +107,22 @@ public static class MapperExtensions
         };
     }
 
+    public static OrderResponse CreateResponse(this Order order)
+    {
+        return new OrderResponse
+        {
+            Id = order.Id,
+            Billboard = order.Billboard.CreateResponse(),
+            Tariff = order.SelectedTariff.CreateResponse(),
+            StartDate = order.StartDate,
+            EndDate = order.EndDate,
+            RentPrice = order.RentPrice,
+            ProductPrice = order.ProductPrice,
+            PenaltyPrice = order.PenaltyPrice,
+            User = order.User.CreateResponse()
+        };
+    }
+
     public static ShortBillboardResponse CreateShortResponse(this Billboard billboard)
     {
         return new ShortBillboardResponse
@@ -164,6 +180,19 @@ public static class MapperExtensions
             StartTime = TimeSpan.Parse(request.StartTime),
             EndTime = TimeSpan.Parse(request.EndTime),
             Price = request.Price
+        };
+    }
+
+    public static AddOrder CreateAddOrder(this AddOrderRequest request, Guid userId)
+    {
+        return new AddOrder
+        {
+            BillboardId = request.BillboardId,
+            StartDate = request.StartDate,
+            EndDate = request.EndDate,
+            TariffId = request.TariffId,
+            Files = request.Files,
+            UserId = userId
         };
     }
 }
