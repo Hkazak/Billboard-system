@@ -22,5 +22,6 @@ public static class ValidationErrorMessages
     public const string PriceIsEmpty = "Price must not be empty";
     public const string EndTimeIsEmpty = "End time must not be empty";
     public const string StartTimeIsEmpty = "Start time must not be empty";
-
+    public const string CombinationOfSurfaceAndTypeMustBeUnique =
+        "Billboard surface id and billboard type should be unique for each price rule";
 }

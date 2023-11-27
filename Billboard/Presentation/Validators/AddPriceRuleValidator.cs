@@ -1,4 +1,5 @@
-﻿using Contracts.Requests;
+﻿using Contracts.Constants;
+using Contracts.Requests;
 using FluentValidation;
 using Persistence.Context;
 using Persistence.Enums;
@@ -11,8 +12,10 @@ public class AddPriceRuleValidator : AbstractValidator<AddPriceRuleRequest>
     public AddPriceRuleValidator(BillboardContext context)
     {
         RuleFor(e => e.Price).GreaterThan(0);
-        RuleFor(e => e.BillboardType).Must(e => Enum.IsDefined(typeof(BillboardTypeId), e));
+        RuleFor(e => e.BillboardType).Must(e => Enum.IsDefined(typeof(BillboardTypeId), e))
+            .WithMessage(ValidationErrorMessages.BillboardTypeIsInvalid);
         RuleFor(e => e).MustAsync((e, token) =>
-            context.IsUniquePriceRuleAsync(e.BillboardSurfaceId, Enum.Parse<BillboardTypeId>(e.BillboardType), token));
+            context.IsUniquePriceRuleAsync(e.BillboardSurfaceId, Enum.Parse<BillboardTypeId>(e.BillboardType), token))
+            .WithMessage(ValidationErrorMessages.CombinationOfSurfaceAndTypeMustBeUnique);
     }
 }

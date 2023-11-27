@@ -25,6 +25,6 @@ public static class DbContextExtensions
         BillboardTypeId billboardTypeId, CancellationToken cancellationToken = default)
     {
         return await context.PriceRules
-            .AnyAsync(e => e.BillboardSurfaceId == billboardSurfaceId && e.BillboardTypeId == billboardTypeId);
+            .AnyAsync(e => e.BillboardSurfaceId == billboardSurfaceId && e.BillboardTypeId == billboardTypeId, cancellationToken);
     }
 }

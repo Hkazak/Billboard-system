@@ -1,4 +1,5 @@
-﻿using Application.CQRS.Commands;
+﻿using System.Net;
+using Application.CQRS.Commands;
 using Application.CQRS.Queries;
 using Contracts.Requests;
 using Contracts.Responses;
@@ -48,6 +49,17 @@ public class PriceRulesController : ControllerBase
     [Authorize(Roles = "Manager")]
     public async Task<ActionResult<PriceRuleResponse>> CreatePriceRule([FromBody] AddPriceRuleRequest request)
     {
+        var validationResult = await _validator.ValidateAsync(request);
+        if (!validationResult.IsValid)
+        {
+            var errorResponse = new ErrorResponse
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                ErrorMessage = string.Concat(validationResult.Errors.Select(e=>e.ErrorMessage))
+            };
+            return BadRequest(errorResponse);
+        }
+
         var cancellationToken = HttpContext.RequestAborted;
         var command = new AddPriceRuleCommand
         {

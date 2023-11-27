@@ -19,7 +19,9 @@ public class GetPriceRuleListQuery : IRequest<IEnumerable<PriceRuleResponse>>
 
         public async Task<IEnumerable<PriceRuleResponse>> Handle(GetPriceRuleListQuery request, CancellationToken cancellationToken)
         {
-            var rules = await _context.PriceRules.ToListAsync(cancellationToken);
+            var rules = await _context.PriceRules
+                .Include(e => e.BillboardSurface)
+                .ToListAsync(cancellationToken);
             return rules.Select(e => e.CreateResponse());
         }
     }
