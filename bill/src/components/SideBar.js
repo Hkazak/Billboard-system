@@ -7,8 +7,8 @@ import {
     AdminAuthRoute,
     BillboardsRoute,
     CreateManagerRoute,
-    DashboardRoute,
-    ManagerAuthRoute,
+    DashboardRoute, DiscountRoute,
+    ManagerAuthRoute, PriceRuleRoute,
     TariffRoute,
     UserAuthorizationRoute
 } from '../Paths';
@@ -50,6 +50,16 @@ const Sidebar = ({children}) => {
         {
             path:TariffRoute,
             name:"Тарифы",
+            icon:<FaTh/>
+        },
+        {
+            path:DiscountRoute,
+            name:"Акции",
+            icon:<FaTh/>
+        },
+        {
+            path:PriceRuleRoute,
+            name:"Цена изготовление",
             icon:<FaTh/>
         }
     ]
