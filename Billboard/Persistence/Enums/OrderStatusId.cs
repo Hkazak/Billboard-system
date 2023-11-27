@@ -4,5 +4,6 @@ public enum OrderStatusId
 {
     Submitted,
     InProgress,
-    Completed
+    Completed,
+    Cancelled
 }
