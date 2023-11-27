@@ -4,6 +4,7 @@ using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
@@ -44,6 +45,7 @@ public class PriceRulesController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Manager")]
     public async Task<ActionResult<PriceRuleResponse>> CreatePriceRule([FromBody] AddPriceRuleRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
