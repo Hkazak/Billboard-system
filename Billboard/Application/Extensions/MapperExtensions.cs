@@ -69,8 +69,8 @@ public static class MapperExtensions
         {
             Id = tariff.Id,
             Title = tariff.Title,
-            StartTime = tariff.StartTime.ToString(@"hh\:mm"),
-            EndTime = tariff.EndTime.ToString(@"hh\:mm"),
+            StartTime = tariff.StartTime.ToString(FormatConstants.ValidTimeFormat),
+            EndTime = tariff.EndTime.ToString(FormatConstants.ValidTimeFormat),
             Price = tariff.Price
         };
     }
@@ -102,7 +102,7 @@ public static class MapperExtensions
             Name = discount.Name,
             SalesOf = discount.SalesOf * 100m,
             MinRentCount = discount.MinRentCount,
-            EndDate = discount.EndDate.ToLocalTime().ToString(ValidationConstants.ValidDateFormat),
+            EndDate = discount.EndDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
             Billboards = discount.Billboards.Select(e=>e.CreateShortResponse()).ToList()
         };
     }

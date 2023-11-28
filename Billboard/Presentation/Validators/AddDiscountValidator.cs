@@ -14,6 +14,6 @@ public class AddDiscountValidator : AbstractValidator<AddDiscountRequest>
         RuleFor(e => e.DiscountPercentage).NotEmpty()
             .WithMessage(ValidationErrorMessages.PriceIsEmpty);
         RuleFor(e => e.EndDate).NotEmpty()
-            .Must(value => DateTime.TryParseExact(value, ValidationConstants.ValidDateFormat, null, DateTimeStyles.None, out _));
+            .Must(value => DateTime.TryParseExact(value, FormatConstants.ValidDateFormat, null, DateTimeStyles.None, out _));
     }
 }

@@ -27,19 +27,19 @@ function DashboardControlPanel({handleSelectSurface, handleSelectExposure, handl
                 <li className="control-panel-options-list-item">
                     <select name="surface-type" className="control-panel-input" onChange={(ev)=>handleSelectSurface(surfacesList[ev.target.options.selectedIndex - 1])}>
                         <option className="control-panel-input-option">Вид поверхности</option>
-                        {surfacesList.map(surface=><option className="control-panel-input-option">{surface.name}</option>)}
+                        {surfacesList.map(surface=><option key={surface.id} className="control-panel-input-option">{surface.name}</option>)}
                     </select>
                 </li>
                 <li className="control-panel-options-list-item">
                     <select name="exposure-type" className="control-panel-input" onChange={(ev)=>handleSelectExposure(exposureTypeList[ev.target.options.selectedIndex - 1])}>
                         <option className="control-panel-input-option">Вид экспонирования</option>
-                        {exposureTypeList.map(exposure=><option className="control-panel-input-option">{exposure}</option>)}
+                        {exposureTypeList.map(exposure=><option key={exposure} className="control-panel-input-option">{exposure}</option>)}
                     </select>
                 </li>
                 <li className="control-panel-options-list-item">
                     <select name="tariff" className="control-panel-input" onChange={(ev)=>handleSelectTariff(tariffsList[ev.target.options.selectedIndex - 1])}>
                         <option className="control-panel-input-option">Тариф</option>
-                        {tariffsList.map(tariff=><option className="control-panel-input-option">{tariff.title}</option>)}
+                        {tariffsList.map(tariff=><option key={tariff.id} className="control-panel-input-option">{tariff.title}</option>)}
                     </select>
                 </li>
                 <li className="control-panel-options-list-item">

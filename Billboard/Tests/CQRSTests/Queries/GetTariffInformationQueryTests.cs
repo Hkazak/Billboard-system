@@ -1,4 +1,5 @@
 ﻿using Application.CQRS.Queries;
+using Contracts.Constants;
 using Contracts.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
@@ -52,8 +53,8 @@ public class GetTariffInformationQueryTests
         {
             Assert.That(tariff.Id, Is.EqualTo(response.Id));
             Assert.That(tariff.Price, Is.EqualTo(response.Price));
-            Assert.That(tariff.StartTime.ToString(@"hh\:mm"), Is.EqualTo(response.StartTime));
-            Assert.That(tariff.EndTime.ToString(@"hh\:mm"), Is.EqualTo(response.EndTime));
+            Assert.That(tariff.StartTime.ToString(FormatConstants.ValidTimeFormat), Is.EqualTo(response.StartTime));
+            Assert.That(tariff.EndTime.ToString(FormatConstants.ValidTimeFormat), Is.EqualTo(response.EndTime));
         });
     }
 
