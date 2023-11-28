@@ -24,7 +24,6 @@ import AdminAuthorization from './pages/AdminAuthorization';
 import ManagerResetPassword from './pages/ManagerResetPassword';
 import ManagerForgotPassword from './pages/ManagerForgotPassword';
 import BillboardPage from './pages/BillboardPage';
-import CreateBill from './pages/CreateBill';
 import BillDescr from './pages/BillDescr';
 import TariffPage from './pages/TariffPage';
 import TariffGroup from './pages/TariffGroup';
@@ -45,7 +44,6 @@ function App(){
             <Route path={ManagerAuthRoute} element={<ManagerAuthorization/>}></Route>
             <Route path={ManagerResetPasswordRoute} element={<ManagerResetPassword/>}></Route>
             <Route path={ManagerForgotPasswordRoute} element={<ManagerForgotPassword/>}></Route>
-            <Route path={CreateBillboardRoute} element={<CreateBill/>}></Route>
             <Route path={BillboardsRoute} element={<BillboardPage/>}></Route>
             <Route path={AdminAuthRoute} element={<AdminAuthorization/>}></Route>
             <Route path={CreateManagerRoute} element={<ManagerPage/>}></Route>

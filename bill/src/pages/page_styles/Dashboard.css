@@ -47,12 +47,20 @@ select:focus {
     height: 70vh;
 }
 
-.cr-btn{
-    margin-top: 40px;
-    margin-left: 600px;
-    align-items: center;
+.create-billboard-panel-button-block
+{
+    display: flex;
+    justify-content: center;
 }
 
-.cr-btn button{
-    width: 300px;
+.create-billboard-panel-button
+{
+    width: 275px;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid black;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    background: #F8BC43;
 }

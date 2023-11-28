@@ -1,0 +1,159 @@
+.create-billboard-block
+{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-left: calc(50vw - 22.5%);
+    margin-top: -5%;
+    z-index: 3;
+    padding: 5px;
+    background: white;
+}
+
+.create-billboard-title
+{
+    font-size: 30px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: center;
+    display: block;
+    margin: 20px 0;
+}
+
+.create-billboard-general-span
+{
+    margin: 10px 5%;
+    font-size: 20px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    display: block;
+}
+
+.billboard-data-input
+{
+    display: inline-block;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 40px;
+    margin: 10px 5%;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 40px;
+    padding: 0 5px;
+    outline: none;
+}
+
+.billboard-data-textarea
+{
+    resize: none;
+    display: inline-block;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 200px;
+    margin: 10px 5%;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 35px;
+    padding: 0 5px;
+    outline: none;
+}
+
+.create-billboard-button
+{
+    text-align: center;
+    background: #F8BC43;
+    width: 40%;
+    height: 50px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+.cancel-create-billboard-button
+{
+    text-align: center;
+    background: #FF4343;
+    width: 40%;
+    height: 50px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+.manage-buttons
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+.billboard-data-short-input
+{
+    display: inline-block;
+    width: 40%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 40px;
+    margin-left: 5%;
+}
+
+.billboard-size-unit
+{
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 3px;
+}
+
+.upload-picture-block
+{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 0 5%;
+    height: 165px;
+    background: #96C9D3;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.upload-pictures-button
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+}
+
+.pictures-container
+{
+    width: 90%;
+    margin: 10px 5%;
+    display: flex;
+    overflow-x: auto;
+}
+
+.pictures-container img
+{
+    border-radius: 8px;
+    border: 1px solid black;
+    margin-right: 5px;
+}

@@ -4,7 +4,7 @@ export const createBillboardEndpoint = `${baseUrl}/Billboards`;
 export const getBillboardListEndpoint = `${baseUrl}/Billboards`;
 export const getShortBillboardListEndpoint = `${baseUrl}/Billboards/short`;
 
-export async function CreateBillboard(name, address, description, groupOfTariffs, billboardType, billboardSurfaceId, penalty, height, width, pictureSource) {
+export async function CreateBillboardRequest(name, address, description, groupOfTariffs, billboardType, billboardSurfaceId, penalty, height, width, pictureSource) {
     let body = {
         "name": name,
         "address": address,

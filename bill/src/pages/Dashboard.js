@@ -1,15 +1,14 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
 import Sidebar from '../components/SideBar'
 import './page_styles/Dashboard.css'
 import {useNavigate} from 'react-router-dom'
-import Button from 'react-bootstrap/esm/Button'
 import Header from "../components/Header";
-import ControlPanel from "../components/ControlPanel";
 import DashboardControlPanel from "../components/DashboardControlPanel";
+import CreateBillboard from "../components/CreateBillboard";
 
 function Dashboard() {
     const navigate = useNavigate();
+    const [hideCreatePanel, setHideCreatePanel] = useState(true);
 
     function handleSetSurface(surface)
     {
@@ -36,19 +35,23 @@ function Dashboard() {
 
     }
 
+    function handleCreateBillboard(billboard)
+    {
+    }
+
     return (
         <div className="dashboard-content">
             <Header title={"Dashboard"}/>
+            <CreateBillboard hide={hideCreatePanel} setHide={setHideCreatePanel} handleNewBillboard={handleCreateBillboard} />
             <Sidebar>
                 <DashboardControlPanel handleSelectSurface={handleSetSurface} handleSelectExposure={handleSetBillboardType} handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate} handleSelectEndDate={handleSetEndDate} />
                 <iframe className='map'
                         src="https://www.google.com/maps/d/embed?mid=1DayHk74XQHB1StkXz5_yeCdlzeo&hl=en&ehbc=2E312F"
                         width="1200" height="650"></iframe>
-                <br></br>
-                <div className='cr-btn'>
-                    <Button variant='warning' onClick={() => {
-                        navigate('/cr-bills')
-                    }}> Create </Button>
+                <div className="create-billboard-panel-button-block">
+                    <button className="create-billboard-panel-button" onClick={e=>setHideCreatePanel(!hideCreatePanel)}>
+                        Создать билборд
+                    </button>
                 </div>
             </Sidebar>
         </div>
