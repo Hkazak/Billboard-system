@@ -25,8 +25,12 @@ public class GetBillboardInformationQuery : IRequest<BillboardResponse>
         public async Task<BillboardResponse> Handle(GetBillboardInformationQuery request,
             CancellationToken cancellationToken)
         {
-            var billboard =
-                await _context.Billboards.FirstOrDefaultAsync(e => e.Id == request.BillboardId && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
+            var billboard = await _context.Billboards
+                .Include(e => e.BillboardSurface)
+                .Include(e => e.GroupOfTariffs)
+                .Include(e => e.Pictures)
+                .FirstOrDefaultAsync(e => e.Id == request.BillboardId
+                                          && e.ArchiveStatusId == ArchiveStatusId.NonArchived, cancellationToken);
             if (billboard is null)
             {
                 throw new NotFoundException($"Billboard with id: {request.BillboardId} not found");

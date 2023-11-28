@@ -63,7 +63,10 @@ public class AddOrderCommand : IRequest<OrderResponse>
                 StartDate = request.Request.StartDate,
                 EndDate = request.Request.EndDate,
                 User = user,
-                SelectedTariff = tariff
+                SelectedTariff = tariff,
+                BillboardId = request.Request.BillboardId,
+                TariffId = request.Request.TariffId,
+                UserId = request.Request.UserId
             };
             await _context.AddAsync(order, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

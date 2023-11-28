@@ -37,7 +37,7 @@ public class GetBillboardQueryTests
     }
     
     [Test]
-    public async Task Handler_nonArchivedBillboard_ValidGroupOfTariffs()
+    public async Task Handler_nonArchivedBillboard_ValidBillboard()
     {
         // Arrange
         var billboard = await _context.Billboards.FirstAsync(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived);
@@ -48,10 +48,8 @@ public class GetBillboardQueryTests
         var handler = new GetBillboardInformationQuery.GetBillboardInformationQueryHandler(_context);
         // Act, Assert
         var response = await handler.Handle(query, CancellationToken.None);
-        Assert.Multiple(() =>
-        {
-            Assert.That(billboard.Id, Is.EqualTo(billboard.Id));
-        });
+      
+        Assert.That(billboard.Id, Is.EqualTo(response.Id));
     }
 
     [OneTimeTearDown]

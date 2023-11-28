@@ -40,8 +40,8 @@ public class AddTariffCommandTests
         Assert.Multiple(() =>
         {
             Assert.That(response.Title, Is.EqualTo(request.Title));
-            Assert.That(response.StartTime, Is.EqualTo(request.StartTime.ToString(@"hh:\mm")));
-            Assert.That(response.EndTime, Is.EqualTo(request.EndTime.ToString(@"hh:\mm")));
+            Assert.That(response.StartTime, Is.EqualTo(request.StartTime.ToString(@"hh\:mm")));
+            Assert.That(response.EndTime, Is.EqualTo(request.EndTime.ToString(@"hh\:mm")));
             Assert.That(response.Price, Is.EqualTo(request.Price));
         });
     }
