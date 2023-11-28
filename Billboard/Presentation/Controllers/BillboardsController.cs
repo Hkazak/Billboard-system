@@ -51,6 +51,20 @@ public class BillboardsController : ControllerBase
         }, response);
     }
 
+    [HttpPost]
+    [Authorize(Roles = "Manager")]
+    [Route("pictures")]
+    public async Task<ActionResult> UploadPictures([FromForm] IFormCollection form)
+    {
+        var files= form.Files;
+        var command = new UploadBillboardPicturesCommand
+        {
+            Files = files.Where(e=>e.ContentType.Contains("image")).Select(file=>file.OpenReadStream())
+        };
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
     [HttpGet]
     [Route("{id:guid}")]
     public async Task<ActionResult<BillboardResponse>> GetBillboard([FromRoute] Guid id)
