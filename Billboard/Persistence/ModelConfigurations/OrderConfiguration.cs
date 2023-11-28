@@ -13,7 +13,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(e => e.RentPrice).HasPrecision(12, 2);
         builder.Property(e => e.PenaltyPrice).HasPrecision(12, 2);
         builder.HasOne(e => e.Billboard)
-            .WithMany();
+            .WithMany()
+            .HasForeignKey(e => e.BillboardId);
         builder.HasOne(e => e.OrderStatus)
             .WithMany()
             .HasForeignKey(e => e.StatusId);
@@ -21,8 +22,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .WithMany()
             .HasForeignKey(e => e.DiscountId);
         builder.HasOne(e => e.SelectedTariff)
-            .WithMany();
+            .WithMany()
+            .HasForeignKey(e => e.TariffId);
         builder.HasOne(e => e.User)
-            .WithMany(e => e.Orders);
+            .WithMany(e => e.Orders)
+            .HasForeignKey(e => e.UserId);
     }
 }

@@ -96,6 +96,7 @@ public static class DataSeeder
             .RuleFor(e => e.Width, faker => faker.Random.Number())
             .RuleFor(e => e.Penalty, faker => faker.Random.Number())
             .RuleFor(e => e.TypeId, BillboardTypeId.DoubleSide)
+            .RuleFor(e => e.BillboardSurface, GenerateBillboardSurface)
             .RuleFor(e => e.Pictures , faker =>  GeneratePictures(5))
             .RuleFor(e => e.GroupOfTariffs, GenerateGroupOfTariffs(ArchiveStatusId.NonArchived));
         
