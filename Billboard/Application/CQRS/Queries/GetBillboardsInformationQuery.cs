@@ -22,7 +22,12 @@ public class GetBillboardsInformationQuery : IRequest<IEnumerable<BillboardRespo
         public async Task<IEnumerable<BillboardResponse>> Handle(GetBillboardsInformationQuery request,
             CancellationToken cancellationToken)
         {
-            var billboards = await _context.Billboards.Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived).ToListAsync(cancellationToken);
+            var billboards = await _context.Billboards
+                .Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived)
+                .Include(e => e.Pictures)
+                .Include(e => e.BillboardSurface)
+                .Include(e => e.GroupOfTariffs)
+                .ToListAsync(cancellationToken);
             return billboards.Select(e => e.CreateResponse());
         }
     }

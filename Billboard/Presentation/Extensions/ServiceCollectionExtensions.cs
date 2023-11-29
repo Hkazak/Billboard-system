@@ -125,6 +125,10 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection ConfigureFileProvider(this IServiceCollection services, string folderPath)
     {
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         return services.AddScoped<IMediaFileProvider, UploadedFileProvider>(_ => new UploadedFileProvider(folderPath));
     }
 }

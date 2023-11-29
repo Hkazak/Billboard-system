@@ -10,8 +10,7 @@ if (builder.Environment.IsProduction())
 }
 
 // Add services to the container.
-var savedFilesFolderPath = Path.Combine(builder.Environment.ContentRootPath, "wwwroot/Pictures");
-
+var savedFilesFolderPath = Path.Combine(builder.Environment.ContentRootPath, "wwwroot/Pictures/Uploads");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
