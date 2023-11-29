@@ -55,7 +55,7 @@
     background: #F8BC43;
     width: 40%;
     height: 50px;
-    margin: 20px auto 10px;
+    margin: 20px 0;
     border: none;
     border-radius: 8px;
 }
@@ -98,4 +98,22 @@
     display: block;
     margin: 1px 0;
     background: #52AABC;
+}
+
+.manage-buttons
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-create-discount-button
+{
+    text-align: center;
+    background: #FF4343;
+    width: 40%;
+    height: 50px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 8px;
+    color: white;
 }

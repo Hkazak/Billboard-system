@@ -2,7 +2,6 @@
 {
     margin: 0;
     padding: 0;
-    font-family: Inter, sans-serif;
 }
 
 .new-tariff
@@ -12,9 +11,8 @@
     width: 40%;
     height: 400px;
     border: 1px solid black;
-    padding: 20px 80px;
     border-radius: 8px;
-    z-index: 2;
+    z-index: 3;
     background: white;
     margin-top: calc(50vh - 150px);
     margin-left: calc(50vw - 20%);
@@ -23,21 +21,31 @@
 .title
 {
     text-align: center;
+    font-family: Inter, sans-serif;
 }
 
 .general-text
 {
     font-size: 16px;
     font-weight: 400;
+    font-family: Inter, sans-serif;
+    margin: 10px 5%;
 }
 
 .tariff-property
 {
-    display: block;
-    text-decoration: none;
-    outline: none;
-    border: 1px solid silver;
+    display: inline-block;
+    width: 90%;
+    border: 1px solid black;
     border-radius: 8px;
+    height: 40px;
+    margin: 10px 5%;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 40px;
+    padding: 0 5px;
+    outline: none;
 }
 
 .time-period
@@ -47,13 +55,21 @@
     outline: none;
     border: 1px solid silver;
     border-radius: 8px;
-    max-width: 15%;
-    margin: 10px 5px 10px 0;
+    width: 20%;
+    height: 40px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.select-time-period
+{
+    margin: 10px 5%;
 }
 
 .all-day-block
 {
     display: block;
+    margin: 10px 5%;
 }
 
 .all-day-block input

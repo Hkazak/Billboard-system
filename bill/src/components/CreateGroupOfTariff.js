@@ -5,7 +5,7 @@ import "../styles/CreateGroupOfTariffs.css";
 import {CreateGroupOfTariffs} from "../lib/controllers/TariffGroupController";
 import arrow from "../assets/arrow.png"
 
-function CreateGroupOfTariff({show, handleNewGroupOfTariffs})
+function CreateGroupOfTariff({hide, setHide, handleNewGroupOfTariffs})
 {
     const [selectedTariffs, setSelectedTariffs] = useState([]);
     const [allTariffs, setAllTariffs] = useState([]);
@@ -45,7 +45,7 @@ function CreateGroupOfTariff({show, handleNewGroupOfTariffs})
     }, []);
 
     return (
-      <div className="create-new-group-of-tariffs-block" hidden={show}>
+      <form className="create-new-group-of-tariffs-block" hidden={hide}>
           <span className="create-new-group-of-tariffs-title">
               Новая группа тарифов
           </span>
@@ -73,10 +73,15 @@ function CreateGroupOfTariff({show, handleNewGroupOfTariffs})
           <div className="selected-tariffs-list">
               {selectedTariffs.map(tariff=><Tariff key={tariff.id} tariffTitle={tariff.title} startTime={tariff.startTime} endTime={tariff.endTime} tariffPrice={tariff.price} onClickCallback={()=>unselectTariff(tariff)} />)}
           </div>
-          <button className="create-new-group-of-tariffs-button" onClick={()=>handleCreateNewGroupOfTariffs()}>
-              Создать
-          </button>
-      </div>
+          <div className="manage-buttons">
+              <button className="create-new-group-of-tariffs-button" onClick={()=>handleCreateNewGroupOfTariffs()}>
+                  Создать
+              </button>
+              <button className="cancel-create-group-of-tariffs-button" onClick={()=>setHide(true)}>
+                  Отмена
+              </button>
+          </div>
+      </form>
     );
 }
 

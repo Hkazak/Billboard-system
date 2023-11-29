@@ -6,6 +6,11 @@ body
   margin:0;
   padding:0;
   text-decoration: none;
+  font-family: Inter, sans-serif !important;
+}
+input
+{
+  padding-left: 5px !important;
 }
 .container{
   display: flex;

@@ -48,7 +48,7 @@ function TariffPage() {
             <CreateTariff isEnabled={isCreation} setIsEnabled={setIsCreation} handleNewTariff={handleNewTariff} setPage={setPageNumber} />
             <Sidebar>
                 <ControlPanel handleCreateItem={handleCreatePanel} handleSearch={handleSearch} createButtonText={"Новый тариф"} placeholderSearchText={"Название"} />
-                {tariffs.filter(e=>e.title.includes(searchText)).map(t=><Tariff tariffTitle={t.title} startTime={t.startTime} endTime={t.endTime} tariffPrice={t.price} />)}
+                {tariffs.filter(e=>e.title.includes(searchText)).map(t=><Tariff key={t.id} tariffTitle={t.title} startTime={t.startTime} endTime={t.endTime} tariffPrice={t.price} />)}
             </Sidebar>
         </div>
     )

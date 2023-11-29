@@ -43,7 +43,7 @@ function TariffGroup() {
 
     return (
         <div className="page-content">
-            <CreateGroupOfTariff show={hideCreateGroupOfTariffsBlock}  />
+            <CreateGroupOfTariff hide={hideCreateGroupOfTariffsBlock} setHide={setHideCreateGroupOfTariffsBlock} handleNewGroupOfTariffs={handleNewGroupOfTariffs} />
             <Header title={"Группа тарифов"}/>
             <Sidebar>
                 <ControlPanel handleCreateItem={handleCreateGroupOfTariffsBlock} handleSearch={handleSearch} createButtonText={"Новая группа"} placeholderSearchText={"Название"} />

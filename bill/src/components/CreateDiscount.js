@@ -4,7 +4,7 @@ import {CreateDiscountRequest} from "../lib/controllers/DiscountController";
 import {GetShortBillboardList} from "../lib/controllers/BillboardController";
 
 let selectedBillboards = [];
-function CreateDiscount({hide, handleNewDiscount})
+function CreateDiscount({hide, setHide, handleNewDiscount})
 {
     const [name, setName] = useState('');
     const [minRent, setMinRent] = useState(0);
@@ -42,7 +42,7 @@ function CreateDiscount({hide, handleNewDiscount})
     }
 
     return (
-        <div className="create-discount-block" hidden={hide}>
+        <form className="create-discount-block" hidden={hide}>
             <span className="create-discount-title">
                 Новая акция
             </span>
@@ -67,10 +67,15 @@ function CreateDiscount({hide, handleNewDiscount})
             <ul className="billboards-names">
                 {billboards.filter(e=>e.name.includes(searchText)).map(e=><li key={e.id} onClick={ev=>selectBillboard(ev, e)}>{e.name}</li>)}
             </ul>
-            <button className="create-discount-button" onClick={()=>handleCreateDiscount()}>
-                Создать
-            </button>
-        </div>
+            <div className="manage-buttons">
+                <button className="create-discount-button" onClick={()=>handleCreateDiscount()}>
+                    Создать
+                </button>
+                <button className="cancel-create-discount-button" onClick={()=>setHide(true)}>
+                    Отмена
+                </button>
+            </div>
+        </form>
     );
 }
 

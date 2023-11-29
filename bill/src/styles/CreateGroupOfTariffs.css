@@ -132,3 +132,21 @@
 {
     rotate: 180deg;
 }
+
+.manage-buttons
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-create-group-of-tariffs-button
+{
+    text-align: center;
+    background: #FF4343;
+    width: 40%;
+    height: 50px;
+    margin: 20px 0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}

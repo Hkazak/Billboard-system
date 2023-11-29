@@ -55,7 +55,25 @@
     background: #F8BC43;
     width: 40%;
     height: 50px;
-    margin: 20px auto 10px;
+    margin: 20px 0;
     border: none;
     border-radius: 8px;
+}
+
+.manage-buttons
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-create-price-rule-button
+{
+    text-align: center;
+    background: #FF4343;
+    width: 40%;
+    height: 50px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 8px;
+    color: white;
 }

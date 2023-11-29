@@ -68,7 +68,7 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
     }, []);
 
     return (
-        <div className="create-billboard-block" hidden={hide}>
+        <form className="create-billboard-block" hidden={hide}>
             <span className="create-billboard-title">
                 Новая акция
             </span>
@@ -116,7 +116,7 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
                     Отмена
                 </button>
             </div>
-        </div>
+        </form>
     );
 }
 

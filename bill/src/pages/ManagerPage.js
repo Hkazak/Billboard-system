@@ -40,7 +40,7 @@ function ManagerPage() {
     return (
         <div className="manager-block">
             <Header title="Управление аккаунтами" />
-            <CreateManager hide={hideCreateManagerPanel} handleNewManager={handleNewManager} />
+            <CreateManager hide={hideCreateManagerPanel} setHide={setHideCreateManagerPanel} handleNewManager={handleNewManager} />
             <Sidebar>
                 <ControlPanel isClientView={false} handleSearch={handleSearch} placeholderSearchText="Название" handleCreateItem={handleCreateManagerPanelVisible} createButtonText="Создать менеджера" />
                 {

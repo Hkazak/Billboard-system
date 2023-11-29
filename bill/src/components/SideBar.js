@@ -14,7 +14,7 @@ import {
 } from '../Paths';
 import "../styles/Sidebar.css";
 
-const pageHeight = window.innerHeight;
+
 const Sidebar = ({children}) => {
     const menuItem=[
         {
@@ -64,8 +64,14 @@ const Sidebar = ({children}) => {
         }
     ]
     const [offsetTop, setOffsetTop] = useState(0);
+    const [pageHeight, setPageHeight] = useState(0);
     useEffect(()=>{
         setOffsetTop(document.getElementsByClassName('sidebar')[0].offsetTop);
+        setPageHeight(window.innerHeight);
+        window.onresize = (e)=>{
+            console.log('work');
+            setPageHeight(window.innerHeight);
+        }
     }, []);
     return (
         <div className="container">

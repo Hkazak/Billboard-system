@@ -4,7 +4,7 @@ import {getBillboardSurfacesList} from "../lib/controllers/TarrifsController";
 import {GetBillboardTypes} from "../lib/controllers/BillboardTypesController";
 import {CreatePriceRuleRequest} from "../lib/controllers/PriceRuleController";
 
-function CreatePriceRule({hide, handleNewPriceRule})
+function CreatePriceRule({hide, setHide, handleNewPriceRule})
 {
     const [surfaces, setSurfaces] = useState([]);
     const [billboardTypes, setBillboardTypes] = useState([]);
@@ -28,7 +28,7 @@ function CreatePriceRule({hide, handleNewPriceRule})
             .then(e=>setBillboardTypes(e));
     }, []);
     return (
-        <div className="create-new-price-rule-block" hidden={hide}>
+        <form className="create-new-price-rule-block" hidden={hide}>
             <span className="create-price-rule-title">
                 Новое правило расчета цены
             </span>
@@ -44,10 +44,15 @@ function CreatePriceRule({hide, handleNewPriceRule})
                 </select>
                 <input required type="number" className="price-rule-input" placeholder="Цена за 1м х 1м" onChange={(e)=>setPrice(parseInt(e.target.value))}/>
             </div>
-            <button className="create-price-rule-button" onClick={()=>createPriceRule()}>
-                Создать
-            </button>
-        </div>
+            <div className="manage-buttons">
+                <button className="create-price-rule-button" onClick={()=>createPriceRule()}>
+                    Создать
+                </button>
+                <button className="cancel-create-price-rule-button" onClick={()=>setHide(true)}>
+                    Отмена
+                </button>
+            </div>
+        </form>
     );
 }
 

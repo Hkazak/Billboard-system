@@ -36,7 +36,7 @@ function PriceRulePage()
     return (
         <div className="price-rule-page-block">
             <Header title="Цена изготовления" />
-            <CreatePriceRule hide={hideCreateRulePanel} handleNewPriceRule={handleNewRule} />
+            <CreatePriceRule hide={hideCreateRulePanel} setHide={setHideCreateRulePanel} handleNewPriceRule={handleNewRule} />
             <Sidebar>
                 <ControlPanel placeholderSearchText="Поиск" createButtonText="Новое правило" handleSearch={handleSearchText} handleCreateItem={handleCreateItem}/>
                 {priceRules
