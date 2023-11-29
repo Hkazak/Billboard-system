@@ -1,10 +1,11 @@
 ﻿using Application.Extensions;
+using Application.InternalModels;
+using Application.Services;
 using Contracts.Exceptions;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Ocsp;
 using Persistence.Context;
 using Persistence.Enums;
 using Persistence.Models;
@@ -18,10 +19,12 @@ public class AddBillboardCommand : IRequest<BillboardResponse>
     public class AddBillboardCommandHandler : IRequestHandler<AddBillboardCommand, BillboardResponse>
     {
         private readonly BillboardContext _context;
+        private readonly IMediaFileProvider _fileProvider;
 
-        public AddBillboardCommandHandler(BillboardContext context)
+        public AddBillboardCommandHandler(BillboardContext context, IMediaFileProvider fileProvider)
         {
             _context = context;
+            _fileProvider = fileProvider;
         }
 
         public async Task<BillboardResponse> Handle(AddBillboardCommand request, CancellationToken cancellationToken)
@@ -40,6 +43,13 @@ public class AddBillboardCommand : IRequest<BillboardResponse>
                 throw new NotFoundException($"Group of tariffs with id {request.Request.GroupOfTariffs} not found");
             }
 
+            var files = new List<MediaFile>();
+            foreach (var picture in request.Request.Pictures)
+            {
+                var file = await _fileProvider.WriteFileAsync(picture, cancellationToken);
+                files.Add(file);
+            }
+
             var billboard = new Billboard
             {
                 Name = request.Request.Name,
@@ -51,7 +61,13 @@ public class AddBillboardCommand : IRequest<BillboardResponse>
                 Height = request.Request.Height,
                 Penalty = request.Request.Penalty,
                 GroupOfTariffs = groupOfTariffs,
-                ArchiveStatusId = ArchiveStatusId.NonArchived
+                ArchiveStatusId = ArchiveStatusId.NonArchived,
+                Pictures = files
+                    .Select(e => new Picture
+                    {
+                        Source = e.Path
+                    })
+                    .ToList()
             };
             await _context.Billboards.AddAsync(billboard, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

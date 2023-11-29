@@ -58,7 +58,7 @@ public static class MapperExtensions
             Width = billboard.Width,
             Height = billboard.Height,
             Penalty = billboard.Penalty,
-            PictureSource = billboard.Pictures.Select(e => e.Source).ToList(),
+            PictureSource = billboard.Pictures.Select(e => $"pictures/{Path.GetFileName(e.Source)}").ToList(),
             GroupOfTariffs = billboard.GroupOfTariffs.CreateResponse(),
         };
     }

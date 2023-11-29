@@ -122,4 +122,9 @@ public static class ServiceCollectionExtensions
     {
         return services.AddDistributedMemoryCache();
     }
+
+    public static IServiceCollection ConfigureFileProvider(this IServiceCollection services, string folderPath)
+    {
+        return services.AddScoped<IMediaFileProvider, UploadedFileProvider>(_ => new UploadedFileProvider(folderPath));
+    }
 }

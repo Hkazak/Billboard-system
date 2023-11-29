@@ -1,11 +1,11 @@
 ﻿using Application.CQRS.Commands;
-using Application.Extensions;
+using Application.Services;
 using Contracts.Requests;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using NUnit.Framework;
 using Persistence.Context;
 using Persistence.Enums;
-using Persistence.Models;
 using Tests.TestsHelpers;
 
 namespace Tests.CQRSTests.Commands;
@@ -13,6 +13,7 @@ namespace Tests.CQRSTests.Commands;
 public class AddBillboardCommandTests
 {
     private BillboardContext _context = default! ;
+    private IMediaFileProvider _fileProvider = default!;
 
     [OneTimeSetUp]
     public async Task SetupContext()
@@ -21,6 +22,7 @@ public class AddBillboardCommandTests
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
         _context = new BillboardContext(options);
+        _fileProvider = Mock.Of<IMediaFileProvider>();
         await _context.SeedBillboardsAsync();
     }
     
@@ -44,7 +46,7 @@ public class AddBillboardCommandTests
         {
             Request = request
         };
-        var handler = new AddBillboardCommand.AddBillboardCommandHandler(_context);
+        var handler = new AddBillboardCommand.AddBillboardCommandHandler(_context, _fileProvider);
         var response = await handler.Handle(command, CancellationToken.None);
         Assert.Multiple(() =>
         {

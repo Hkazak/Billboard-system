@@ -11,4 +11,5 @@ public record AddBillboardRequest
     public decimal Penalty { get; init; }
     public required decimal Height { get; init; }
     public required decimal Width { get; init; }
+    public ICollection<string> Pictures { get; init; } = new List<string>();
 }
