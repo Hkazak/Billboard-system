@@ -7,7 +7,6 @@ import DashboardControlPanel from "../components/DashboardControlPanel";
 import CreateBillboard from "../components/CreateBillboard";
 
 function Dashboard() {
-    const navigate = useNavigate();
     const [hideCreatePanel, setHideCreatePanel] = useState(true);
 
     function handleSetSurface(surface)

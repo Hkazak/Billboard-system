@@ -4,24 +4,22 @@ export const createBillboardEndpoint = `${baseUrl}/Billboards`;
 export const getBillboardListEndpoint = `${baseUrl}/Billboards`;
 export const getShortBillboardListEndpoint = `${baseUrl}/Billboards/short`;
 
-export async function CreateBillboardRequest(name, address, description, groupOfTariffs, billboardType, billboardSurfaceId, penalty, height, width, pictureSource) {
+export async function CreateBillboardRequest(name, address, description, groupOfTariffs, billboardType, billboardSurfaceId, penalty, height, width, pictures) {
     let body = {
         "name": name,
         "address": address,
         "description": description,
         "groupOfTariffs": groupOfTariffs,
-        "billboardType": "SingleSide",
+        "billboardType": billboardType,
         "billboardSurfaceId": billboardSurfaceId,
         "penalty": penalty,
         "height": height,
         "width": width,
-        "pictureSource": pictureSource
+        "pictures": pictures.map(e=>e.data.split(',')[1])
     };
     const accessToken = localStorage.getItem(LS.accessToken);
 
-    console.log(body);
-
-    const response = await fetch(createBillboardEndpoint, {
+    const requestInfo = {
         method: 'POST',
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -30,7 +28,9 @@ export async function CreateBillboardRequest(name, address, description, groupOf
             'Authorization': `bearer ${accessToken}`
         },
         body: JSON.stringify(body)
-    });
+    };
+
+    const response = await fetch(createBillboardEndpoint, requestInfo);
 
     return response;
 }
