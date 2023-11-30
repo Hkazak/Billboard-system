@@ -44,6 +44,17 @@ function CreateTariff({ isEnabled, setIsEnabled, handleNewTariff, setPage }) {
             .then(e=>handleNewTariff(e));
     }
 
+    function resetPanel(e)
+    {
+        e.preventDefault();
+        e.target.form.reset();
+        setIsEnabled(false);
+        setTimeStart('00:00');
+        setTimeEnd('23:59');
+        setTariffName('');
+        setTariffPrice(0);
+    }
+
     return (
         <form className="new-tariff" hidden={!isEnabled}>
             <h2 className="title">Новый тариф</h2>
@@ -61,7 +72,7 @@ function CreateTariff({ isEnabled, setIsEnabled, handleNewTariff, setPage }) {
             </div>
             <div className='two-buttons'>
                 <button className="create-tariff" onClick={createTariff}>Создать</button>
-                <button className="cancel" onClick={(ev) => { setIsEnabled(false) }}>Отмена</button>
+                <button className="cancel" onClick={(ev) => resetPanel(ev)}>Отмена</button>
             </div>
         </form>
     );

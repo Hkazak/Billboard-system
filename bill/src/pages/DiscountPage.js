@@ -36,7 +36,7 @@ function DiscountPage()
     return (
         <div className="discount-block">
             <Header title={"Акции"} />
-            <CreateDiscount hide={hideCreateDiscountBlock} handleNewDiscount={handleNewDiscount} />
+            <CreateDiscount hide={hideCreateDiscountBlock} setHide={setHideCreateDiscountBlock} handleNewDiscount={handleNewDiscount} />
             <Sidebar>
                 <ControlPanel handleSearch={handleSearch} handleCreateItem={handleCreateItem} placeholderSearchText={"Название"} createButtonText={"Новые акции"} />
                 {discounts.filter(e=>e.name.includes(searchText)).map(e=><Discount key={e.id} name={e.name} discount={e.salesOf} minRentCount={e.minRentCount} endDate={e.endDate} billboards={e.billboards} />)}

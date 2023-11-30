@@ -22,8 +22,9 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
-    function handleCreateBillboard()
+    function handleCreateBillboard(e)
     {
+        e.preventDefault();
         CreateBillboardRequest(billboardName, billboardDescription, address, groupOfTariffId, billboardType, surfaceId, penalty, height, width, uploadedPictures)
             .then(e=> e.json())
             .then(e=>handleNewBillboard(e));
@@ -53,6 +54,12 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
             }
             reader.readAsDataURL(file);
         }
+    }
+
+    function resetPanel(e)
+    {
+        e.preventDefault();
+        setHide(true);
     }
 
     useEffect(()=>{
@@ -109,10 +116,10 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
                 </div>
             </div>
             <div className="manage-buttons">
-                <button className="create-billboard-button" onClick={()=>handleCreateBillboard()}>
+                <button className="create-billboard-button" onClick={(e)=>handleCreateBillboard(e)}>
                     Создать
                 </button>
-                <button className="cancel-create-billboard-button" onClick={()=>setHide(true)}>
+                <button className="cancel-create-billboard-button" onClick={(e)=>resetPanel(e)}>
                     Отмена
                 </button>
             </div>

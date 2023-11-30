@@ -16,6 +16,18 @@ function CreateManager({hide, setHide, handleNewManager})
             .then(e=>handleNewManager(e));
     }
 
+    function resetPanel(e)
+    {
+        e.preventDefault();
+        e.target.form.reset();
+        setHide(true);
+        setFirstName('');
+        setLastName('');
+        setMiddleName('');
+        setPhone('');
+        setEmail('');
+    }
+
     return (
         <form className="create-manager-block" hidden={hide}>
             <span className="create-manager-title">
@@ -30,7 +42,7 @@ function CreateManager({hide, setHide, handleNewManager})
                 <button className="create-manager-button" onClick={e=>createManager()}>
                     Создать
                 </button>
-                <button className="cancel-create-manager-button" onClick={()=>setHide(true)}>
+                <button className="cancel-create-manager-button" onClick={(e)=>resetPanel(e)}>
                     Отмена
                 </button>
             </div>

@@ -30,18 +30,42 @@ function CreateGroupOfTariff({hide, setHide, handleNewGroupOfTariffs})
         ]);
     }
 
-    function handleCreateNewGroupOfTariffs()
+    function handleCreateNewGroupOfTariffs(e)
     {
+        e.preventDefault();
         CreateGroupOfTariffs(name, selectedTariffs)
             .then(e=>e.json())
             .then(e=>handleNewGroupOfTariffs(e));
         setSelectedTariffs([]);
     }
 
-    useEffect(()=>{
+    function changePage(e, page)
+    {
+        e.preventDefault();
+        setPageNumber(Math.max(1,page));
+    }
+
+    function resetPanel(e)
+    {
+        e.preventDefault();
+        e.target.form.reset();
+        setHide(true);
+        setSearchTariffName('');
+        setName('');
+        setPageNumber(1);
+        setSelectedTariffs([]);
+        refresh();
+    }
+
+    function refresh()
+    {
         GetTariffs()
             .then(e=>e.json())
             .then(e=>setAllTariffs(e));
+    }
+
+    useEffect(()=>{
+        refresh();
     }, []);
 
     return (
@@ -57,11 +81,11 @@ function CreateGroupOfTariff({hide, setHide, handleNewGroupOfTariffs})
           <div className="search-controller-block">
               <input type="text" className="search-tariff-input" placeholder="Название тарифа" onChange={(e)=>setSearchTariffName(e.target.value)}/>
               <div className="pagination-controller-block">
-                  <button className="current-page-change-button" onClick={()=>setPageNumber(Math.max(1, pageNumber-1))}>
+                  <button className="current-page-change-button" onClick={(e)=>changePage(e,pageNumber-1)}>
                       <img src={arrow} alt="&lt;" className="reverse-arrow" width={10}/>
                   </button>
-                  <input type="number" className="pagination-set-page" value={pageNumber} onChange={(e)=>setPageNumber(parseInt(e.target.value))}/>
-                  <button className="current-page-change-button" onClick={()=>setPageNumber(pageNumber+1)}>
+                  <input type="number" className="pagination-set-page" value={pageNumber} onChange={(e)=>changePage(e,parseInt(e.target.value))}/>
+                  <button className="current-page-change-button" onClick={(e)=>changePage(e,pageNumber+1)}>
                       <img src={arrow} alt="&lt;" width={10}/>
                   </button>
               </div>
@@ -74,10 +98,10 @@ function CreateGroupOfTariff({hide, setHide, handleNewGroupOfTariffs})
               {selectedTariffs.map(tariff=><Tariff key={tariff.id} tariffTitle={tariff.title} startTime={tariff.startTime} endTime={tariff.endTime} tariffPrice={tariff.price} onClickCallback={()=>unselectTariff(tariff)} />)}
           </div>
           <div className="manage-buttons">
-              <button className="create-new-group-of-tariffs-button" onClick={()=>handleCreateNewGroupOfTariffs()}>
+              <button className="create-new-group-of-tariffs-button" onClick={(e)=>handleCreateNewGroupOfTariffs(e)}>
                   Создать
               </button>
-              <button className="cancel-create-group-of-tariffs-button" onClick={()=>setHide(true)}>
+              <button className="cancel-create-group-of-tariffs-button" onClick={(e)=>resetPanel(e)}>
                   Отмена
               </button>
           </div>

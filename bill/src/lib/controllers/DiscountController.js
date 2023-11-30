@@ -26,7 +26,7 @@ export function CreateDiscountRequest(name, minRent, discount, endDate, billboar
         discountPercentage: discount,
         minRentCount: minRent,
         endDate: endDate,
-        billboardIds: billboards.map(e=>e.id)
+        billboardIds: billboards
     };
     const requestInfo = {
         method: 'POST',

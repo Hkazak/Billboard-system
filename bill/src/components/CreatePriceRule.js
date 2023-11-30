@@ -12,20 +12,40 @@ function CreatePriceRule({hide, setHide, handleNewPriceRule})
     const [billboardType, setBillboardType] = useState('');
     const [price, setPrice] = useState(0);
 
-    function createPriceRule()
+    function createPriceRule(e)
     {
+        e.preventDefault();
         CreatePriceRuleRequest(surfaceId, billboardType, price)
             .then(e=>e.json())
-            .then(e=>handleNewPriceRule(e));
+            .then(e=>{
+                console.log(e);
+                handleNewPriceRule(e);
+            });
     }
 
-    useEffect(()=> {
+    function resetPanel(e)
+    {
+        e.preventDefault();
+        e.target.form.reset();
+        setHide(true);
+        setPrice(0);
+        setBillboardType('');
+        setSurfaceId('');
+        refresh();
+    }
+
+    function refresh()
+    {
         getBillboardSurfacesList()
             .then(e=>e.json())
             .then(e=>setSurfaces(e));
         GetBillboardTypes()
             .then(e=>e.json())
             .then(e=>setBillboardTypes(e));
+    }
+
+    useEffect(()=> {
+        refresh();
     }, []);
     return (
         <form className="create-new-price-rule-block" hidden={hide}>
@@ -45,10 +65,10 @@ function CreatePriceRule({hide, setHide, handleNewPriceRule})
                 <input required type="number" className="price-rule-input" placeholder="Цена за 1м х 1м" onChange={(e)=>setPrice(parseInt(e.target.value))}/>
             </div>
             <div className="manage-buttons">
-                <button className="create-price-rule-button" onClick={()=>createPriceRule()}>
+                <button className="create-price-rule-button" onClick={(e)=>createPriceRule(e)}>
                     Создать
                 </button>
-                <button className="cancel-create-price-rule-button" onClick={()=>setHide(true)}>
+                <button className="cancel-create-price-rule-button" onClick={(e)=>resetPanel(e)}>
                     Отмена
                 </button>
             </div>

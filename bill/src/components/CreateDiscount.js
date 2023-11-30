@@ -14,11 +14,26 @@ function CreateDiscount({hide, setHide, handleNewDiscount})
     const [searchText, setSearchText] = useState('');
     const [billboards, setBillboards] = useState([]);
 
-    function handleCreateDiscount()
+    function handleCreateDiscount(e)
     {
-        CreateDiscountRequest(name, minRent, discount, endDate, selectedBillboards)
-            .then(e=>e.json())
-            .then(e=>handleNewDiscount(e));
+        e.preventDefault();
+        const billboardsToSend = [];
+        if(selectAllBillboards)
+        {
+            billboardsToSend.push(...billboards.map(e=>e.id));
+        }
+        else
+        {
+            billboardsToSend.push(...selectedBillboards)
+        }
+        console.log(billboardsToSend);
+        const endDateString = endDate
+            .toLocaleDateString('ru-RU')
+            .replaceAll('/', '-')
+            .replaceAll('.', '-');
+        CreateDiscountRequest(name, minRent, discount, endDateString, billboardsToSend)
+            .then(t=>t.json())
+            .then(t=>handleNewDiscount(t));
     }
 
     useEffect(()=>{
@@ -37,8 +52,14 @@ function CreateDiscount({hide, setHide, handleNewDiscount})
         else
         {
             ev.target.className = 'selected-billboard-name'
-            selectedBillboards.push(billboard);
+            selectedBillboards.push(billboard.id);
         }
+    }
+
+    function resetPanel(e)
+    {
+        e.preventDefault();
+        setHide(true);
     }
 
     return (
@@ -68,10 +89,10 @@ function CreateDiscount({hide, setHide, handleNewDiscount})
                 {billboards.filter(e=>e.name.includes(searchText)).map(e=><li key={e.id} onClick={ev=>selectBillboard(ev, e)}>{e.name}</li>)}
             </ul>
             <div className="manage-buttons">
-                <button className="create-discount-button" onClick={()=>handleCreateDiscount()}>
+                <button className="create-discount-button" onClick={e=>handleCreateDiscount(e)}>
                     Создать
                 </button>
-                <button className="cancel-create-discount-button" onClick={()=>setHide(true)}>
+                <button className="cancel-create-discount-button" onClick={(e)=>resetPanel(e)}>
                     Отмена
                 </button>
             </div>
