@@ -24,8 +24,8 @@ public static class DbContextExtensions
     public static async Task<bool> IsUniquePriceRuleAsync(this BillboardContext context, Guid billboardSurfaceId,
         BillboardTypeId billboardTypeId, CancellationToken cancellationToken = default)
     {
-        return await context.PriceRules
-            .AnyAsync(e => e.BillboardSurfaceId == billboardSurfaceId && e.BillboardTypeId == billboardTypeId, cancellationToken);
+        var hasSame = await context.PriceRules.AnyAsync(e => e.BillboardSurfaceId == billboardSurfaceId && e.BillboardTypeId == billboardTypeId, cancellationToken);
+        return !hasSame;
     }
 
     public static async Task<bool> IsNotIntersectAsync(this BillboardContext context, DateTime startDate,
