@@ -23,7 +23,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasForeignKey(e => e.DiscountId);
         builder.HasOne(e => e.SelectedTariff)
             .WithMany()
-            .HasForeignKey(e => e.TariffId);
+            .HasForeignKey(e => e.SelectedTariffId);
         builder.HasOne(e => e.User)
             .WithMany(e => e.Orders)
             .HasForeignKey(e => e.UserId);

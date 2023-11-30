@@ -4,7 +4,9 @@ using Application.Extensions;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Enums;
 using Presentation.Extensions;
 
 namespace Presentation.Controllers;
@@ -33,7 +35,21 @@ public class OrdersController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet]
+    [Authorize(Roles = "Manager, Client")]
+    public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders()
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new GetOrderListQuery
+        {
+            RequestSenderId = User.GetUserId()
+        };
+        var orders = await _mediator.Send(query, cancellationToken);
+        return Ok(orders);
+    }
+
     [HttpPost]
+    [Authorize(Roles = "Client")]
     public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] AddOrderRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
@@ -49,13 +65,15 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Manager, Client")]
     [Route("{id:guid}")]
     public async Task<ActionResult<OrderResponse>> GetOrder([FromRoute] Guid id)
     {
         var cancellationToken = HttpContext.RequestAborted;
         var query = new GetOrderQuery
         {
-            OrderId = id
+            OrderId = id,
+            RequestSenderId = User.GetUserId()
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);

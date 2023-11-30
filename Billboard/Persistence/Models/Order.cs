@@ -11,7 +11,7 @@ public class Order
     public required DateTime StartDate { get; set; } 
     public required DateTime EndDate { get; set; }
     public required Guid BillboardId { get; init; }
-    public required Guid TariffId { get; init; }
+    public required Guid SelectedTariffId { get; init; }
     public required Guid UserId { get; init; }
     public Billboard? Billboard { get;  set; }
     public Tariff? SelectedTariff { get;  set; }
@@ -20,4 +20,5 @@ public class Order
     public Discount? Discount { get; set; }
     public OrderStatusId StatusId { get; set; }
     public OrderStatus? OrderStatus { get; private set; }
+    public ICollection<Picture> Pictures { get; init; } = new List<Picture>();
 }

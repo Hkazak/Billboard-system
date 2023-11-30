@@ -24,7 +24,7 @@ public class GetBookedByTariffOrderListQuery : IRequest<IEnumerable<BookedOrderR
         {
             var dateRanges = await _context.Orders
                 .Include(e => e.SelectedTariff)
-                .Where(e => e.SelectedTariff.Id == request.Request.TariffId)
+                .Where(e => e.SelectedTariff!.Id == request.Request.TariffId)
                 .ToListAsync(cancellationToken);
             return dateRanges
                 .Select(e => new BookedOrderResponse

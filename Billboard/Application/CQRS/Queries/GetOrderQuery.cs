@@ -4,12 +4,14 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
 public class GetOrderQuery : IRequest<OrderResponse>
 {
     public required Guid OrderId { get; init; }
+    public required Guid RequestSenderId { get; init; }
     
     public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, OrderResponse>
     {
@@ -22,7 +24,15 @@ public class GetOrderQuery : IRequest<OrderResponse>
 
         public async Task<OrderResponse> Handle(GetOrderQuery request, CancellationToken cancellationToken)
         {
-            var order = await _context.Orders
+            var isUser = await _context.Users
+                .AnyAsync(e => e.Id == request.RequestSenderId && e.RoleId == UserRoleId.Client, cancellationToken);
+            var prepareOrders = _context.Orders.AsQueryable();
+            if (isUser)
+            {
+                prepareOrders = prepareOrders.Where(e => e.UserId == request.RequestSenderId);
+            }
+
+            var order = await prepareOrders
                 .Include(e => e.Billboard)
                 .Include(e => e.SelectedTariff)
                 .FirstOrDefaultAsync(e => e.Id == request.OrderId, cancellationToken);

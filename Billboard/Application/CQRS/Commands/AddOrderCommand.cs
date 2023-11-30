@@ -1,4 +1,6 @@
 ﻿using Application.Extensions;
+using Application.InternalModels;
+using Application.Services;
 using Contracts.DataTransferObjects;
 using Contracts.Exceptions;
 using Contracts.Responses;
@@ -16,10 +18,12 @@ public class AddOrderCommand : IRequest<OrderResponse>
     public class AddOrderCommandHandler : IRequestHandler<AddOrderCommand, OrderResponse>
     {
         private readonly BillboardContext _context;
+        private readonly IMediaFileProvider _fileProvider;
 
-        public AddOrderCommandHandler(BillboardContext context)
+        public AddOrderCommandHandler(BillboardContext context, IMediaFileProvider fileProvider)
         {
             _context = context;
+            _fileProvider = fileProvider;
         }
 
         public async Task<OrderResponse> Handle(AddOrderCommand request, CancellationToken cancellationToken)
@@ -54,19 +58,32 @@ public class AddOrderCommand : IRequest<OrderResponse>
                 throw new NotFoundException($"Not found rule for surface {billboard.BillboardSurface.Id} billboard type {billboard.TypeId}");
             }
 
+            var files = new List<MediaFile>();
+            foreach (var file in request.Request.Files)
+            {
+                var media = await _fileProvider.WriteFileAsync(file, cancellationToken);
+                files.Add(media);
+            }
+
             var order = new Order
             {
                 RentPrice = tariff.Price * (decimal)(request.Request.EndDate - request.Request.StartDate).TotalDays,
                 PenaltyPrice = 0,
                 ProductPrice = billboard.Width * billboard.Height * priceRule.Price,
                 Billboard = billboard,
-                StartDate = request.Request.StartDate,
-                EndDate = request.Request.EndDate,
+                StartDate = request.Request.StartDate.ToUniversalTime(),
+                EndDate = request.Request.EndDate.ToUniversalTime(),
                 User = user,
                 SelectedTariff = tariff,
                 BillboardId = request.Request.BillboardId,
-                TariffId = request.Request.TariffId,
-                UserId = request.Request.UserId
+                SelectedTariffId = request.Request.TariffId,
+                UserId = request.Request.UserId,
+                Pictures = files
+                    .Select(e => new Picture
+                    {
+                        Source = e.Path
+                    })
+                    .ToList()
             };
             await _context.AddAsync(order, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

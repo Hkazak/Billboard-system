@@ -7,5 +7,5 @@ public record AddOrder
     public required DateTime EndDate { get; init; }
     public required Guid TariffId { get; init; }
     public required Guid UserId { get; init; }
-    public ICollection<OrderFile> Files { get; init; } = new List<OrderFile>();
+    public ICollection<string> Files { get; init; } = new List<string>();
 }

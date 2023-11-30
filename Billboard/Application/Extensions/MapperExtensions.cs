@@ -1,4 +1,5 @@
-﻿using Application.InternalModels;
+﻿using System.Globalization;
+using Application.InternalModels;
 using Contracts.Constants;
 using Contracts.DataTransferObjects;
 using Contracts.Requests;
@@ -58,8 +59,32 @@ public static class MapperExtensions
             Width = billboard.Width,
             Height = billboard.Height,
             Penalty = billboard.Penalty,
-            PictureSource = billboard.Pictures.Select(e => $"pictures/{Path.GetFileName(e.Source)}").ToList(),
+            PictureSource = billboard.Pictures.Select(e => $"/pictures/{Path.GetFileName(e.Source)}").ToList(),
             GroupOfTariffs = billboard.GroupOfTariffs.CreateResponse(),
+        };
+    }
+
+    public static OrderResponse CreateResponse(this Order order)
+    {
+        return new OrderResponse
+        {
+            Id = order.Id,
+            Name = order.Billboard!.Name,
+            Description = order.Billboard.Description,
+            BillboardType = order.Billboard.TypeId.ToString(),
+            BillboardSurface = order.Billboard.BillboardSurface.Surface,
+            Width = order.Billboard.Width,
+            Height = order.Billboard.Height,
+            PenaltyPrice = order.PenaltyPrice,
+            Tariff = order.SelectedTariff!.CreateResponse(),
+            StartDate = order.StartDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
+            EndDate = order.EndDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
+            RentPrice = order.RentPrice,
+            ProductPrice = order.ProductPrice,
+            Discount = order.Discount?.CreateResponse(),
+            UploadedFiles = order.Pictures
+                .Select(e => $"/pictures/{Path.GetFileName(e.Source)}")
+                .ToList(),
         };
     }
 
@@ -104,22 +129,6 @@ public static class MapperExtensions
             MinRentCount = discount.MinRentCount,
             EndDate = discount.EndDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
             Billboards = discount.Billboards.Select(e=>e.CreateShortResponse()).ToList()
-        };
-    }
-
-    public static OrderResponse CreateResponse(this Order order)
-    {
-        return new OrderResponse
-        {
-            Id = order.Id,
-            Billboard = order.Billboard.CreateResponse(),
-            Tariff = order.SelectedTariff.CreateResponse(),
-            StartDate = order.StartDate,
-            EndDate = order.EndDate,
-            RentPrice = order.RentPrice,
-            ProductPrice = order.ProductPrice,
-            PenaltyPrice = order.PenaltyPrice,
-            User = order.User.CreateResponse()
         };
     }
 
@@ -188,8 +197,8 @@ public static class MapperExtensions
         return new AddOrder
         {
             BillboardId = request.BillboardId,
-            StartDate = request.StartDate,
-            EndDate = request.EndDate,
+            StartDate = DateTime.ParseExact(request.StartDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None),
+            EndDate = DateTime.ParseExact(request.EndDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None),
             TariffId = request.TariffId,
             Files = request.Files,
             UserId = userId
