@@ -6,7 +6,7 @@ import UploadIcon from "../assets/upload.svg";
 import "../styles/CreateBillboard.css";
 import {CreateBillboardRequest} from "../lib/controllers/BillboardController";
 
-function CreateBillboard({hide = true, setHide, handleNewBillboard})
+function CreateBillboard({hide = true, setHide, handleNewBillboard, isClientView})
 {
     const [groupOfTariffsList, setGroupOfTariffsList] = useState([]);
     const [surfacesList, setSurfacesList] = useState([]);
@@ -75,7 +75,7 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
     }, []);
 
     return (
-        <form className="create-billboard-block" hidden={hide}>
+        <form className="create-billboard-block" hidden={hide || isClientView}>
             <span className="create-billboard-title">
                 Новая акция
             </span>

@@ -30,6 +30,7 @@ function UserAuthorization() {
       console.log('User authorization feature');
       console.log(jsonResponse);
       localStorage.setItem(LS.accessToken, jsonResponse['accessToken']);
+      localStorage.setItem(LS.isClient, 'true');
       navigate(DashboardRoute);
       return;
     }

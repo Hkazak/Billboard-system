@@ -24,8 +24,18 @@ function Map({markBillboards, onSelectBillboard})
             countrySet: 'kz',
             query: `Алматы ${billboard.address}`
         });
-        const lng = response.results[0].position.lng;
-        const lat = response.results[0].position.lat;
+        let lng = mapLng;
+        let lat = mapLat;
+        for(const position of response.results.map(e=>e.position))
+        {
+            const samePointIndex = markers.current.map(e=>e.getLngLat()).findIndex(e=>e.lng === position.lng && e.lat === position.lat);
+            if(samePointIndex !== -1)
+            {
+                continue;
+            }
+            lng = position.lng;
+            lat = position.lat;
+        }
         const marker = new tt.Marker();
         return marker
             .setLngLat([lng, lat])

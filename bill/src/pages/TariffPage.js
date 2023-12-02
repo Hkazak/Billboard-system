@@ -11,11 +11,13 @@ import { GetTariffs } from '../lib/controllers/TariffController.js';
 import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
 import Tariff from "../components/Tariff";
+import {LS} from "../lib/Consts";
 
 function TariffPage() {
 
     const [isCreation, setIsCreation] = useState(false);
     const [searchText, setSearchText] = useState('');
+    const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
 
     function handleCreatePanel(e) {
         setIsCreation(!isCreation);
@@ -47,7 +49,7 @@ function TariffPage() {
             <Header title={"Тарифы"} />
             <CreateTariff isEnabled={isCreation} setIsEnabled={setIsCreation} handleNewTariff={handleNewTariff} setPage={setPageNumber} />
             <Sidebar>
-                <ControlPanel handleCreateItem={handleCreatePanel} handleSearch={handleSearch} createButtonText={"Новый тариф"} placeholderSearchText={"Название"} />
+                <ControlPanel handleCreateItem={handleCreatePanel} handleSearch={handleSearch} createButtonText={"Новый тариф"} placeholderSearchText={"Название"} isClientView={isClientView} />
                 {tariffs.filter(e=>e.title.includes(searchText)).map(t=><Tariff key={t.id} tariffTitle={t.title} startTime={t.startTime} endTime={t.endTime} tariffPrice={t.price} />)}
             </Sidebar>
         </div>

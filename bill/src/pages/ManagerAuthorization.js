@@ -30,6 +30,7 @@ function ManagerAuthorization() {
       console.log('Manager authorization feature');
       console.log(jsonResponse);
       localStorage.setItem(LS.accessToken, jsonResponse['accessToken']);
+      localStorage.setItem(LS.isClient, 'false');
       navigate(DashboardRoute);
       return;
     }

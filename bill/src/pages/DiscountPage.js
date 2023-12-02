@@ -5,12 +5,14 @@ import {useEffect, useState} from "react";
 import Discount from "../components/Discount";
 import {GetDiscounts} from "../lib/controllers/DiscountController";
 import CreateDiscount from "../components/CreateDiscount";
+import {LS} from "../lib/Consts";
 
 function DiscountPage()
 {
     const [searchText, setSearchText] = useState('');
     const [hideCreateDiscountBlock, setHideCreateDiscountBlock] = useState(true);
     const [discounts, setDiscounts] = useState([]);
+    const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
 
     function handleSearch(e)
     {
@@ -38,8 +40,8 @@ function DiscountPage()
             <Header title={"Акции"} />
             <CreateDiscount hide={hideCreateDiscountBlock} setHide={setHideCreateDiscountBlock} handleNewDiscount={handleNewDiscount} />
             <Sidebar>
-                <ControlPanel handleSearch={handleSearch} handleCreateItem={handleCreateItem} placeholderSearchText={"Название"} createButtonText={"Новые акции"} />
-                {discounts.filter(e=>e.name.includes(searchText)).map(e=><Discount key={e.id} name={e.name} discount={e.salesOf} minRentCount={e.minRentCount} endDate={e.endDate} billboards={e.billboards} />)}
+                <ControlPanel handleSearch={handleSearch} handleCreateItem={handleCreateItem} placeholderSearchText={"Название"} createButtonText={"Новые акции"} isClientView={isClientView} />
+                {discounts?.filter(e=>e?.name?.includes(searchText)).map(e=><Discount key={e?.id} name={e?.name} discount={e?.salesOf} minRentCount={e?.minRentCount} endDate={e?.endDate} billboards={e?.billboards} />)}
             </Sidebar>
         </div>
     );

@@ -1,0 +1,42 @@
+.order-price-block
+{
+    width: 60%;
+}
+
+.order-price-item
+{
+    font-family: Roboto, sans-serif !important;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 400;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    white-space: nowrap;
+}
+
+.order-price-title
+{
+    font-family: Roboto, sans-serif !important;
+    font-size: 30px;
+    line-height: 35px;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.order-price-list
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.order-price-item-dots
+{
+    border-bottom: 2px dotted black;
+    bottom: 0.4rem;
+}
+
+.order-price-item-price
+{
+    right: 0;
+}

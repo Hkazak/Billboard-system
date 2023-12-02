@@ -7,6 +7,7 @@ import CreateBillboard from "../components/CreateBillboard";
 import {GetBillboardList} from "../lib/controllers/BillboardController";
 import Map from "../components/Map";
 import BillboardInformation from "../components/BillboardInformation";
+import {LS} from "../lib/Consts";
 
 function Dashboard() {
     const [hideCreatePanel, setHideCreatePanel] = useState(true);
@@ -14,6 +15,7 @@ function Dashboard() {
     const [selectedBillboards, setSelectedBillboards] = useState([]);
     const [hideBillboardInfo, setHideBillboardInfo] = useState(true);
     const [selectedBillboard, setSelectedBillboard] = useState({});
+    const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
 
     function handleSetSurface(surface)
     {
@@ -57,6 +59,7 @@ function Dashboard() {
             .then(e=>
             {
                 setBillboards(e);
+                setSelectedBillboards(e);
             });
     }, []);
     // TODO
@@ -67,11 +70,11 @@ function Dashboard() {
         <div className="dashboard-content">
             <Header title={"Dashboard"}/>
             <CreateBillboard hide={hideCreatePanel} setHide={setHideCreatePanel} handleNewBillboard={handleCreateBillboard} />
-            <BillboardInformation billboard={selectedBillboard} hide={hideBillboardInfo} setHide={setHideBillboardInfo} />
+            <BillboardInformation isClientView={isClientView} billboard={selectedBillboard} hide={hideBillboardInfo} setHide={setHideBillboardInfo} />
             <Sidebar>
                 <DashboardControlPanel handleSelectSurface={handleSetSurface} handleSelectExposure={handleSetBillboardType} handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate} handleSelectEndDate={handleSetEndDate} />
-                <Map markBillboards={billboards} onSelectBillboard={selectBillboard} />
-                <div className="create-billboard-panel-button-block">
+                <Map markBillboards={selectedBillboards} onSelectBillboard={selectBillboard} />
+                <div className="create-billboard-panel-button-block" hidden={isClientView}>
                     <button className="create-billboard-panel-button" onClick={e=>setHideCreatePanel(!hideCreatePanel)}>
                         Создать билборд
                     </button>

@@ -7,9 +7,58 @@
     border: 1px solid black;
     border-radius: 8px;
     padding: 10px 5px;
+    margin-top: -5%;
     margin-left: calc(50vw - 40%);
     background: #EAEAEA;
     z-index: 3;
+}
+
+.tariff-block-selected
+{
+    border: 1px solid black;
+    border-radius: 8px;
+    background: white;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    margin: 0 15px 0 0;
+    padding: 0;
+    height: 145px;
+}
+
+.tariff-block-selected .tariff-price
+{
+    background: #52AABC;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 7px 0;
+}
+
+.billboard-information-tariffs-list .tariff-block .tariff-price
+{
+    background: #96C9D3;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 7px 0;
+}
+
+.billboard-information-tariffs-list
+{
+    display: flex;
+    overflow-x: auto;
+}
+
+.billboard-information-discounts-list
+{
+    display: flex;
+    overflow-x: auto;
+}
+
+.billboard-information-discounts-list .billboard-discount-block
+{
+    margin-right: 10px;
+    min-width: 25%;
 }
 
 .billboard-information-text
@@ -97,7 +146,7 @@
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 20%;
+    min-width: 20%;
     margin: 0 15px 0 0;
     padding: 0;
     height: 145px;
@@ -105,7 +154,7 @@
 
 .billboard-information-tariffs-list .tariff-block .tariff-price
 {
-    background: #52AABC;
+    background: #96C9D3;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: 7px 0;
