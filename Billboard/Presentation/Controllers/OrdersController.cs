@@ -6,7 +6,6 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Persistence.Enums;
 using Presentation.Extensions;
 
 namespace Presentation.Controllers;
@@ -77,5 +76,34 @@ public class OrdersController : ControllerBase
         };
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("{id:guid}/approve")]
+    [Authorize(Roles = "Manager")]
+    public async Task<ActionResult> ApproveOrder([FromRoute] Guid id)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var command = new ApproveOrderCommand
+        {
+            OrderId = id
+        };
+        await _mediator.Send(command, cancellationToken);
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("{id:guid}/cancel")]
+    [Authorize(Roles = "Client, Manager")]
+    public async Task<ActionResult> CancelOrder([FromRoute] Guid id)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var command = new CancelOrderCommand
+        {
+            OrderId = id,
+            RequestSenderId = User.GetUserId()
+        };
+        await _mediator.Send(command, cancellationToken);
+        return NoContent();
     }
 }

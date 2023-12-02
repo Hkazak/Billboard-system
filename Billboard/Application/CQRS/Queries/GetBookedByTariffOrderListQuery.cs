@@ -4,6 +4,7 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 
 namespace Application.CQRS.Queries;
 
@@ -24,7 +25,9 @@ public class GetBookedByTariffOrderListQuery : IRequest<IEnumerable<BookedOrderR
         {
             var orders = await _context.Orders
                 .Include(e => e.SelectedTariff)
-                .Where(e => request.Request.BillboardId == e.BillboardId && (request.Request.TariffId == Guid.Empty || e.SelectedTariff!.Id == request.Request.TariffId))
+                .Where(e => e.StatusId == OrderStatusId.InProgress 
+                            && request.Request.BillboardId == e.BillboardId
+                            && (request.Request.TariffId == Guid.Empty || e.SelectedTariff!.Id == request.Request.TariffId))
                 .ToListAsync(cancellationToken);
             return orders.Select(e => e.CreateBookedResponse());
         }

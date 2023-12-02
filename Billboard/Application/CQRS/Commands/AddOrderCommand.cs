@@ -7,6 +7,7 @@ using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using Persistence.Enums;
 using Persistence.Models;
 
 namespace Application.CQRS.Commands;
@@ -78,6 +79,7 @@ public class AddOrderCommand : IRequest<OrderResponse>
                 BillboardId = request.Request.BillboardId,
                 SelectedTariffId = request.Request.TariffId,
                 UserId = request.Request.UserId,
+                StatusId = OrderStatusId.Submitted,
                 Pictures = files
                     .Select(e => new Picture
                     {
