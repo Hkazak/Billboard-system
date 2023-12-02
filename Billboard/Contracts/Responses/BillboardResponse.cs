@@ -12,5 +12,6 @@ public record BillboardResponse
     public required decimal Height { get; init; }
     public required decimal Penalty { get; init; }
     public required ICollection<string> PictureSource { get; init; }
+    public required ICollection<DiscountResponse> Discounts { get; init; }
     public required GroupOfTariffsResponse GroupOfTariffs { get; init; }
 }

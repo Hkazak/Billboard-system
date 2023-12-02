@@ -61,6 +61,7 @@ public static class MapperExtensions
             Penalty = billboard.Penalty,
             PictureSource = billboard.Pictures.Select(e => $"/pictures/{Path.GetFileName(e.Source)}").ToList(),
             GroupOfTariffs = billboard.GroupOfTariffs.CreateResponse(),
+            Discounts = billboard.Discounts.Select(e => e.CreateResponse()).ToList()
         };
     }
 
@@ -85,6 +86,16 @@ public static class MapperExtensions
             UploadedFiles = order.Pictures
                 .Select(e => $"/pictures/{Path.GetFileName(e.Source)}")
                 .ToList(),
+        };
+    }
+
+    public static BookedOrderResponse CreateBookedResponse(this Order order)
+    {
+        return new BookedOrderResponse
+        {
+            OrderId = order.Id,
+            StartDate = order.StartDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
+            EndDate = order.EndDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat)
         };
     }
 

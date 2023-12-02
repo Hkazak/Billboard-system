@@ -2,7 +2,6 @@
 using Contracts.Responses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver.Linq;
 using Persistence.Context;
 using Persistence.Enums;
 
@@ -19,14 +18,15 @@ public class GetBillboardsInformationQuery : IRequest<IEnumerable<BillboardRespo
             _context = context;
         }
 
-        public async Task<IEnumerable<BillboardResponse>> Handle(GetBillboardsInformationQuery request,
-            CancellationToken cancellationToken)
+        public async Task<IEnumerable<BillboardResponse>> Handle(GetBillboardsInformationQuery request, CancellationToken cancellationToken)
         {
             var billboards = await _context.Billboards
                 .Where(e => e.ArchiveStatusId == ArchiveStatusId.NonArchived)
                 .Include(e => e.Pictures)
                 .Include(e => e.BillboardSurface)
                 .Include(e => e.GroupOfTariffs)
+                .ThenInclude(e => e.Tariffs)
+                .Include(e => e.Discounts)
                 .ToListAsync(cancellationToken);
             return billboards.Select(e => e.CreateResponse());
         }

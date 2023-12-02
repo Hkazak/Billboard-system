@@ -1,4 +1,4 @@
-﻿using Application.InternalModels;
+﻿using Application.Extensions;
 using Contracts.Requests;
 using Contracts.Responses;
 using MediatR;
@@ -22,20 +22,11 @@ public class GetBookedByTariffOrderListQuery : IRequest<IEnumerable<BookedOrderR
 
         public async Task<IEnumerable<BookedOrderResponse>> Handle(GetBookedByTariffOrderListQuery request, CancellationToken cancellationToken)
         {
-            var dateRanges = await _context.Orders
+            var orders = await _context.Orders
                 .Include(e => e.SelectedTariff)
-                .Where(e => e.SelectedTariff!.Id == request.Request.TariffId)
+                .Where(e => request.Request.BillboardId == e.BillboardId && (request.Request.TariffId == Guid.Empty || e.SelectedTariff!.Id == request.Request.TariffId))
                 .ToListAsync(cancellationToken);
-            return dateRanges
-                .Select(e => new BookedOrderResponse
-                {
-                    OrderId = e.Id,
-                    BookedDates = new DateRange
-                    {
-                        StartDate = e.StartDate,
-                        EndDate = e.EndDate
-                    },
-                });
+            return orders.Select(e => e.CreateBookedResponse());
         }
     }
 }

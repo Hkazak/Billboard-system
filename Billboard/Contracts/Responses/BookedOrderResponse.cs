@@ -6,6 +6,10 @@ namespace Contracts.Responses;
 public record BookedOrderResponse
 {
     public required Guid OrderId { get; init; }
-    [DefaultValue($"[{FormatConstants.ValidDateFormat}]")]
-    public required IEnumerable<DateTime> BookedDates { get; init; }
+    
+    [DefaultValue($"{FormatConstants.ValidDateFormat}")]
+    public required string StartDate { get; init; }
+
+    [DefaultValue($"{FormatConstants.ValidDateFormat}")]
+    public required string EndDate { get; init; }
 }

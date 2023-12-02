@@ -1,8 +1,6 @@
 ﻿using System.Net;
-using System.Text.Json;
 using Application.CQRS.Commands;
 using Application.CQRS.Queries;
-using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
