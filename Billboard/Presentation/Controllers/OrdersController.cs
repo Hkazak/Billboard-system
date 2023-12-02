@@ -34,6 +34,19 @@ public class OrdersController : ControllerBase
         return Ok(response);
     }
 
+    [HttpPost]
+    [Route("price")]
+    public async Task<ActionResult<OrderPriceResponse>> CalculateOrderPrice([FromBody] CalculateOrderPriceRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new CalculateOrderPriceQuery
+        {
+            Request = request
+        };
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+    
     [HttpGet]
     [Authorize(Roles = "Manager, Client")]
     public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders()
