@@ -41,7 +41,7 @@ select:focus {
     border-radius: 0;
 }
 
-.map{
+.map-container{
     margin: 20px 0;
     width: 95%;
     height: 70vh;
@@ -63,4 +63,9 @@ select:focus {
     font-size: 16px;
     font-family: Inter, sans-serif;
     background: #F8BC43;
+}
+
+.dashboard-content
+{
+    position: relative;
 }

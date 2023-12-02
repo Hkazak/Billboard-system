@@ -35,10 +35,10 @@ export async function CreateBillboardRequest(name, address, description, groupOf
     return response;
 }
 
-export async function GetBillboardList(name, address, description, groupOfTariffs, billboardType, billboardSurfaceId, penalty, height, width, pictureSource) {
+export function GetBillboardList() {
     const accessToken = localStorage.getItem(LS.accessToken);
 
-    const response = await fetch(getBillboardListEndpoint, {
+    return fetch(getBillboardListEndpoint, {
         method: 'GET',
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -47,8 +47,6 @@ export async function GetBillboardList(name, address, description, groupOfTariff
             'Authorization': `bearer ${accessToken}`
         }
     });
-
-    return response;
 }
 
 export function GetShortBillboardList()

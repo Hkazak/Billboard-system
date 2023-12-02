@@ -1,17 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Sidebar from '../components/SideBar'
 import './page_styles/Dashboard.css'
-import {useNavigate} from 'react-router-dom'
 import Header from "../components/Header";
 import DashboardControlPanel from "../components/DashboardControlPanel";
 import CreateBillboard from "../components/CreateBillboard";
+import {GetBillboardList} from "../lib/controllers/BillboardController";
+import Map from "../components/Map";
+import BillboardInformation from "../components/BillboardInformation";
 
 function Dashboard() {
     const [hideCreatePanel, setHideCreatePanel] = useState(true);
+    const [billboards, setBillboards] = useState([]);
+    const [selectedBillboards, setSelectedBillboards] = useState([]);
+    const [hideBillboardInfo, setHideBillboardInfo] = useState(true);
+    const [selectedBillboard, setSelectedBillboard] = useState({});
 
     function handleSetSurface(surface)
     {
-
     }
 
     function handleSetTariff(tariff)
@@ -38,15 +43,34 @@ function Dashboard() {
     {
     }
 
+    function selectBillboard(billboardId)
+    {
+        const billboard = billboards.find(e=>e.id===billboardId);
+        setSelectedBillboard(billboard);
+        setHideBillboardInfo(false);
+    }
+
+    useEffect(()=>
+    {
+        GetBillboardList()
+            .then(e=>e.json())
+            .then(e=>
+            {
+                setBillboards(e);
+            });
+    }, []);
+    // TODO
+    // 1. Add markers to display billboard information
+    // 2. Add onClick events to markers
+    // 3. Add onClick event to map, for set center and open billboard information
     return (
         <div className="dashboard-content">
             <Header title={"Dashboard"}/>
             <CreateBillboard hide={hideCreatePanel} setHide={setHideCreatePanel} handleNewBillboard={handleCreateBillboard} />
+            <BillboardInformation billboard={selectedBillboard} hide={hideBillboardInfo} setHide={setHideBillboardInfo} />
             <Sidebar>
                 <DashboardControlPanel handleSelectSurface={handleSetSurface} handleSelectExposure={handleSetBillboardType} handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate} handleSelectEndDate={handleSetEndDate} />
-                <iframe className='map'
-                        src="https://www.google.com/maps/d/embed?mid=1DayHk74XQHB1StkXz5_yeCdlzeo&hl=en&ehbc=2E312F"
-                        width="1200" height="650"></iframe>
+                <Map markBillboards={billboards} onSelectBillboard={selectBillboard} />
                 <div className="create-billboard-panel-button-block">
                     <button className="create-billboard-panel-button" onClick={e=>setHideCreatePanel(!hideCreatePanel)}>
                         Создать билборд

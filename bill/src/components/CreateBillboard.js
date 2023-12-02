@@ -25,7 +25,7 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard})
     function handleCreateBillboard(e)
     {
         e.preventDefault();
-        CreateBillboardRequest(billboardName, billboardDescription, address, groupOfTariffId, billboardType, surfaceId, penalty, height, width, uploadedPictures)
+        CreateBillboardRequest(billboardName, address, billboardDescription, groupOfTariffId, billboardType, surfaceId, penalty, height, width, uploadedPictures)
             .then(e=> e.json())
             .then(e=>handleNewBillboard(e));
     }

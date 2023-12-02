@@ -71,6 +71,17 @@ const Sidebar = ({children}) => {
     const [offsetTop, setOffsetTop] = useState(0);
     const [pageHeight, setPageHeight] = useState(0);
     useEffect(()=>{
+        const observer = new ResizeObserver((entries)=>
+        {
+            for(const entry of entries)
+            {
+                if(entry.target === document.body)
+                {
+                    setPageHeight(entry.target.scrollHeight);
+                }
+            }
+        });
+        observer.observe(document.body);
         setOffsetTop(document.getElementsByClassName('sidebar')[0].offsetTop);
         setPageHeight(window.innerHeight);
         window.onresize = (e)=>{

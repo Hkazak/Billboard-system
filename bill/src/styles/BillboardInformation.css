@@ -1,0 +1,153 @@
+.billboard-information-block
+{
+    width: 80%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px 5px;
+    margin-left: calc(50vw - 40%);
+    background: #EAEAEA;
+    z-index: 3;
+}
+
+.billboard-information-text
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+}
+
+.billboard-information-title
+{
+    display: block;
+    font-family: Inter, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.billboard-information-data
+{
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 400;
+    max-width: 80%;
+}
+
+.billboard-information-general
+{
+    border: 1px solid black;
+    border-radius: 8px;
+    background: white;
+    width: 60%;
+    display: inline-block;
+    padding: 10px 10% 10px 10px;
+}
+
+.billboard-information-general-data-wrapper
+{
+    max-width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 2px 0;
+}
+
+.billboard-information-general-data-label
+{
+    white-space: nowrap;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.billboard-information-general-data-dots
+{
+    border-bottom: 2px dotted black;
+    margin: 0;
+    width: 80%;
+    display: inline-block;
+}
+
+.billboard-information-general-data
+{
+    white-space: nowrap;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.billboard-information-general-text
+{
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.billboard-information-discounts, .billboard-information-tariffs, .billboard-information-booked-days
+{
+    margin-top: 15px;
+}
+
+.billboard-information-tariffs-list .tariff-block
+{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    margin: 0 15px 0 0;
+    padding: 0;
+    height: 145px;
+}
+
+.billboard-information-tariffs-list .tariff-block .tariff-price
+{
+    background: #52AABC;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 7px 0;
+}
+
+.billboard-information-calendars
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.billboard-information-calendar
+{
+    margin-right: 10px;
+}
+
+.billboard-information-close
+{
+    width: 40%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 15px;
+    background: #FF4343;
+    color: white;
+}
+
+.billboard-information-send
+{
+    background: #F8BC43;
+    width: 40%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.manage-buttons
+{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    align-self: flex-end;
+}
