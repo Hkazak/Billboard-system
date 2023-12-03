@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Context;
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BillboardContext))]
-    partial class BillboardContextModelSnapshot : ModelSnapshot
+    [Migration("20231203121658_AddedPaymentModels")]
+    partial class AddedPaymentModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,8 +100,8 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(8192)
-                        .HasColumnType("character varying(8192)");
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<Guid>("GroupOfTariffsId")
                         .HasColumnType("uuid");
@@ -579,7 +582,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("844db647-ff5c-4d29-9e6f-3f65f6c12059"),
+                            Id = new Guid("c792e7cb-8dbf-4177-b2b1-ad60b68f2307"),
                             Email = "admin@Billboard.com",
                             Name = "Admin",
                             Password = "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",

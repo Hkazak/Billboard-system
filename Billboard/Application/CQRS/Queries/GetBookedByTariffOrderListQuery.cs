@@ -25,7 +25,7 @@ public class GetBookedByTariffOrderListQuery : IRequest<IEnumerable<BookedOrderR
         {
             var orders = await _context.Orders
                 .Include(e => e.SelectedTariff)
-                .Where(e => e.StatusId == OrderStatusId.InProgress 
+                .Where(e => (e.StatusId == OrderStatusId.InProgress || e.StatusId == OrderStatusId.Submitted) 
                             && request.Request.BillboardId == e.BillboardId
                             && (request.Request.TariffId == Guid.Empty || e.SelectedTariff!.Id == request.Request.TariffId))
                 .ToListAsync(cancellationToken);

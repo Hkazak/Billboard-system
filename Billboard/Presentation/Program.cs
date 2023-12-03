@@ -23,6 +23,7 @@ builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.ConfigureSwagger();
 builder.Services.ConfigureCache();
 builder.Services.ConfigureFileProvider(savedFilesFolderPath);
+builder.Services.ConfigureIoka(builder.Configuration);
 
 builder.Services.AddCors(options => {
     options.AddDefaultPolicy(policy => {

@@ -1,8 +1,10 @@
-﻿using Application.CQRS.Commands;
+﻿using System.Net;
+using Application.CQRS.Commands;
 using Application.CQRS.Queries;
 using Application.Extensions;
 using Contracts.Requests;
 using Contracts.Responses;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +17,12 @@ namespace Presentation.Controllers;
 public class OrdersController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IValidator<AddOrderRequest> _addOrderValidator;
 
-    public OrdersController(IMediator mediator)
+    public OrdersController(IMediator mediator, IValidator<AddOrderRequest> addOrderValidator)
     {
         _mediator = mediator;
+        _addOrderValidator = addOrderValidator;
     }
 
     [HttpGet]
@@ -65,6 +69,16 @@ public class OrdersController : ControllerBase
     public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] AddOrderRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
+        var validationResult = await _addOrderValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            var errorResponse = new ErrorResponse
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                ErrorMessage = string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage))
+            };
+            return BadRequest(errorResponse);
+        }
         var command = new AddOrderCommand
         {
             Request = request.CreateAddOrder(User.GetUserId())

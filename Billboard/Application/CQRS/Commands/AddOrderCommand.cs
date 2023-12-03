@@ -30,7 +30,7 @@ public class AddOrderCommand : IRequest<OrderResponse>
         public async Task<OrderResponse> Handle(AddOrderCommand request, CancellationToken cancellationToken)
         {
             var billboard = await _context.Billboards
-                .Include(e=>e.BillboardSurface)
+                .Include(e => e.BillboardSurface)
                 .FirstOrDefaultAsync(e => e.Id == request.Request.BillboardId, cancellationToken);
             var tariff = await _context.Tariffs
                 .FirstOrDefaultAsync(e => e.Id == request.Request.TariffId, cancellationToken);

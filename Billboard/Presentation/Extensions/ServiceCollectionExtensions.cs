@@ -131,4 +131,18 @@ public static class ServiceCollectionExtensions
         }
         return services.AddScoped<IMediaFileProvider, UploadedFileProvider>(_ => new UploadedFileProvider(folderPath));
     }
+
+    public static IServiceCollection ConfigureIoka(this IServiceCollection services, IConfiguration configuration)
+    {
+        var iokaConfiguration = configuration.GetSection("IokaConfiguration").Get<IokaConfiguration>();
+        if (iokaConfiguration is null)
+        {
+            throw new InvalidOperationException("Ioka configuration is undefined");
+        }
+
+        services.AddScoped<IokaConfiguration>(_ => iokaConfiguration);
+        services.AddScoped<IPaymentService, IokaPaymentService>();
+        services.AddHttpClient<IokaPaymentService>();
+        return services;
+    }
 }

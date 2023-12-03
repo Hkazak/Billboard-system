@@ -1,5 +1,8 @@
 ﻿using System.Globalization;
 using Application.InternalModels;
+using Application.InternalModels.PaymentService.Models;
+using Application.InternalModels.PaymentService.Requests;
+using Application.InternalModels.PaymentService.Responses;
 using Contracts.Constants;
 using Contracts.DataTransferObjects;
 using Contracts.Requests;
@@ -65,6 +68,41 @@ public static class MapperExtensions
         };
     }
 
+    public static CreateOrderRequest CreatePaymentOrderRequest(this Order order, string backUrl, string successUrl, string failureUrl)
+    {
+        return new CreateOrderRequest
+        {
+            Amount = Math.Min(int.MaxValue, (long)((order.ProductPrice + order.PenaltyPrice + order.RentPrice) * 100)),
+            Currency = "KZT",
+            CaptureMethod = "AUTO",
+            ExternalId = order.Id.ToString(),
+            Description = $"Order final price: product price {order.ProductPrice} + {order.RentPrice} + {order.PenaltyPrice}",
+            Attempts = 10,
+            DueDate = DateTime.UtcNow.AddHours(1).ToString(FormatConstants.ValidIokaDateTimeFormat),
+            BackUrl = backUrl.Contains("localhost") ? "http://example.com" : backUrl,
+            SuccessUrl = successUrl.Contains("localhost") ? "http://example.com" : successUrl,
+            FailureUrl = failureUrl.Contains("localhost") ? "http://example.com" : failureUrl,
+        };
+    }
+
+    public static PaymentResponse CreateResponse(this CreateOrderResponse response)
+    {
+        return new PaymentResponse
+        {
+            Id = Guid.Parse(response.Order.ExternalId),
+            CheckoutUrl = response.Order.CheckoutUrl
+        };
+    }
+
+    public static PaymentResponse CreateResponse(this PaymentOrder order)
+    {
+        return new PaymentResponse
+        {
+            Id = Guid.Parse(order.ExternalId),
+            CheckoutUrl = order.CheckoutUrl
+        };
+    }
+
     public static OrderResponse CreateResponse(this Order order)
     {
         return new OrderResponse
@@ -78,8 +116,10 @@ public static class MapperExtensions
             Height = order.Billboard.Height,
             PenaltyPrice = order.PenaltyPrice,
             Tariff = order.SelectedTariff!.CreateResponse(),
-            StartDate = order.StartDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
-            EndDate = order.EndDate.ToLocalTime().ToString(FormatConstants.ValidDateFormat),
+            StartDate = order.StartDate.ToLocalTime()
+                .ToString(FormatConstants.ValidDateFormat),
+            EndDate = order.EndDate.ToLocalTime()
+                .ToString(FormatConstants.ValidDateFormat),
             RentPrice = order.RentPrice,
             ProductPrice = order.ProductPrice,
             Discount = order.Discount?.CreateResponse(),

@@ -11,16 +11,16 @@ public class AddOrderValidator : AbstractValidator<AddOrderRequest>
 {
     public AddOrderValidator(BillboardContext context)
     {
-        var (startDate, endDate) = (DateTime.UnixEpoch, DateTime.UnixEpoch);
         RuleFor(e => e.StartDate)
-            .Must(e => DateTime.TryParseExact(e, FormatConstants.ValidDateFormat, null, DateTimeStyles.None,
-                out startDate));
+            .Must(e => DateTime.TryParseExact(e, FormatConstants.ValidDateFormat, null, DateTimeStyles.None, out _));
         RuleFor(e => e.EndDate)
-            .Must(e => DateTime.TryParseExact(e, FormatConstants.ValidDateFormat, null, DateTimeStyles.None, out endDate));
-        if (startDate == DateTime.UnixEpoch || endDate == DateTime.UnixEpoch) return;
-        RuleFor(x => startDate)
-            .GreaterThan(x => endDate);
+            .Must(e => DateTime.TryParseExact(e, FormatConstants.ValidDateFormat, null, DateTimeStyles.None, out _));
+        RuleFor(x => x.EndDate)
+            .GreaterThan(x => x.StartDate);
         RuleFor(x => x).MustAsync((e, token) =>
-            context.IsNotIntersectAsync(startDate, endDate, e.BillboardId, e.TariffId, token));
+            context.IsNotIntersectAsync(
+                DateTime.ParseExact(e.StartDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None).ToUniversalTime(),
+                DateTime.ParseExact(e.EndDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None).ToUniversalTime(),
+                e.BillboardId, e.TariffId, token));
     }
 }
