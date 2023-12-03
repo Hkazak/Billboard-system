@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Sidebar from '../components/SideBar'
 import './page_styles/Dashboard.css'
 import Header from "../components/Header";
@@ -62,15 +62,25 @@ function Dashboard() {
                 setSelectedBillboards(e);
             });
     }, []);
-    // TODO
-    // 1. Add markers to display billboard information
-    // 2. Add onClick events to markers
-    // 3. Add onClick event to map, for set center and open billboard information
     return (
         <div className="dashboard-content">
             <Header title={"Dashboard"}/>
             <CreateBillboard hide={hideCreatePanel} setHide={setHideCreatePanel} handleNewBillboard={handleCreateBillboard} />
-            <BillboardInformation isClientView={isClientView} billboard={selectedBillboard} hide={hideBillboardInfo} setHide={setHideBillboardInfo} />
+            <BillboardInformation
+                billboardId={selectedBillboard.id}
+                billboardType={selectedBillboard.billboardType}
+                name={selectedBillboard.name}
+                description={selectedBillboard.description}
+                width={selectedBillboard.width}
+                height={selectedBillboard.height}
+                billboardSurface={selectedBillboard.billboardSurface}
+                discounts={selectedBillboard.discounts}
+                groupOfTariffs={selectedBillboard.groupOfTariffs}
+                pictureSource={selectedBillboard.pictureSource}
+                isClientView={isClientView}
+                hide={hideBillboardInfo}
+                setHide={setHideBillboardInfo}
+            />
             <Sidebar>
                 <DashboardControlPanel handleSelectSurface={handleSetSurface} handleSelectExposure={handleSetBillboardType} handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate} handleSelectEndDate={handleSetEndDate} />
                 <Map markBillboards={selectedBillboards} onSelectBillboard={selectBillboard} />

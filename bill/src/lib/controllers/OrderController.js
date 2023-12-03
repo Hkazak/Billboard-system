@@ -27,8 +27,12 @@ export function GetBookedOrdersRequest(billboardId, tariffId = null)
 export function CreateOrderRequest(billboardId, startDate, endDate, tariffId, files)
 {
     const accessToken = localStorage.getItem(LS.accessToken);
-    const startDateString = startDate.toString('ru-RU').replaceAll('/', '-');
-    const endDateString = endDate.toString('ru-RU').replaceAll('/', '-');
+    const startDateString = startDate.toLocaleDateString('ru-RU')
+        .replaceAll('/', '-')
+        .replaceAll('.', '-');
+    const endDateString = endDate.toLocaleDateString('ru-RU')
+        .replaceAll('/', '-')
+        .replaceAll('.', '-');
     const requestBody = {
         billboardId: billboardId,
         tariffId: tariffId,

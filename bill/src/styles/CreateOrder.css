@@ -1,0 +1,90 @@
+.create-order-block
+{
+    width: 60%;
+    position: absolute;
+    z-index: 99999;
+    background: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 30px 15px;
+    left: 20%;
+    top: 30%;
+}
+
+.create-order-block .upload-picture-block
+{
+    background: #F5F5F5;
+}
+
+.upload-files-text
+{
+    display: block;
+    margin-top: 35px;
+}
+
+.upload-files-text-description
+{
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;
+}
+
+.upload-files-text-title
+{
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    text-align: left;
+    display: block;
+}
+
+.payment-block
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-order-button
+{
+    background: #F8BC43;
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid black;
+    display: inline-block;
+    min-width: 135px;
+}
+
+.close-create-order-block
+{
+    min-width: 35px;
+    min-height: 35px;
+    background: #FF4343;
+    color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    align-self: flex-start;
+}
+
+.top-block-content
+{
+    display: flex;
+    justify-content: right;
+    height: 50px;
+}
+
+.create-order-title
+{
+    text-align: center;
+    font-size: 30px;
+    font-family: Roboto, sans-serif !important;
+    line-height: 35px;
+    flex-grow: 2;
+    align-self: flex-end;
+}

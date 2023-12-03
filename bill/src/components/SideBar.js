@@ -8,7 +8,7 @@ import {
     BillboardsRoute,
     CreateManagerRoute,
     DashboardRoute, DiscountRoute,
-    ManagerAuthRoute, PriceRuleRoute, TariffGroupRoute,
+    ManagerAuthRoute, PriceRuleRoute, SurfaceRoute, TariffGroupRoute,
     TariffRoute,
     UserAuthorizationRoute
 } from '../Paths';
@@ -66,6 +66,11 @@ const Sidebar = ({children}) => {
             path:TariffGroupRoute,
             name:"Группы тарифов",
             icon:<FaTh/>
+        },
+        {
+            path:SurfaceRoute,
+            name:"Виды поверхности",
+            icon:<FaTh/>
         }
     ]
     const [offsetTop, setOffsetTop] = useState(0);
@@ -77,7 +82,8 @@ const Sidebar = ({children}) => {
             {
                 if(entry.target === document.body)
                 {
-                    setPageHeight(entry.target.scrollHeight);
+                    setPageHeight(Math.max(entry.target.scrollHeight, entry.target.clientHeight, window.innerHeight));
+                    break;
                 }
             }
         });

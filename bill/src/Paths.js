@@ -15,3 +15,4 @@ export const TariffRoute = '/tariffs';
 export const TariffGroupRoute = '/tariffs-group';
 export const DiscountRoute = '/discounts';
 export const PriceRuleRoute = '/price-rules';
+export const SurfaceRoute = '/billboard-surfaces';

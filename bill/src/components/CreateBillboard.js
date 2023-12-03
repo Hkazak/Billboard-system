@@ -2,16 +2,15 @@ import {useEffect, useState} from "react";
 import {GetGroupOfTariffsList} from "../lib/controllers/TariffGroupController";
 import {getBillboardSurfacesList} from "../lib/controllers/TarrifsController";
 import {GetBillboardTypes} from "../lib/controllers/BillboardTypesController";
-import UploadIcon from "../assets/upload.svg";
 import "../styles/CreateBillboard.css";
 import {CreateBillboardRequest} from "../lib/controllers/BillboardController";
+import UploadPictures from "./UploadPictures";
 
 function CreateBillboard({hide = true, setHide, handleNewBillboard, isClientView})
 {
     const [groupOfTariffsList, setGroupOfTariffsList] = useState([]);
     const [surfacesList, setSurfacesList] = useState([]);
     const [billboardTypesList, setBillboardTypesList] = useState([]);
-    const [uploadedPictures, setUploadedPictures] = useState([]);
     const [billboardName, setBillboardName] = useState('');
     const [billboardDescription, setBillboardDescription] = useState('');
     const [address, setAddress] = useState('');
@@ -21,39 +20,14 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard, isClientView
     const [penalty, setPenalty] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
+    const [pictures, setPictures] = useState([]);
 
     function handleCreateBillboard(e)
     {
         e.preventDefault();
-        CreateBillboardRequest(billboardName, address, billboardDescription, groupOfTariffId, billboardType, surfaceId, penalty, height, width, uploadedPictures)
+        CreateBillboardRequest(billboardName, address, billboardDescription, groupOfTariffId, billboardType, surfaceId, penalty, height, width, pictures)
             .then(e=> e.json())
             .then(e=>handleNewBillboard(e));
-    }
-
-    function handleUploadFiles(ev)
-    {
-        const files = ev.target.files;
-        const pictures = [...uploadedPictures];
-        for(let i = 0; i < files.length; ++i)
-        {
-            const file = files[i];
-            console.log(file);
-            const reader = new FileReader();
-            reader.onload = (e  )=>
-            {
-                const picture = {
-                    id: pictures.length,
-                    name: file.name,
-                    data: e.target.result,
-                };
-                pictures.push(picture);
-                if(pictures.length === ev.target.files.length)
-                {
-                    setUploadedPictures([...pictures]);
-                }
-            }
-            reader.readAsDataURL(file);
-        }
     }
 
     function resetPanel(e)
@@ -104,16 +78,7 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard, isClientView
                 <input required placeholder="Высота" type="number" className="billboard-data-short-input" onChange={e=>setHeight(parseInt(e.target.value))}/>
                 <span className="billboard-size-unit">M</span>
                 <span className="create-billboard-general-span">Фотографии</span>
-                <div className="upload-file-block">
-                    <label htmlFor="upload-file" className="upload-picture-block">
-                        <input type="file" name="upload-file" multiple className="upload-pictures-button" onChange={handleUploadFiles} accept="image/jpeg,image/png"/>
-                        <img src={UploadIcon} alt="" className="upload-picture-block-icon" width="50" height="50"/>
-                        <span className="upload-picture-text">Нажмите или перетащите файлы</span>
-                    </label>
-                    <div className="pictures-container">
-                        {uploadedPictures.map(e=><img className="uploaded-image" src={e.data} key={e.id} alt={e.name} width="100" height="100"/>)}
-                    </div>
-                </div>
+                <UploadPictures onUpload={files=>setPictures([...files])} />
             </div>
             <div className="manage-buttons">
                 <button className="create-billboard-button" onClick={(e)=>handleCreateBillboard(e)}>
