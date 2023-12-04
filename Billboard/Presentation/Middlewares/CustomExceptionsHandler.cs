@@ -56,6 +56,11 @@ public class CustomExceptionsHandler
                 StatusCode = HttpStatusCode.BadRequest,
                 ErrorMessage = exception.Message
             },
+            DataConflictException => new ErrorResponse
+            {
+                StatusCode = HttpStatusCode.Conflict,
+                ErrorMessage = exception.Message
+            },
             _ => new ErrorResponse
             {
                 StatusCode = HttpStatusCode.InternalServerError,

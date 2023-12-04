@@ -25,4 +25,9 @@ public record OrderResponse
     public required decimal Width { get; init; }
     public required decimal Height { get; init; }
     public required string BillboardType { get; init; }
+    public required string Status { get; init; }
+    public required string UserName { get; init; }
+    public required string UserEmail { get; init; }
+    public required ICollection<string> BillboardPictures { get; init; }
+    public required string BillboardDescription { get; init; }
 }

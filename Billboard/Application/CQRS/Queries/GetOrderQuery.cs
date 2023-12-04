@@ -33,8 +33,11 @@ public class GetOrderQuery : IRequest<OrderResponse>
             }
 
             var order = await prepareOrders
-                .Include(e => e.Billboard)
+                .Include(e => e.Billboard!)
+                .ThenInclude(e => e.BillboardSurface)
                 .Include(e => e.SelectedTariff)
+                .Include(e => e.User!)
+                .Include(e => e.Pictures)
                 .FirstOrDefaultAsync(e => e.Id == request.OrderId, cancellationToken);
             if (order is null)
             {

@@ -31,7 +31,8 @@ public static class DbContextExtensions
     public static async Task<bool> IsNotIntersectAsync(this BillboardContext context, DateTime startDate,
         DateTime endDate,Guid billboardId, Guid tariffId, CancellationToken cancellationToken = default)
     {
-        var isIntersect = await context.Orders.Where(e => e.BillboardId == billboardId && e.SelectedTariffId == tariffId)
+        var isIntersect = await context.Orders
+            .Where(e => e.BillboardId == billboardId && e.SelectedTariffId == tariffId && (e.StatusId == OrderStatusId.Submitted || e.StatusId == OrderStatusId.InProgress))
             .AnyAsync(e => e.StartDate.Date <= startDate.Date && startDate.Date <= e.EndDate.Date 
                            || e.StartDate.Date <= endDate.Date && endDate.Date <= e.EndDate.Date 
                            || startDate.Date  <= e.StartDate.Date && e.StartDate.Date <= endDate.Date 

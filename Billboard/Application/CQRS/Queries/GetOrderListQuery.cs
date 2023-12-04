@@ -33,7 +33,7 @@ public class GetOrderListQuery : IRequest<IEnumerable<OrderResponse>>
             var orders = await prepareOrders
                 .Include(e => e.Billboard!)
                 .ThenInclude(e => e.BillboardSurface)
-                .Include(e => e.User)
+                .Include(e => e.User!)
                 .Include(e => e.SelectedTariff)
                 .Include(e => e.Pictures)
                 .ToListAsync(cancellationToken);

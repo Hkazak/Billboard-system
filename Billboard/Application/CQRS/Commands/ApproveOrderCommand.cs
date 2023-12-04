@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Enums;
+using Persistence.Extensions;
 
 namespace Application.CQRS.Commands;
 
@@ -26,6 +27,12 @@ public class ApproveOrderCommand : IRequest
             if (order is null)
             {
                 throw new NotFoundException($"Order with id {request.OrderId} not found");
+            }
+
+            var isNotIntersect = await _context.IsNotIntersectAsync(order.StartDate, order.EndDate, order.BillboardId, order.SelectedTariffId, cancellationToken);
+            if (!isNotIntersect)
+            {
+                throw new DataConflictException($"Order with id {order.Id} can't be approved, because some days from {order.StartDate.ToLocalTime()} to {order.EndDate.ToLocalTime()} already rent");
             }
 
             order.StatusId = OrderStatusId.InProgress;

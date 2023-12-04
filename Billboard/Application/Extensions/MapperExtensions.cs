@@ -51,6 +51,15 @@ public static class MapperExtensions
 
     public static BillboardResponse CreateResponse(this Billboard billboard)
     {
+        var pictures = billboard.Pictures
+            .Where(e => File.Exists(e.Source))
+            .Select(e => $"/pictures/{Path.GetFileName(e.Source)}")
+            .ToList();
+        if (pictures.Count == 0)
+        {
+            pictures.Add("/pictures/no-image.png");
+        }
+
         return new BillboardResponse
         {
             Id = billboard.Id,
@@ -62,7 +71,7 @@ public static class MapperExtensions
             Width = billboard.Width,
             Height = billboard.Height,
             Penalty = billboard.Penalty,
-            PictureSource = billboard.Pictures.Select(e => $"/pictures/{Path.GetFileName(e.Source)}").ToList(),
+            PictureSource = pictures,
             GroupOfTariffs = billboard.GroupOfTariffs.CreateResponse(),
             Discounts = billboard.Discounts.Select(e => e.CreateResponse()).ToList()
         };
@@ -105,6 +114,24 @@ public static class MapperExtensions
 
     public static OrderResponse CreateResponse(this Order order)
     {
+        var pictures = order.Pictures
+            .Where(e => File.Exists(e.Source))
+            .Select(e => $"/pictures/{Path.GetFileName(e.Source)}")
+            .ToList();
+        var billboardPictures = order.Billboard!.Pictures
+            .Where(e => File.Exists(e.Source))
+            .Select(e => $"/pictures/{Path.GetFileName(e.Source)}")
+            .ToList();
+        if (pictures.Count == 0)
+        {
+            pictures.Add("/pictures/no-image.png");
+        }
+
+        if (billboardPictures.Count == 0)
+        {
+            billboardPictures.Add("/pictures/no-image.png");
+        }
+
         return new OrderResponse
         {
             Id = order.Id,
@@ -123,9 +150,12 @@ public static class MapperExtensions
             RentPrice = order.RentPrice,
             ProductPrice = order.ProductPrice,
             Discount = order.Discount?.CreateResponse(),
-            UploadedFiles = order.Pictures
-                .Select(e => $"/pictures/{Path.GetFileName(e.Source)}")
-                .ToList(),
+            UploadedFiles = pictures,
+            Status = order.StatusId.ToString(),
+            UserName = order.User!.Name,
+            UserEmail = order.User!.Email,
+            BillboardDescription = order.Billboard.Description,
+            BillboardPictures = billboardPictures
         };
     }
 

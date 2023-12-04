@@ -50,7 +50,17 @@ public class OrdersController : ControllerBase
         var response = await _mediator.Send(query, cancellationToken);
         return Ok(response);
     }
-    
+
+    [HttpGet]
+    [Route("statuses")]
+    public async Task<ActionResult<IEnumerable<string>>> GetOrderStatuses()
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var query = new GetOrdersStatusesQuery();
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+
     [HttpGet]
     [Authorize(Roles = "Manager, Client")]
     public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders()

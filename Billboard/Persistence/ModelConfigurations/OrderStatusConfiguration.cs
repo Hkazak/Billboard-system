@@ -22,6 +22,10 @@ public class OrderStatusConfiguration : IEntityTypeConfiguration<OrderStatus>
             new OrderStatus
             {
                 Id = OrderStatusId.Completed, Status = OrderStatusId.Completed.ToString()
+            },
+            new OrderStatus
+            {
+                Id = OrderStatusId.Cancelled, Status = OrderStatusId.Cancelled.ToString()
             }
         };
         builder.HasKey(e => e.Id);
