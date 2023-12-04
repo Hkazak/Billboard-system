@@ -35,6 +35,8 @@ public class GetOrderQuery : IRequest<OrderResponse>
             var order = await prepareOrders
                 .Include(e => e.Billboard!)
                 .ThenInclude(e => e.BillboardSurface)
+                .Include(e => e.Billboard!)
+                .ThenInclude(e => e.Pictures)
                 .Include(e => e.SelectedTariff)
                 .Include(e => e.User!)
                 .Include(e => e.Pictures)

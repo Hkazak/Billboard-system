@@ -1,4 +1,5 @@
-﻿using Contracts.Exceptions;
+﻿using System.Data;
+using Contracts.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
@@ -22,23 +23,32 @@ public class CancelOrderCommand : IRequest
 
         public async Task Handle(CancelOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = await _context.Orders
-                .FirstOrDefaultAsync(e => e.Id == request.OrderId, cancellationToken);
-            if (order is null)
+            await using var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.RepeatableRead, cancellationToken);
+            try
             {
-                throw new NotFoundException($"Order with id {request.OrderId} not found");
-            }
+                var order = await _context.Orders.FirstOrDefaultAsync(e => e.Id == request.OrderId, cancellationToken);
+                if (order is null)
+                {
+                    throw new NotFoundException($"Order with id {request.OrderId} not found");
+                }
 
-            var isClient = _context.Users
-                .AnyAsync(e => e.Id == request.RequestSenderId && e.RoleId == UserRoleId.Client, cancellationToken);
-            if (order.UserId != request.RequestSenderId || await isClient)
+                var isClient = _context.Users
+                    .AnyAsync(e => e.Id == request.RequestSenderId && e.RoleId == UserRoleId.Client, cancellationToken);
+                if (order.UserId != request.RequestSenderId && await isClient)
+                {
+                    throw new NotPermissionsException($"Client with id {request.RequestSenderId} don't have access to cancel order");
+                }
+
+                order.StatusId = OrderStatusId.Cancelled;
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+            }
+            catch (Exception)
             {
-                throw new NotPermissionsException($"Client with id {request.RequestSenderId} don't have access to cancel order");
+                await transaction.RollbackAsync(cancellationToken);
+                throw;
             }
-
-            order.StatusId = OrderStatusId.Cancelled;
-            _context.Orders.Update(order);
-            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
