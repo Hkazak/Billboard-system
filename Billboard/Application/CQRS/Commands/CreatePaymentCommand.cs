@@ -40,9 +40,7 @@ public class CreatePaymentCommand : IRequest<PaymentResponse>
             var failureUrl = $"{_paymentService.FailureUrl}/{order.Id}";
             var paymentRequest = order.CreatePaymentOrderRequest(backUrl, successUrl, failureUrl);
             var response = await _paymentService.CreateOrderAsync(paymentRequest, cancellationToken);
-            var utcDueDate = DateTime.ParseExact(response.Order.DueDate, FormatConstants.ValidIokaDateTimeFormat, null, DateTimeStyles.None)
-                .ToLocalTime()
-                .ToUniversalTime();
+            var utcDueDate = response.Order.DueDate.ToDateIoka().ToLocalTime().ToUniversalTime();
             var payment = new Payment
             {
                 OrderId = request.Request.OrderId,

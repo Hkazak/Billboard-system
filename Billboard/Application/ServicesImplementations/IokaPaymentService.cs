@@ -29,7 +29,7 @@ public class IokaPaymentService : IPaymentService
         using var httpRequest = new HttpRequestMessage(HttpMethod.Post, _configuration.CreateOrderUrl);
         httpRequest.Content = JsonContent.Create(request);
         httpRequest.Headers.Add("API-KEY", _configuration.ApiKey);
-        var httpResponse = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using var httpResponse = await _httpClient.SendAsync(httpRequest, cancellationToken);
         var jsonResponse = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
         if (!httpResponse.IsSuccessStatusCode)
         {
@@ -48,7 +48,31 @@ public class IokaPaymentService : IPaymentService
     public async Task<PaymentOrder> GetOrderById(string externalOrderId, CancellationToken cancellationToken = default)
     {
         var endpoint = $"{_configuration.GetOrderByIdUrl}/{externalOrderId}";
-        var httpResponse = await _httpClient.GetAsync(endpoint, cancellationToken);
+        using var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+        request.Headers.Add("API-KEY", _configuration.ApiKey);
+        using var httpResponse = await _httpClient.SendAsync(request, cancellationToken);
+        var jsonResponse = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
+        if (!httpResponse.IsSuccessStatusCode)
+        {
+            throw new InternalServiceException($"Some problem with Ioka, response body: {jsonResponse}");
+        }
+
+        var response = JsonSerializer.Deserialize<PaymentOrder>(jsonResponse);
+        if (response is null)
+        {
+            throw new JsonException($"Ioka response invalid: {jsonResponse}");
+        }
+
+        return response;
+    }
+
+    public async Task<PaymentOrder> UpdateOrderById(string paymentOrderId, UpdateOrder body, CancellationToken cancellationToken = default)
+    {
+        var endpoint = $"{_configuration.UpdateOrderByIdUrl}/{paymentOrderId}";
+        using var request = new HttpRequestMessage(HttpMethod.Patch, endpoint);
+        request.Content = JsonContent.Create(body);
+        request.Headers.Add("API-KEY", _configuration.ApiKey);
+        using var httpResponse = await _httpClient.SendAsync(request, cancellationToken);
         var jsonResponse = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
         if (!httpResponse.IsSuccessStatusCode)
         {

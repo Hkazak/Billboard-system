@@ -31,6 +31,7 @@ public class AddOrderCommand : IRequest<OrderResponse>
         {
             var billboard = await _context.Billboards
                 .Include(e => e.BillboardSurface)
+                .Include(e => e.Discounts)
                 .FirstOrDefaultAsync(e => e.Id == request.Request.BillboardId, cancellationToken);
             var tariff = await _context.Tariffs
                 .FirstOrDefaultAsync(e => e.Id == request.Request.TariffId, cancellationToken);
@@ -66,6 +67,8 @@ public class AddOrderCommand : IRequest<OrderResponse>
                 files.Add(media);
             }
 
+            var days = (request.Request.EndDate - request.Request.StartDate).TotalDays;
+            var discount = billboard.Discounts.MaxBy(e => e.MinRentCount <= days);
             var order = new Order
             {
                 RentPrice = tariff.Price * (decimal)(request.Request.EndDate - request.Request.StartDate).TotalDays,
@@ -85,7 +88,9 @@ public class AddOrderCommand : IRequest<OrderResponse>
                     {
                         Source = e.Path
                     })
-                    .ToList()
+                    .ToList(),
+                DiscountId = discount?.Id,
+                Discount = discount
             };
             await _context.AddAsync(order, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

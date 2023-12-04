@@ -87,7 +87,7 @@ public static class MapperExtensions
             ExternalId = order.Id.ToString(),
             Description = $"Order final price: product price {order.ProductPrice} + {order.RentPrice} + {order.PenaltyPrice}",
             Attempts = 10,
-            DueDate = DateTime.UtcNow.AddHours(1).ToString(FormatConstants.ValidIokaDateTimeFormat),
+            DueDate = DateTime.UtcNow.AddDays(7).ToString(FormatConstants.ValidIokaDateTimeFormat),
             BackUrl = backUrl.Contains("localhost") ? "http://example.com" : backUrl,
             SuccessUrl = successUrl.Contains("localhost") ? "http://example.com" : successUrl,
             FailureUrl = failureUrl.Contains("localhost") ? "http://example.com" : failureUrl,
@@ -155,7 +155,8 @@ public static class MapperExtensions
             UserName = order.User!.Name,
             UserEmail = order.User!.Email,
             BillboardDescription = order.Billboard.Description,
-            BillboardPictures = billboardPictures
+            BillboardPictures = billboardPictures,
+            BillboardId = order.BillboardId
         };
     }
 
@@ -278,8 +279,8 @@ public static class MapperExtensions
         return new AddOrder
         {
             BillboardId = request.BillboardId,
-            StartDate = DateTime.ParseExact(request.StartDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None),
-            EndDate = DateTime.ParseExact(request.EndDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None),
+            StartDate = request.StartDate.ToDate(),
+            EndDate = request.EndDate.ToDate(),
             TariffId = request.TariffId,
             Files = request.Files,
             UserId = userId

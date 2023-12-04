@@ -2,6 +2,7 @@
 using Application.CQRS.Commands;
 using Application.CQRS.Queries;
 using Application.Extensions;
+using Contracts.DataTransferObjects;
 using Contracts.Requests;
 using Contracts.Responses;
 using FluentValidation;
@@ -51,6 +52,26 @@ public class OrdersController : ControllerBase
         return Ok(response);
     }
 
+    [HttpPost]
+    [Route("{id:guid}/price")]
+    public async Task<ActionResult<OrderPriceResponse>> CalculateOrderPrice([FromRoute] Guid id,
+        [FromBody] RecalculateOrderPriceRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var queryRequest = new RecalculateOrderPrice
+        {
+            OrderId = id,
+            StartDate = request.StartDate.ToDate(),
+            EndDate = request.EndDate.ToDate()
+        };
+        var query = new RecalculateOrderPriceQuery
+        {
+            Request = queryRequest
+        };
+        var response = await _mediator.Send(query, cancellationToken);
+        return Ok(response);
+    }
+    
     [HttpGet]
     [Route("statuses")]
     public async Task<ActionResult<IEnumerable<string>>> GetOrderStatuses()
@@ -142,5 +163,25 @@ public class OrdersController : ControllerBase
         };
         await _mediator.Send(command, cancellationToken);
         return NoContent();
+    }
+
+    [HttpPut]
+    [Route("{id:guid}")]
+    [Authorize(Roles = "Client")]
+    public async Task<ActionResult> ChangeOrder([FromRoute] Guid id, [FromBody] RecalculateOrderPriceRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+        var command = new ChangeOrderCommand
+        {
+            Request = new ChangeOrder
+            {
+                OrderId = id,
+                StartDate = request.StartDate.ToDate(),
+                EndDate = request.EndDate.ToDate(),
+                RequestSenderId = User.GetUserId()
+            }
+        };
+        var response = await _mediator.Send(command, cancellationToken);
+        return Ok(response);
     }
 }

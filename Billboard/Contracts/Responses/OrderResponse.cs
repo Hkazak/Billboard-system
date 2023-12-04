@@ -30,4 +30,5 @@ public record OrderResponse
     public required string UserEmail { get; init; }
     public required ICollection<string> BillboardPictures { get; init; }
     public required string BillboardDescription { get; init; }
+    public required Guid BillboardId { get; init; }
 }

@@ -33,7 +33,7 @@ public class AddDiscountCommand : IRequest<DiscountResponse>
                 Name = request.Request.Name,
                 SalesOf = request.Request.DiscountPercentage / 100m,
                 MinRentCount = request.Request.MinRentCount,
-                EndDate = DateTime.ParseExact(request.Request.EndDate, FormatConstants.ValidDateFormat, null).ToUniversalTime(),
+                EndDate = request.Request.EndDate.ToDate().ToUniversalTime(),
                 ArchiveStatusId = ArchiveStatusId.NonArchived,
                 Billboards = billboards
             };

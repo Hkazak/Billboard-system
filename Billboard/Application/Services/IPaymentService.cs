@@ -11,4 +11,5 @@ public interface IPaymentService
     string FailureUrl { get; }
     Task<CreateOrderResponse> CreateOrderAsync(CreateOrderRequest request, CancellationToken cancellationToken = default);
     Task<PaymentOrder> GetOrderById(string externalOrderId, CancellationToken cancellationToken = default);
+    Task<PaymentOrder> UpdateOrderById(string paymentOrderId, UpdateOrder body, CancellationToken cancellationToken = default);
 }

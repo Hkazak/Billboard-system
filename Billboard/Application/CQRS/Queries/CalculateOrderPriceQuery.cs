@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Application.Extensions;
 using Contracts.Constants;
 using Contracts.Exceptions;
 using Contracts.Requests;
@@ -48,8 +49,8 @@ public class CalculateOrderPriceQuery : IRequest<OrderPriceResponse>
                 throw new NotFoundException($"Not found rule for surface {billboard.BillboardSurface.Id} billboard type {billboard.TypeId}");
             }
 
-            var startDate = DateTime.ParseExact(request.Request.StartDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None);
-            var endDate = DateTime.ParseExact(request.Request.EndDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None);
+            var startDate = request.Request.StartDate.ToDate();
+            var endDate = request.Request.EndDate.ToDate();
             var days = (decimal)(endDate - startDate).TotalDays;
             return new OrderPriceResponse
             {

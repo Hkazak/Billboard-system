@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Application.Extensions;
 using Contracts.Constants;
 using Contracts.Requests;
 using FluentValidation;
@@ -19,8 +20,8 @@ public class AddOrderValidator : AbstractValidator<AddOrderRequest>
             .GreaterThan(x => x.StartDate);
         RuleFor(x => x).MustAsync((e, token) =>
             context.IsNotIntersectAsync(
-                DateTime.ParseExact(e.StartDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None).ToUniversalTime(),
-                DateTime.ParseExact(e.EndDate, FormatConstants.ValidDateFormat, null, DateTimeStyles.None).ToUniversalTime(),
+                e.StartDate.ToDate().ToUniversalTime(),
+                e.EndDate.ToDate().ToUniversalTime(),
                 e.BillboardId, e.TariffId, token));
     }
 }
