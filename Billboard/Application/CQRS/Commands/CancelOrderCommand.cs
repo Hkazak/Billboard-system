@@ -23,7 +23,7 @@ public class CancelOrderCommand : IRequest
 
         public async Task Handle(CancelOrderCommand request, CancellationToken cancellationToken)
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.RepeatableRead, cancellationToken);
+            await using var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
             try
             {
                 var order = await _context.Orders.FirstOrDefaultAsync(e => e.Id == request.OrderId, cancellationToken);

@@ -24,7 +24,7 @@ public class ApproveOrderCommand : IRequest
 
         public async Task Handle(ApproveOrderCommand request, CancellationToken cancellationToken)
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.RepeatableRead, cancellationToken);
+            await using var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
             try
             {
                 var order = await _context.Orders.FirstOrDefaultAsync(e => e.Id == request.OrderId, cancellationToken);
