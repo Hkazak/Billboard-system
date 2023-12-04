@@ -1,23 +1,19 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
-.logo
-{
+.logo {
     display: inline-block;
     width: 350px;
     height: 80px;
 }
 
-.page-title
-{
+.page-title {
     display: inline-block;
     margin-left: 10%;
 }
 
-.header-title
-{
+.header-title {
     margin: 20px 40px;
 }

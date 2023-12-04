@@ -19,12 +19,12 @@
     vertical-align: middle;
 }
 
-.left-cont{
+.left-cont {
     border-top-left-radius: 20px 20px;
     border-bottom-left-radius: 40px 40px;
     height: 550px;
     width: 500px;
-    background-color: rgb(166,98,10);
+    background-color: rgb(166, 98, 10);
     color: #ffff;
 }
 
@@ -37,7 +37,7 @@
     background-color: #52AABC;
 }
 
-.greet-cont{
+.greet-cont {
     margin-top: 100px;
     margin-left: 60px;
 }
@@ -47,7 +47,7 @@
     color: #ffff;
 }
 
-.desc-text{
+.desc-text {
     font-size: 14px;
     color: #ffff;
 }
@@ -58,38 +58,38 @@
     color: azure;
 }
 
-.policy-link{
+.policy-link {
     font-size: 12px;
     padding-left: 70px;
 }
 
-.auth-text{
+.auth-text {
     margin-top: 85px;
     text-align: center;
     color: #ffff;
 }
 
-.form-input{
+.form-input {
     margin-top: 30px;
     text-align: center;
     color: #ffff;
 }
 
-.input-field{
+.input-field {
     border: 1px solid rgb(211, 211, 211);
     box-sizing: border-box;
-    width: 80%;   
-    margin: 8px 0;  
-    padding: 10px 20px; 
+    width: 80%;
+    margin: 8px 0;
+    padding: 10px 20px;
     border-radius: 10px;
 }
 
-.btn-auth{
+.btn-auth {
     box-sizing: border-box;
     border-radius: 10px;
-    width: 65%;   
-    margin: 8px 0;  
-    padding: 10px 20px; 
+    width: 65%;
+    margin: 8px 0;
+    padding: 10px 20px;
     text-align: center;
     margin-top: 30px;
     background-color: #F8BC43;

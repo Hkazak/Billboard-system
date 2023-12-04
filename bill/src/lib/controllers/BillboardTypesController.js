@@ -2,8 +2,7 @@ import {baseUrl, LS} from "../Consts";
 
 export const getBillboardTypesEndpoint = `${baseUrl}/BillboardTypes`;
 
-export function GetBillboardTypes()
-{
+export function GetBillboardTypes() {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestInfo = {
         method: 'GET',

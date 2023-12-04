@@ -1,5 +1,4 @@
-.create-billboard-block
-{
+.create-billboard-block {
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -13,8 +12,7 @@
     background: white;
 }
 
-.create-billboard-title
-{
+.create-billboard-title {
     font-size: 30px;
     font-family: Inter, sans-serif;
     font-weight: 400;
@@ -24,8 +22,7 @@
     margin: 20px 0;
 }
 
-.create-billboard-general-span
-{
+.create-billboard-general-span {
     margin: 10px 5%;
     font-size: 20px;
     font-family: Inter, sans-serif;
@@ -34,8 +31,7 @@
     display: block;
 }
 
-.billboard-data-input
-{
+.billboard-data-input {
     display: inline-block;
     width: 90%;
     border: 1px solid black;
@@ -50,8 +46,7 @@
     outline: none;
 }
 
-.billboard-data-textarea
-{
+.billboard-data-textarea {
     resize: none;
     display: inline-block;
     width: 90%;
@@ -67,8 +62,7 @@
     outline: none;
 }
 
-.create-billboard-button
-{
+.create-billboard-button {
     text-align: center;
     background: #F8BC43;
     width: 40%;
@@ -78,8 +72,7 @@
     border-radius: 8px;
 }
 
-.cancel-create-billboard-button
-{
+.cancel-create-billboard-button {
     text-align: center;
     background: #FF4343;
     width: 40%;
@@ -90,14 +83,12 @@
     color: white;
 }
 
-.manage-buttons
-{
+.manage-buttons {
     display: flex;
     justify-content: space-around;
 }
 
-.billboard-data-short-input
-{
+.billboard-data-short-input {
     display: inline-block;
     width: 40%;
     height: 40px;
@@ -111,8 +102,7 @@
     margin-left: 5%;
 }
 
-.billboard-size-unit
-{
+.billboard-size-unit {
     display: inline-block;
     font-family: Inter, sans-serif;
     font-size: 16px;

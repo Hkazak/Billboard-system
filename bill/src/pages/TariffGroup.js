@@ -19,35 +19,34 @@ function TariffGroup() {
         refreshGroupOfTariffsList();
     }, []);
 
-    function refreshGroupOfTariffsList()
-    {
+    function refreshGroupOfTariffsList() {
         GetGroupOfTariffsList()
             .then(e => e.json())
             .then(e => setGroups(e));
     }
 
-    function handleCreateGroupOfTariffsBlock(e)
-    {
+    function handleCreateGroupOfTariffsBlock(e) {
         setHideCreateGroupOfTariffsBlock(!hideCreateGroupOfTariffsBlock);
     }
 
-    function handleSearch(e)
-    {
+    function handleSearch(e) {
         setSearchText(e.target.value);
     }
 
-    function handleNewGroupOfTariffs(groupOfTariffs)
-    {
+    function handleNewGroupOfTariffs(groupOfTariffs) {
         setGroups([...groups, groupOfTariffs]);
     }
 
     return (
         <div className="page-content">
-            <CreateGroupOfTariff hide={hideCreateGroupOfTariffsBlock} setHide={setHideCreateGroupOfTariffsBlock} handleNewGroupOfTariffs={handleNewGroupOfTariffs} />
+            <CreateGroupOfTariff hide={hideCreateGroupOfTariffsBlock} setHide={setHideCreateGroupOfTariffsBlock}
+                                 handleNewGroupOfTariffs={handleNewGroupOfTariffs}/>
             <Header title={"Группа тарифов"}/>
             <Sidebar>
-                <ControlPanel handleCreateItem={handleCreateGroupOfTariffsBlock} handleSearch={handleSearch} createButtonText={"Новая группа"} placeholderSearchText={"Название"} />
-                {groups.filter(e=>e.name.includes(searchText)).map(g => <GroupOfTariffs name={g.name} key={g.id} tariffs={g.tariffs}/>)}
+                <ControlPanel handleCreateItem={handleCreateGroupOfTariffsBlock} handleSearch={handleSearch}
+                              createButtonText={"Новая группа"} placeholderSearchText={"Название"}/>
+                {groups.filter(e => e.name.includes(searchText)).map(g => <GroupOfTariffs name={g.name} key={g.id}
+                                                                                          tariffs={g.tariffs}/>)}
             </Sidebar>
         </div>
     )

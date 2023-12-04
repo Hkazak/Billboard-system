@@ -1,11 +1,11 @@
-import { LS, baseUrl } from "../Consts";
+import {LS, baseUrl} from "../Consts";
 
 export const userSignUpEndpoint = `${baseUrl}/Users/sign-up`;
 export const userSignInEndpoint = `${baseUrl}/Users/sign-in`;
 export const userResetPasswordSendEmailEndpoint = `${baseUrl}/Users/password/forgot`;
 export const userResetPasswordChangePasswordEndpoint = `${baseUrl}/Users/password/reset`;
 
-export async function RegisterUser(userName, userEmail, userPassword, userConfirmPassword){
+export async function RegisterUser(userName, userEmail, userPassword, userConfirmPassword) {
     let body = {
         'name': userName,
         'email': userEmail,
@@ -28,7 +28,7 @@ export async function RegisterUser(userName, userEmail, userPassword, userConfir
     return response;
 }
 
-export async function AuthorizeUser(userEmail, userPassword){
+export async function AuthorizeUser(userEmail, userPassword) {
     let body = {
         'email': userEmail,
         'password': userPassword
@@ -49,7 +49,7 @@ export async function AuthorizeUser(userEmail, userPassword){
     return response;
 }
 
-export async function ResetPasswordSendEmail(email){
+export async function ResetPasswordSendEmail(email) {
     let body = {
         'email': email
     };
@@ -69,7 +69,7 @@ export async function ResetPasswordSendEmail(email){
     return response;
 }
 
-export async function ResetPasswordChangePassword(email, code, password, confirmPassword){
+export async function ResetPasswordChangePassword(email, code, password, confirmPassword) {
     let body = {
         'confirmationCode': code,
         'email': email,

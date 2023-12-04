@@ -2,30 +2,23 @@ import "../styles/ManagerInfo.css";
 import {useState} from "react";
 import {ActivateManager, DeactivateManager} from "../lib/controllers/ManagerController";
 
-function ManagerInfo({firstName, middleName, lastName, email, phone, status, id})
-{
+function ManagerInfo({firstName, middleName, lastName, email, phone, status, id}) {
     const [isActiveManager, setIsActiveManager] = useState(status.toLowerCase() === 'active');
     const [managerStatus, setManagerStatus] = useState(status.toLowerCase());
 
-    function changeManagerStatus(id)
-    {
-        if(managerStatus !== 'active')
-        {
+    function changeManagerStatus(id) {
+        if (managerStatus !== 'active') {
             ActivateManager(id)
-                .then(e=>{
-                    if(e.ok)
-                    {
+                .then(e => {
+                    if (e.ok) {
                         setIsActiveManager(true);
                         setManagerStatus('active');
                     }
                 });
-        }
-        else
-        {
+        } else {
             DeactivateManager(id)
-                .then(e=>{
-                    if(e.ok)
-                    {
+                .then(e => {
+                    if (e.ok) {
                         setIsActiveManager(false);
                         setManagerStatus('inactive');
                     }
@@ -46,7 +39,7 @@ function ManagerInfo({firstName, middleName, lastName, email, phone, status, id}
                 </span>
             </div>
             <div className="control-buttons">
-                <button className="control-button" onClick={e=>changeManagerStatus(id)}>
+                <button className="control-button" onClick={e => changeManagerStatus(id)}>
                     {isActiveManager ? 'Заморозить аккаунт' : 'Активировать аккаунт'}
                 </button>
                 <button className="control-button">

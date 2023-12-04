@@ -5,30 +5,25 @@ import {CreateOrderRequest} from "../lib/controllers/OrderController";
 import {CreatePaymentRequest} from "../lib/controllers/PaymentController";
 import "../styles/CreateOrder.css";
 
-function CreateOrder({price, billboardId, tariffId, startDate, endDate, isClientView, hide, setHide})
-{
+function CreateOrder({price, billboardId, tariffId, startDate, endDate, isClientView, hide, setHide}) {
     const [uploadedPictures, setUploadedPictures] = useState([]);
 
-    async function handlePay(e)
-    {
+    async function handlePay(e) {
         e.preventDefault();
         e.target.form.reset();
         console.log(billboardId);
         const response = await CreateOrderRequest(billboardId, startDate, endDate, tariffId, uploadedPictures);
-        if(response.ok)
-        {
+        if (response.ok) {
             const order = await response.json();
             const paymentResponse = await CreatePaymentRequest(order.id);
             const payment = await paymentResponse.json();
-            if(paymentResponse.ok)
-            {
-                window.open(payment.checkoutUrl, '_blank', 'noreferrer');
+            if (paymentResponse.ok) {
+                window.open(payment.checkoutUrl, '_blank');
             }
         }
     }
 
-    function handleClose(e)
-    {
+    function handleClose(e) {
         e.preventDefault();
         e.target.form.reset();
         setHide(true);
@@ -44,7 +39,7 @@ function CreateOrder({price, billboardId, tariffId, startDate, endDate, isClient
                 <span className="upload-files-text-title">Загрузить файлы</span>
                 <span className="upload-files-text-description">Загрузите фотографию, видео и другие файлы которые помогут нам при исполнении вашего заказа</span>
             </span>
-            <UploadPictures onUpload={files=>setUploadedPictures([...files])} />
+            <UploadPictures onUpload={files => setUploadedPictures([...files])}/>
             <div className="payment-block">
                 <OrderPrice price={price} isClientView={isClientView}/>
                 <button className="create-order-button" onClick={handlePay}>Оформить</button>

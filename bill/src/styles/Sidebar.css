@@ -1,5 +1,4 @@
-.sidebar
-{
+.sidebar {
     width: 360px;
     padding: 30px 0 0 20px;
     border-top-right-radius: 16px;
@@ -9,8 +8,7 @@
     flex-direction: column;
 }
 
-.container
-{
+.container {
     padding: 0 !important;
     margin: 0 !important;
 }

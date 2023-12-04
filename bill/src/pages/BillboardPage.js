@@ -9,9 +9,11 @@ import ControlPanel from "../components/ControlPanel";
 function BillboardPage() {
     return (
         <div className="billboard-block">
-            <Header title="Управление билбордами" />
+            <Header title="Управление билбордами"/>
             <Sidebar>
-                <ControlPanel handleSearch={(e)=>console.log(e)} placeholderSearchText={"Название билборда"} createButtonText="Новый билборд" handleCreateItem={(e)=>console.log(e)} isClientView={true} />
+                <ControlPanel handleSearch={(e) => console.log(e)} placeholderSearchText={"Название билборда"}
+                              createButtonText="Новый билборд" handleCreateItem={(e) => console.log(e)}
+                              isClientView={true}/>
             </Sidebar>
         </div>
     );

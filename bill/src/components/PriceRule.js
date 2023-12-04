@@ -1,7 +1,6 @@
 import "../styles/PriceRule.css";
 
-function PriceRule({surface, type, price})
-{
+function PriceRule({surface, type, price}) {
     return (
         <div className="price-rule-item-block">
             <div className="price-rule-information">

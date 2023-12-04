@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {
     FaTh,
-}from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
+} from "react-icons/fa";
+import {NavLink} from 'react-router-dom';
 import {
     AdminAuthRoute,
     BillboardsRoute,
     CreateManagerRoute,
     DashboardRoute, DiscountRoute,
-    ManagerAuthRoute, PriceRuleRoute, SurfaceRoute, TariffGroupRoute,
+    ManagerAuthRoute, OrdersRoute, PriceRuleRoute, SurfaceRoute, TariffGroupRoute,
     TariffRoute,
     UserAuthorizationRoute
 } from '../Paths';
@@ -16,97 +16,87 @@ import "../styles/Sidebar.css";
 
 
 const Sidebar = ({children}) => {
-    const menuItem=[
+    const menuItem = [
         {
-            path:DashboardRoute,
-            name:"Dashboard",
-            icon:<FaTh/>
+            path: DashboardRoute,
+            name: "Dashboard",
+            icon: <FaTh/>
         },
         {
-            path:UserAuthorizationRoute,
-            name:"Авторизация",
-            icon:<FaTh/>
+            path: UserAuthorizationRoute,
+            name: "Авторизация",
+            icon: <FaTh/>
         },
         {
             path: BillboardsRoute,
-            name:"Билборды",
-            icon:<FaTh/>
+            name: "Билборды",
+            icon: <FaTh/>
         },
         {
-            path:CreateManagerRoute,
-            name:"Менеджеры",
-            icon:<FaTh/>
+            path: CreateManagerRoute,
+            name: "Менеджеры",
+            icon: <FaTh/>
         },
         {
-            path:ManagerAuthRoute,
-            name:"Авторизация Менеджера",
-            icon:<FaTh/>
+            path: ManagerAuthRoute,
+            name: "Авторизация Менеджера",
+            icon: <FaTh/>
         },
         {
-            path:AdminAuthRoute,
-            name:"Авторизация Администратора",
-            icon:<FaTh/>
+            path: AdminAuthRoute,
+            name: "Авторизация Администратора",
+            icon: <FaTh/>
         },
         {
-            path:TariffRoute,
-            name:"Тарифы",
-            icon:<FaTh/>
+            path: TariffRoute,
+            name: "Тарифы",
+            icon: <FaTh/>
         },
         {
-            path:DiscountRoute,
-            name:"Акции",
-            icon:<FaTh/>
+            path: DiscountRoute,
+            name: "Акции",
+            icon: <FaTh/>
         },
         {
-            path:PriceRuleRoute,
-            name:"Цена изготовление",
-            icon:<FaTh/>
+            path: PriceRuleRoute,
+            name: "Цена изготовление",
+            icon: <FaTh/>
         },
         {
-            path:TariffGroupRoute,
-            name:"Группы тарифов",
-            icon:<FaTh/>
+            path: TariffGroupRoute,
+            name: "Группы тарифов",
+            icon: <FaTh/>
         },
         {
-            path:SurfaceRoute,
-            name:"Виды поверхности",
-            icon:<FaTh/>
+            path: SurfaceRoute,
+            name: "Виды поверхности",
+            icon: <FaTh/>
+        },
+        {
+            path: OrdersRoute,
+            name: "Заказы",
+            icon: <FaTh/>
         }
     ]
     const [offsetTop, setOffsetTop] = useState(0);
-    const [pageHeight, setPageHeight] = useState(0);
-    useEffect(()=>{
-        const observer = new ResizeObserver((entries)=>
-        {
-            for(const entry of entries)
-            {
-                if(entry.target === document.body)
-                {
-                    setPageHeight(Math.max(entry.target.scrollHeight, entry.target.clientHeight, window.innerHeight));
-                    break;
-                }
-            }
-        });
-        observer.observe(document.body);
+    const [minPageHeight, setMinPageHeight] = useState(0);
+
+    useEffect(() => {
         setOffsetTop(document.getElementsByClassName('sidebar')[0].offsetTop);
-        setPageHeight(window.innerHeight);
-        window.onresize = (e)=>{
-            console.log('work');
-            setPageHeight(window.innerHeight);
-        }
+        setMinPageHeight(window.innerHeight);
     }, []);
     return (
         <div className="container">
-           <div className="sidebar" style={{minHeight: `${pageHeight - offsetTop}px`}}>
-               {
-                   menuItem.map((item, index)=>(
-                       <NavLink to={item.path} key={index} className="link">
-                           <div className="link-text">{item.name}</div>
-                       </NavLink>
-                   ))
-               }
-           </div>
-           <main className="main-content">{children}</main>
+            <div className="sidebar" style={{minHeight: `${minPageHeight - offsetTop}px`}}>
+                {
+                    menuItem.map((item, index) => (
+                        <NavLink to={item.path} key={index} className="link">
+                            <div className="link-text">{item.name}</div>
+                        </NavLink>
+                    ))
+                }
+            </div>
+            <main className="main-content">{children}</main>
         </div>
     );
 };

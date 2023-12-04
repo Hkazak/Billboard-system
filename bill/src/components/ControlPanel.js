@@ -1,13 +1,13 @@
 import React from "react";
 import "../styles/ControlPanel.css";
 
-function ControlPanel({handleSearch, placeholderSearchText, handleCreateItem, createButtonText, isClientView=false})
-{
+function ControlPanel({handleSearch, placeholderSearchText, handleCreateItem, createButtonText, isClientView = false}) {
     return (
         <div className="control-panel-block">
-            <input type="text" placeholder={placeholderSearchText} className="control-panel-search" onChange={e=>handleSearch(e)}/>
+            <input type="text" placeholder={placeholderSearchText} className="control-panel-search"
+                   onChange={e => handleSearch(e)}/>
             <button type="button" className="open-panel-create-new-item-button" data-toggle="modal"
-                    data-target="#staticBackdrop" onClick={(e)=>handleCreateItem(e)} hidden={isClientView}>
+                    data-target="#staticBackdrop" onClick={(e) => handleCreateItem(e)} hidden={isClientView}>
                 <span className="new-tarif">{createButtonText}</span>
             </button>
         </div>

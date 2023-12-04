@@ -4,8 +4,8 @@ import {CreateDiscountRequest} from "../lib/controllers/DiscountController";
 import {GetShortBillboardList} from "../lib/controllers/BillboardController";
 
 let selectedBillboards = [];
-function CreateDiscount({hide, setHide, handleNewDiscount})
-{
+
+function CreateDiscount({hide, setHide, handleNewDiscount}) {
     const [name, setName] = useState('');
     const [minRent, setMinRent] = useState(0);
     const [discount, setDiscount] = useState(0);
@@ -14,16 +14,12 @@ function CreateDiscount({hide, setHide, handleNewDiscount})
     const [searchText, setSearchText] = useState('');
     const [billboards, setBillboards] = useState([]);
 
-    function handleCreateDiscount(e)
-    {
+    function handleCreateDiscount(e) {
         e.preventDefault();
         const billboardsToSend = [];
-        if(selectAllBillboards)
-        {
-            billboardsToSend.push(...billboards.map(e=>e.id));
-        }
-        else
-        {
+        if (selectAllBillboards) {
+            billboardsToSend.push(...billboards.map(e => e.id));
+        } else {
             billboardsToSend.push(...selectedBillboards)
         }
         console.log(billboardsToSend);
@@ -32,32 +28,27 @@ function CreateDiscount({hide, setHide, handleNewDiscount})
             .replaceAll('/', '-')
             .replaceAll('.', '-');
         CreateDiscountRequest(name, minRent, discount, endDateString, billboardsToSend)
-            .then(t=>t.json())
-            .then(t=>handleNewDiscount(t));
+            .then(t => t.json())
+            .then(t => handleNewDiscount(t));
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         GetShortBillboardList()
-            .then(e=>e.json())
-            .then(e=>setBillboards(e));
+            .then(e => e.json())
+            .then(e => setBillboards(e));
     }, []);
 
-    function selectBillboard(ev, billboard)
-    {
-        if(ev.target.className === 'selected-billboard-name')
-        {
+    function selectBillboard(ev, billboard) {
+        if (ev.target.className === 'selected-billboard-name') {
             ev.target.className = '';
-            selectedBillboards = [...selectedBillboards.filter(e=>e.id !== billboard.id)]
-        }
-        else
-        {
+            selectedBillboards = [...selectedBillboards.filter(e => e.id !== billboard.id)]
+        } else {
             ev.target.className = 'selected-billboard-name'
             selectedBillboards.push(billboard.id);
         }
     }
 
-    function resetPanel(e)
-    {
+    function resetPanel(e) {
         e.preventDefault();
         setHide(true);
     }
@@ -69,30 +60,38 @@ function CreateDiscount({hide, setHide, handleNewDiscount})
             </span>
             <div className="create-discount-general-information">
                 <span className="create-discount-general-span">Общая информация</span>
-                <input required type="text" className="discount-name-input" placeholder="Название" onChange={(e)=>setName(e.target.value)}/>
-                <input required type="number" className="discount-name-input" placeholder="Минимальный срок аренды" onChange={(e)=>setMinRent(parseInt(e.target.value))}/>
-                <input required type="number" className="discount-name-input" placeholder="Скидка %" onChange={(e)=>setDiscount(parseInt(e.target.value))}/>
-                <input required type="date" className="discount-name-input" placeholder="Дата завершения акции" onChange={(e)=>setEndDate(new Date(e.target.value))}/>
+                <input required type="text" className="discount-name-input" placeholder="Название"
+                       onChange={(e) => setName(e.target.value)}/>
+                <input required type="number" className="discount-name-input" placeholder="Минимальный срок аренды"
+                       onChange={(e) => setMinRent(parseInt(e.target.value))}/>
+                <input required type="number" className="discount-name-input" placeholder="Скидка %"
+                       onChange={(e) => setDiscount(parseInt(e.target.value))}/>
+                <input required type="date" className="discount-name-input" placeholder="Дата завершения акции"
+                       onChange={(e) => setEndDate(new Date(e.target.value))}/>
             </div>
             <span className="create-discount-general-span">
                 Выбрать эффект
             </span>
             <span className="select-billboards-block">
-                <input type="checkbox" checked={selectAllBillboards} onChange={e=>setSelectAllBillboards(!selectAllBillboards)}/>
+                <input type="checkbox" checked={selectAllBillboards}
+                       onChange={e => setSelectAllBillboards(!selectAllBillboards)}/>
                 <label>Действует на все билборды</label>
                 <br/>
-                <input type="checkbox" checked={!selectAllBillboards} onChange={e=>setSelectAllBillboards(!selectAllBillboards)}/>
+                <input type="checkbox" checked={!selectAllBillboards}
+                       onChange={e => setSelectAllBillboards(!selectAllBillboards)}/>
                 <label>Действует на выбранные билборды</label>
             </span>
-            <input required type="text" className="discount-name-input" placeholder="Поиск билборда по названию" onChange={(e)=>setSearchText(e.target.value)}/>
+            <input required type="text" className="discount-name-input" placeholder="Поиск билборда по названию"
+                   onChange={(e) => setSearchText(e.target.value)}/>
             <ul className="billboards-names">
-                {billboards.filter(e=>e.name.includes(searchText)).map(e=><li key={e.id} onClick={ev=>selectBillboard(ev, e)}>{e.name}</li>)}
+                {billboards.filter(e => e.name.includes(searchText)).map(e => <li key={e.id}
+                                                                                  onClick={ev => selectBillboard(ev, e)}>{e.name}</li>)}
             </ul>
             <div className="manage-buttons">
-                <button className="create-discount-button" onClick={e=>handleCreateDiscount(e)}>
+                <button className="create-discount-button" onClick={e => handleCreateDiscount(e)}>
                     Создать
                 </button>
-                <button className="cancel-create-discount-button" onClick={(e)=>resetPanel(e)}>
+                <button className="cancel-create-discount-button" onClick={(e) => resetPanel(e)}>
                     Отмена
                 </button>
             </div>

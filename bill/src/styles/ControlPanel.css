@@ -1,19 +1,16 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
-.control-panel-block
-{
+.control-panel-block {
     background: #52AABC;
     border: 1px solid #52AABC;
     border-top-left-radius: 16px;
     padding: 20px 25px;
 }
 
-.control-panel-search
-{
+.control-panel-search {
     border: none;
     border-radius: 8px;
     width: 50%;
@@ -23,8 +20,7 @@
     outline: none;
 }
 
-.open-panel-create-new-item-button
-{
+.open-panel-create-new-item-button {
     background: white;
     border: none;
     border-radius: 8px;

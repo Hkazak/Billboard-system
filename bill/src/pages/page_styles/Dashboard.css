@@ -1,4 +1,4 @@
-.main-select-cont{
+.main-select-cont {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 80px;
@@ -7,12 +7,12 @@
     font-size: 13px;
 }
 
-.list-wrapper{
+.list-wrapper {
     border: 1px solid #52AABC;
     border-radius: 10px;
 }
 
-.list-cont{
+.list-cont {
     margin-top: 20px;
     list-style: none;
     text-align: center;
@@ -28,7 +28,7 @@ select:focus {
     outline: none;
 }
 
-.select-cont select{
+.select-cont select {
     border: none;
     text-align: center;
     border-radius: 8px;
@@ -41,20 +41,18 @@ select:focus {
     border-radius: 0;
 }
 
-.map-container{
+.map-container {
     margin: 20px 0;
     width: 95%;
     height: 70vh;
 }
 
-.create-billboard-panel-button-block
-{
+.create-billboard-panel-button-block {
     display: flex;
     justify-content: center;
 }
 
-.create-billboard-panel-button
-{
+.create-billboard-panel-button {
     width: 275px;
     height: 35px;
     border-radius: 8px;
@@ -65,7 +63,6 @@ select:focus {
     background: #F8BC43;
 }
 
-.dashboard-content
-{
+.dashboard-content {
     position: relative;
 }

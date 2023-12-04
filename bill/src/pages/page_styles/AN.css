@@ -3,7 +3,7 @@
     max-width: none !important;
     height: 70vh;
     width: 60vw;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
     left: 0;
@@ -37,16 +37,16 @@
     transform: scale(1);
 }
 
-.m-cont{
+.m-cont {
     width: 100%;
 }
 
-.modal-content{
+.modal-content {
     margin: auto;
     width: fit-content;
     background-color: white;
 }
 
-.close-btnnn{
+.close-btnnn {
     width: 90px;
 }

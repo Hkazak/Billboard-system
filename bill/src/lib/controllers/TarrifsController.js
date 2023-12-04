@@ -3,7 +3,7 @@ import {baseUrl, LS} from "../Consts";
 export const getGroupOfTariffsListEndpoint = `${baseUrl}/GroupOfTariffs`;
 export const getBillboardSurfacesListEndpoint = `${baseUrl}/BillboardSurface`;
 
-export async function GetGroupOfTariffs(){
+export async function GetGroupOfTariffs() {
     const accessToken = localStorage.getItem(LS.accessToken);
     const response = await fetch(getGroupOfTariffsListEndpoint, {
         method: 'GET',
@@ -18,7 +18,7 @@ export async function GetGroupOfTariffs(){
     return response;
 }
 
-export async function getBillboardSurfacesList(){
+export async function getBillboardSurfacesList() {
     const accessToken = localStorage.getItem(LS.accessToken);
     return await fetch(getBillboardSurfacesListEndpoint, {
         method: 'GET',

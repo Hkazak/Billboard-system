@@ -11,8 +11,21 @@ import OrderPrice from "./OrderPrice";
 import CreateOrder from "./CreateOrder";
 import {baseUrl} from "../lib/Consts";
 
-function BillboardInformation({billboardId, pictureSource, name, description, billboardSurface, width, height, billboardType, discounts, groupOfTariffs, hide, setHide, isClientView})
-{
+function BillboardInformation({
+                                  billboardId,
+                                  pictureSource,
+                                  name,
+                                  description,
+                                  billboardSurface,
+                                  width,
+                                  height,
+                                  billboardType,
+                                  discounts,
+                                  groupOfTariffs,
+                                  hide,
+                                  setHide,
+                                  isClientView
+                              }) {
     const [bookedRanges, setBookedRanges] = useState([]);
     const [tariffs, setTariffs] = useState([]);
     const selectedRanges = useRef([]);
@@ -23,80 +36,74 @@ function BillboardInformation({billboardId, pictureSource, name, description, bi
     const [orderStartDate, setOrderStartDate] = useState(new Date());
     const [orderEndDate, setOrderEndDate] = useState(new Date());
 
-    function handleSelectDay(date)
-    {
-        if(date.length === 2 && selectedTariffId !== '')
-        {
+    function handleSelectDay(date) {
+        if (date.length === 2 && selectedTariffId !== '') {
             const startDate = new Date(date[0].toString());
             const endDate = new Date(date[1].toString());
             setOrderStartDate(startDate);
             setOrderEndDate(endDate);
+            const daysBetweenDates = (endDate - startDate) / (1000 * 24 * 60 * 60) + 1;
+            const discount = discounts?.findLast(e=>e.minRentCount <= daysBetweenDates);
+            setSelectedDiscountId(discount?.id);
             const start = {day: startDate.getDate(), month: startDate.getMonth(), year: startDate.getFullYear()};
             const end = {day: endDate.getDate(), month: endDate.getMonth(), year: endDate.getFullYear()};
             selectedRanges.current = [new DateObject().set(start), new DateObject().set(end)];
             CalculatePriceRequest(billboardId, startDate, endDate, selectedTariffId)
-                .then(e=>e.json())
-                .then(e=>setPrice(e));
+                .then(e => e.json())
+                .then(e => setPrice(e));
         }
     }
 
-    function handleSelectTariff(e, id)
-    {
-        if(selectedTariffId === id)
-        {
+    function handleSelectTariff(e, id) {
+        if (selectedTariffId === id) {
             setSelectedTariffId('');
             selectedRanges.current = [];
             selectRanges([]);
-        }
-        else
-        {
+        } else {
             setSelectedTariffId(id);
             GetBookedOrdersRequest(billboardId, id)
-                .then(e=>e.json())
-                .then(e=>selectRanges(e));
+                .then(e => e.json())
+                .then(e => selectRanges(e));
         }
     }
 
-    function handleSelectDiscount(e, id)
-    {
-        if(selectedDiscountId === id)
-        {
+    function handleSelectDiscount(e, id) {
+        if (selectedDiscountId === id) {
             setSelectedDiscountId('');
-        }
-        else
-        {
+        } else {
             setSelectedDiscountId(id);
         }
     }
 
-    function toDate(dateString)
-    {
+    function toDate(dateString) {
         const dateParts = dateString.split('-');
         return {day: parseInt(dateParts[0]), month: parseInt(dateParts[1]), year: parseInt(dateParts[2])};
     }
 
-    function selectRanges(ranges)
-    {
-        const bookedRanges = ranges?.map(range=>{
+    function selectRanges(ranges) {
+        const bookedRanges = ranges?.map(range => {
             return {start: toDate(range.startDate), end: toDate(range.endDate)}
-        }).map(range=>[new DateObject().set(range.start), new DateObject().set(range.end)]);
+        }).map(range => [new DateObject().set(range.start), new DateObject().set(range.end)]);
         setBookedRanges(bookedRanges);
     }
 
-    useEffect(()=>{
-        if(billboardId)
-        {
+    useEffect(() => {
+        if (billboardId) {
             GetBookedOrdersRequest(billboardId)
-                .then(e=>e.json())
-                .then(e=>selectRanges(e));
+                .then(e => e.json())
+                .then(e => selectRanges(e));
             setTariffs([...groupOfTariffs.tariffs]);
+            discounts.sort((a,b)=>a.minRentCount - b.minRentCount);
         }
     }, []);
     return (
         <div className="billboard-information-block" hidden={hide}>
-            <CreateOrder billboardId={billboardId} startDate={orderStartDate} endDate={orderEndDate} tariffId={selectedTariffId} isClientView={isClientView} price={price} hide={hideCreateOrderPanel} setHide={setHidCreateOrderPanel} />
+            <CreateOrder billboardId={billboardId} startDate={orderStartDate} endDate={orderEndDate}
+                         tariffId={selectedTariffId} isClientView={isClientView} price={price}
+                         hide={hideCreateOrderPanel} setHide={setHidCreateOrderPanel}/>
             <div className="billboard-information-pictures">
-                {pictureSource?.map(picture=><img key={picture.id} src={baseUrl + picture} alt={picture} className="billboard-picture"/>)}
+                {pictureSource?.map(picture => <img key={picture.id} src={baseUrl + picture} alt={picture}
+                                                    className="billboard-picture"/>)}
             </div>
             <div className="billboard-information-text">
                 <span className="billboard-information-title">{name}</span>
@@ -121,26 +128,42 @@ function BillboardInformation({billboardId, pictureSource, name, description, bi
                 <div className="billboard-information-discounts">
                     <span className="billboard-information-general-text">Акции</span>
                     <div className="billboard-information-discounts-list">
-                        {discounts?.map(discount=><DiscountBlock isSelected={selectedDiscountId === discount.id} onClick={e=>handleSelectDiscount(e, discount.id)} key={discount.id} name={discount.name} minRentCount={discount.minRentCount} salesOf={discount.salesOf} />)}
+                        {discounts?.map(discount => <DiscountBlock isSelected={selectedDiscountId === discount.id}
+                                                                   onClick={e => handleSelectDiscount(e, discount.id)}
+                                                                   key={discount.id} name={discount.name}
+                                                                   minRentCount={discount.minRentCount}
+                                                                   salesOf={discount.salesOf}/>)}
                     </div>
                 </div>
                 <div className="billboard-information-tariffs">
-                    <span className="billboard-information-general-text">{isClientView ? "Выбрать тариф" : "Доступные тарифы"}</span>
+                    <span
+                        className="billboard-information-general-text">{isClientView ? "Выбрать тариф" : "Доступные тарифы"}</span>
                     <div className="billboard-information-tariffs-list">
-                        {groupOfTariffs?.tariffs?.map(tariff=><Tariff isSelected={selectedTariffId === tariff.id} key={tariff.id} tariffTitle={tariff.title} tariffPrice={tariff.price} startTime={tariff.startTime} endTime={tariff.endTime} onClickCallback={e=>handleSelectTariff(e, tariff.id)} />)}
+                        {groupOfTariffs?.tariffs?.map(tariff => <Tariff isSelected={selectedTariffId === tariff.id}
+                                                                        key={tariff.id} tariffTitle={tariff.title}
+                                                                        tariffPrice={tariff.price}
+                                                                        startTime={tariff.startTime}
+                                                                        endTime={tariff.endTime}
+                                                                        onClickCallback={e => handleSelectTariff(e, tariff.id)}/>)}
                     </div>
                 </div>
                 <div className="billboard-information-booked-days">
-                    <span className="billboard-information-general-text">{isClientView ? "Выбрать период использования" : "Забронированные дни"}</span>
+                    <span
+                        className="billboard-information-general-text">{isClientView ? "Выбрать период использования" : "Забронированные дни"}</span>
                     <div className="billboard-information-calendars">
-                        <Calendar className="billboard-information-calendar" rangeHover={true} readOnly={selectedTariffId === '' || !isClientView} weekStartDayIndex={1} range onChange={handleSelectDay} />
-                        <Calendar className="billboard-information-calendar" weekStartDayIndex={1} value={bookedRanges} range multiple readOnly/>
+                        <Calendar className="billboard-information-calendar" rangeHover={true}
+                                  readOnly={selectedTariffId === '' || !isClientView} weekStartDayIndex={1} range
+                                  onChange={handleSelectDay}/>
+                        <Calendar className="billboard-information-calendar" weekStartDayIndex={1} value={bookedRanges}
+                                  range multiple readOnly/>
                     </div>
                 </div>
-                <OrderPrice price={price} isClientView={isClientView} />
+                <OrderPrice price={price} isClientView={isClientView}/>
                 <div className="manage-buttons">
-                    <button className="billboard-information-send" hidden={!isClientView} onClick={e=>setHidCreateOrderPanel(!hideCreateOrderPanel)}>Оформить</button>
-                    <button className="billboard-information-close" onClick={e=>setHide(true)}>Закрыть</button>
+                    <button className="billboard-information-send" hidden={!isClientView}
+                            onClick={e => setHidCreateOrderPanel(!hideCreateOrderPanel)}>Оформить
+                    </button>
+                    <button className="billboard-information-close" onClick={e => setHide(true)}>Закрыть</button>
                 </div>
             </div>
         </div>

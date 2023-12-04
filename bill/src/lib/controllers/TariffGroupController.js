@@ -4,8 +4,7 @@ export const getTariffGroupsEndpoint = `${baseUrl}/GroupOfTariffs`;
 
 export const createGroupOfTariffsEndpoint = `${baseUrl}/GroupOfTariffs`
 
-export function GetGroupOfTariffsList()
-{
+export function GetGroupOfTariffsList() {
     const requestInfo = {
         method: 'GET',
         headers: {
@@ -17,12 +16,11 @@ export function GetGroupOfTariffsList()
     return fetch(getTariffGroupsEndpoint, requestInfo);
 }
 
-export function CreateGroupOfTariffs(name, tariffs)
-{
+export function CreateGroupOfTariffs(name, tariffs) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         name: name,
-        tariffsId: tariffs.map(e=>e.id)
+        tariffsId: tariffs.map(e => e.id)
     };
     const requestInfo = {
         method: 'POST',

@@ -7,41 +7,44 @@ import {GetDiscounts} from "../lib/controllers/DiscountController";
 import CreateDiscount from "../components/CreateDiscount";
 import {LS} from "../lib/Consts";
 
-function DiscountPage()
-{
+function DiscountPage() {
     const [searchText, setSearchText] = useState('');
     const [hideCreateDiscountBlock, setHideCreateDiscountBlock] = useState(true);
     const [discounts, setDiscounts] = useState([]);
     const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
 
-    function handleSearch(e)
-    {
+    function handleSearch(e) {
         setSearchText(e.target.value);
     }
 
-    function handleCreateItem(e)
-    {
+    function handleCreateItem(e) {
         setHideCreateDiscountBlock(!hideCreateDiscountBlock);
     }
 
-    function handleNewDiscount(discount)
-    {
+    function handleNewDiscount(discount) {
         setDiscounts([...discounts, discount])
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         GetDiscounts()
-            .then(e=>e.json())
-            .then(e=>setDiscounts(e));
+            .then(e => e.json())
+            .then(e => setDiscounts(e));
     }, []);
 
     return (
         <div className="discount-block">
-            <Header title={"Акции"} />
-            <CreateDiscount hide={hideCreateDiscountBlock} setHide={setHideCreateDiscountBlock} handleNewDiscount={handleNewDiscount} />
+            <Header title={"Акции"}/>
+            <CreateDiscount hide={hideCreateDiscountBlock} setHide={setHideCreateDiscountBlock}
+                            handleNewDiscount={handleNewDiscount}/>
             <Sidebar>
-                <ControlPanel handleSearch={handleSearch} handleCreateItem={handleCreateItem} placeholderSearchText={"Название"} createButtonText={"Новые акции"} isClientView={isClientView} />
-                {discounts?.filter(e=>e?.name?.includes(searchText)).map(e=><Discount key={e?.id} name={e?.name} discount={e?.salesOf} minRentCount={e?.minRentCount} endDate={e?.endDate} billboards={e?.billboards} />)}
+                <ControlPanel handleSearch={handleSearch} handleCreateItem={handleCreateItem}
+                              placeholderSearchText={"Название"} createButtonText={"Новые акции"}
+                              isClientView={isClientView}/>
+                {discounts?.filter(e => e?.name?.includes(searchText)).map(e => <Discount key={e?.id} name={e?.name}
+                                                                                          discount={e?.salesOf}
+                                                                                          minRentCount={e?.minRentCount}
+                                                                                          endDate={e?.endDate}
+                                                                                          billboards={e?.billboards}/>)}
             </Sidebar>
         </div>
     );

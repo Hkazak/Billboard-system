@@ -1,5 +1,4 @@
-.billboard-discount-block-selected
-{
+.billboard-discount-block-selected {
     width: 20%;
     padding: 5px;
     border: 1px solid black;
@@ -7,8 +6,7 @@
     background: #52AABC;
 }
 
-.billboard-discount-block
-{
+.billboard-discount-block {
     width: 20%;
     padding: 5px;
     border: 1px solid black;
@@ -16,8 +14,7 @@
     background: white;
 }
 
-.billboard-discount-title
-{
+.billboard-discount-title {
     display: block;
     font-size: 16px;
     font-family: Roboto, sans-serif !important;
@@ -26,8 +23,7 @@
     text-align: center;
 }
 
-.billboard-discount-percentage
-{
+.billboard-discount-percentage {
     font-family: Roboto, sans-serif !important;
     font-size: 30px;
     text-align: center;
@@ -36,8 +32,7 @@
     line-height: 35px;
 }
 
-.billboard-discount-condition
-{
+.billboard-discount-condition {
     display: block;
     font-size: 12px;
     font-weight: 400;

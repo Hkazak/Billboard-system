@@ -1,5 +1,4 @@
-.billboard-surface-block
-{
+.billboard-surface-block {
     background: #96C9D3;
     display: inline-block;
     width: 98%;
@@ -9,8 +8,7 @@
     margin: 10px 0;
 }
 
-.billboard-surface-data
-{
+.billboard-surface-data {
     font-family: Inter, sans-serif;
     font-size: 20px;
     font-weight: 400;

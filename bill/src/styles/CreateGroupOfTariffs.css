@@ -1,11 +1,9 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
-.create-new-group-of-tariffs-block
-{
+.create-new-group-of-tariffs-block {
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -18,8 +16,7 @@
     background: white;
 }
 
-.create-new-group-of-tariffs-title
-{
+.create-new-group-of-tariffs-title {
     font-size: 30px;
     font-family: Inter, sans-serif;
     font-weight: 400;
@@ -29,8 +26,7 @@
     margin-bottom: 40px;
 }
 
-.create-new-group-of-tariffs-general-span
-{
+.create-new-group-of-tariffs-general-span {
     margin: 10px 5%;
     font-size: 20px;
     font-family: Inter, sans-serif;
@@ -39,8 +35,7 @@
     display: block;
 }
 
-.group-of-tariffs-name-input
-{
+.group-of-tariffs-name-input {
     display: inline-block;
     width: 90%;
     border: 1px solid black;
@@ -54,8 +49,7 @@
     outline: none;
 }
 
-.create-new-group-of-tariffs-button
-{
+.create-new-group-of-tariffs-button {
     display: block;
     text-align: center;
     background: #F8BC43;
@@ -66,30 +60,26 @@
     border-radius: 8px;
 }
 
-.tariffs-list .tariff-block
-{
+.tariffs-list .tariff-block {
     background: #52AABC94;
     margin: 5px 5%;
     width: 40%;
 }
 
-.selected-tariffs-list .tariff-block
-{
+.selected-tariffs-list .tariff-block {
     background: #52AABC94;
     margin: 0 2% 0 0;
     min-width: 40%;
 }
 
-.selected-tariffs-list
-{
+.selected-tariffs-list {
     overflow-x: auto;
     display: inline-flex;
     align-items: baseline;
     margin: 5px 5%;
 }
 
-.search-tariff-input
-{
+.search-tariff-input {
     display: inline-block;
     width: 70%;
     border: 1px solid black;
@@ -102,22 +92,19 @@
     outline: none;
 }
 
-.pagination-controller-block
-{
+.pagination-controller-block {
     display: inline-block;
     max-width: 20%;
     text-align: center;
 }
 
-.current-page-change-button
-{
+.current-page-change-button {
     border: none;
     background: white;
     width: 10px;
 }
 
-.pagination-set-page
-{
+.pagination-set-page {
     display: inline-block;
     width: 30%;
     height: 20px;
@@ -128,19 +115,16 @@
     text-align: center;
 }
 
-.reverse-arrow
-{
+.reverse-arrow {
     rotate: 180deg;
 }
 
-.manage-buttons
-{
+.manage-buttons {
     display: flex;
     justify-content: space-around;
 }
 
-.cancel-create-group-of-tariffs-button
-{
+.cancel-create-group-of-tariffs-button {
     text-align: center;
     background: #FF4343;
     width: 40%;

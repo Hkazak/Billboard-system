@@ -1,4 +1,4 @@
-import { LS, baseUrl } from "../Consts";
+import {LS, baseUrl} from "../Consts";
 
 export const managerSignInEndpoint = `${baseUrl}/Managers/sign-in`;
 export const userResetPasswordSendEmailEndpoint = `${baseUrl}/Users/password/forgot`;
@@ -7,7 +7,7 @@ export const activateManagerEndpoint = `${baseUrl}/Managers/activate`
 export const deactivateManagerEndpoint = `${baseUrl}/Managers`
 export const createManagerEndpoint = `${baseUrl}/Managers`;
 
-export async function AuthorizeManager(userEmail, userPassword){
+export async function AuthorizeManager(userEmail, userPassword) {
     let body = {
         'email': userEmail,
         'password': userPassword
@@ -28,8 +28,7 @@ export async function AuthorizeManager(userEmail, userPassword){
     return response;
 }
 
-export function CreateManagerRequest(firstName, middleName, lastName, email, phone)
-{
+export function CreateManagerRequest(firstName, middleName, lastName, email, phone) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         email: email,
@@ -51,8 +50,7 @@ export function CreateManagerRequest(firstName, middleName, lastName, email, pho
     return fetch(createManagerEndpoint, requestInfo);
 }
 
-export async function ActivateManager(id)
-{
+export async function ActivateManager(id) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestInfo = {
         method: 'PATCH',
@@ -66,8 +64,7 @@ export async function ActivateManager(id)
     return fetch(`${activateManagerEndpoint}/${id}`, requestInfo);
 }
 
-export async function DeactivateManager(id)
-{
+export async function DeactivateManager(id) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestInfo = {
         method: 'DELETE',

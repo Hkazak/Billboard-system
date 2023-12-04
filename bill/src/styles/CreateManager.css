@@ -1,5 +1,4 @@
-.create-manager-block
-{
+.create-manager-block {
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -12,8 +11,7 @@
     background: white;
 }
 
-.create-manager-title
-{
+.create-manager-title {
     font-size: 30px;
     font-family: Inter, sans-serif;
     font-weight: 400;
@@ -23,8 +21,7 @@
     margin-bottom: 40px;
 }
 
-.manager-data-input
-{
+.manager-data-input {
     display: inline-block;
     width: 90%;
     border: 1px solid black;
@@ -38,8 +35,7 @@
     outline: none;
 }
 
-.create-manager-button
-{
+.create-manager-button {
     display: block;
     text-align: center;
     background: #F8BC43;
@@ -50,14 +46,12 @@
     border-radius: 8px;
 }
 
-.manage-buttons
-{
+.manage-buttons {
     display: flex;
     justify-content: space-around;
 }
 
-.cancel-create-manager-button
-{
+.cancel-create-manager-button {
     text-align: center;
     background: #FF4343;
     width: 40%;

@@ -1,5 +1,4 @@
-.create-order-block
-{
+.create-order-block {
     width: 60%;
     position: absolute;
     z-index: 99999;
@@ -11,19 +10,16 @@
     top: 30%;
 }
 
-.create-order-block .upload-picture-block
-{
+.create-order-block .upload-picture-block {
     background: #F5F5F5;
 }
 
-.upload-files-text
-{
+.upload-files-text {
     display: block;
     margin-top: 35px;
 }
 
-.upload-files-text-description
-{
+.upload-files-text-description {
     font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -31,8 +27,7 @@
     text-align: left;
 }
 
-.upload-files-text-title
-{
+.upload-files-text-title {
     font-family: Roboto, sans-serif;
     font-size: 20px;
     font-weight: 400;
@@ -41,14 +36,12 @@
     display: block;
 }
 
-.payment-block
-{
+.payment-block {
     display: flex;
     justify-content: space-between;
 }
 
-.create-order-button
-{
+.create-order-button {
     background: #F8BC43;
     font-family: Roboto, sans-serif;
     font-size: 20px;
@@ -61,8 +54,7 @@
     min-width: 135px;
 }
 
-.close-create-order-block
-{
+.close-create-order-block {
     min-width: 35px;
     min-height: 35px;
     background: #FF4343;
@@ -72,15 +64,13 @@
     align-self: flex-start;
 }
 
-.top-block-content
-{
+.top-block-content {
     display: flex;
     justify-content: right;
     height: 50px;
 }
 
-.create-order-title
-{
+.create-order-title {
     text-align: center;
     font-size: 30px;
     font-family: Roboto, sans-serif !important;

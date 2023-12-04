@@ -3,8 +3,7 @@ import {baseUrl, LS} from "../Consts";
 export const getDiscountsEndpoint = `${baseUrl}/Discounts`;
 export const createDiscountEndpoint = `${baseUrl}/Discounts`;
 
-export function GetDiscounts()
-{
+export function GetDiscounts() {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestInfo = {
         method: 'GET',
@@ -18,8 +17,7 @@ export function GetDiscounts()
     return fetch(getDiscountsEndpoint, requestInfo);
 }
 
-export function CreateDiscountRequest(name, minRent, discount, endDate, billboards)
-{
+export function CreateDiscountRequest(name, minRent, discount, endDate, billboards) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         name: name,

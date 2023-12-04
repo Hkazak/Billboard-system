@@ -1,5 +1,4 @@
-.create-billboard-surface-block
-{
+.create-billboard-surface-block {
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -12,8 +11,7 @@
     background: white;
 }
 
-.create-surface-title
-{
+.create-surface-title {
     font-size: 30px;
     font-family: Inter, sans-serif;
     font-weight: 400;
@@ -23,8 +21,7 @@
     margin-bottom: 40px;
 }
 
-.create-surface-general-span
-{
+.create-surface-general-span {
     margin: 10px 5%;
     font-size: 20px;
     font-family: Inter, sans-serif;
@@ -33,8 +30,7 @@
     display: block;
 }
 
-.create-surface-input
-{
+.create-surface-input {
     display: inline-block;
     width: 90%;
     border: 1px solid black;
@@ -48,8 +44,7 @@
     outline: none;
 }
 
-.create-surface-button
-{
+.create-surface-button {
     display: block;
     text-align: center;
     background: #F8BC43;
@@ -60,14 +55,12 @@
     border-radius: 8px;
 }
 
-.create-billboard-surface-block .manage-buttons
-{
+.create-billboard-surface-block .manage-buttons {
     display: flex;
     justify-content: space-around;
 }
 
-.cancel-create-surface-button
-{
+.cancel-create-surface-button {
     text-align: center;
     background: #FF4343;
     width: 40%;

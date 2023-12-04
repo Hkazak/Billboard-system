@@ -2,8 +2,7 @@ import {baseUrl, LS} from "../Consts";
 
 export const CreateBillboardSurfaceEndpoint = `${baseUrl}/BillboardSurface`;
 
-export function CreateBillboardSurfaceRequest(surface)
-{
+export function CreateBillboardSurfaceRequest(surface) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         surface: surface

@@ -1,10 +1,8 @@
-.order-price-block
-{
+.order-price-block {
     width: 60%;
 }
 
-.order-price-item
-{
+.order-price-item {
     font-family: Roboto, sans-serif !important;
     font-size: 20px;
     line-height: 25px;
@@ -14,8 +12,7 @@
     white-space: nowrap;
 }
 
-.order-price-title
-{
+.order-price-title {
     font-family: Roboto, sans-serif !important;
     font-size: 30px;
     line-height: 35px;
@@ -24,19 +21,16 @@
     margin-bottom: 30px;
 }
 
-.order-price-list
-{
+.order-price-list {
     display: flex;
     flex-direction: column;
 }
 
-.order-price-item-dots
-{
+.order-price-item-dots {
     border-bottom: 2px dotted black;
     bottom: 0.4rem;
 }
 
-.order-price-item-price
-{
+.order-price-item-price {
     right: 0;
 }

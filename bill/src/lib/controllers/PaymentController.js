@@ -2,8 +2,7 @@ import {baseUrl, LS} from "../Consts";
 
 export const CreatePaymentEndpoint = `${baseUrl}/Payments`;
 
-export function CreatePaymentRequest(orderId)
-{
+export function CreatePaymentRequest(orderId) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         orderId: orderId

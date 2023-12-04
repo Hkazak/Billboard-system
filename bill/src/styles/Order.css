@@ -1,4 +1,4 @@
-.billboard-information-block {
+.order-data-block {
     width: 80%;
     position: absolute;
     display: grid;
@@ -8,7 +8,7 @@
     padding: 10px 5px;
     margin-top: -5%;
     margin-left: calc(50vw - 40%);
-    background: #EAEAEA;
+    background: white;
     z-index: 3;
 }
 
@@ -32,35 +32,40 @@
     padding: 7px 0;
 }
 
-.billboard-information-tariffs-list .tariff-block .tariff-price {
+.order-data-block .pictures-container
+{
+    margin: 10px 0;
+}
+
+.order-data-tariffs-list .tariff-block .tariff-price {
     background: #96C9D3;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: 7px 0;
 }
 
-.billboard-information-tariffs-list {
+.order-data-tariffs-list {
     display: flex;
     overflow-x: auto;
 }
 
-.billboard-information-discounts-list {
+.order-data-discounts-list {
     display: flex;
     overflow-x: auto;
 }
 
-.billboard-information-discounts-list .billboard-discount-block {
+.order-data-discounts-list .billboard-discount-block {
     margin-right: 10px;
     min-width: 25%;
 }
 
-.billboard-information-text {
+.order-data-text {
     display: flex;
     flex-direction: column;
     margin-left: 2%;
 }
 
-.billboard-information-title {
+.order-data-title {
     display: block;
     font-family: Inter, sans-serif;
     font-size: 40px;
@@ -68,7 +73,7 @@
     text-align: center;
 }
 
-.billboard-information-data {
+.order-data-data {
     font-family: Inter, sans-serif;
     font-size: 16px;
     line-height: 16px;
@@ -76,7 +81,7 @@
     max-width: 80%;
 }
 
-.billboard-information-general {
+.order-data-general {
     border: 1px solid black;
     border-radius: 8px;
     background: white;
@@ -85,46 +90,46 @@
     padding: 10px 10% 10px 10px;
 }
 
-.billboard-information-general-data-wrapper {
+.order-data-general-data-wrapper {
     max-width: 100%;
     display: flex;
     justify-content: space-around;
     margin: 2px 0;
 }
 
-.billboard-information-general-data-label {
+.order-data-general-data-label {
     white-space: nowrap;
     font-family: Inter, sans-serif;
     font-size: 14px;
     font-weight: 400;
 }
 
-.billboard-information-general-data-dots {
+.order-data-general-data-dots {
     border-bottom: 2px dotted black;
     margin: 0;
     width: 80%;
     display: inline-block;
 }
 
-.billboard-information-general-data {
+.order-data-general-data {
     white-space: nowrap;
     font-family: Inter, sans-serif;
     font-size: 14px;
     font-weight: 400;
 }
 
-.billboard-information-general-text {
+.order-data-general-text {
     font-family: Roboto, sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 25px;
 }
 
-.billboard-information-discounts, .billboard-information-tariffs, .billboard-information-booked-days {
+.order-data-discounts, .order-data-tariffs, .order-data-booked-days {
     margin-top: 15px;
 }
 
-.billboard-information-tariffs-list .tariff-block {
+.order-data-tariffs-list .tariff-block {
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
@@ -134,47 +139,55 @@
     height: 145px;
 }
 
-.billboard-information-tariffs-list .tariff-block .tariff-price {
+.order-data-tariffs-list .tariff-block .tariff-price {
     background: #96C9D3;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: 7px 0;
 }
 
-.billboard-information-calendars {
+.order-data-calendars {
     display: flex;
     flex-direction: row;
 }
 
-.billboard-information-calendar {
+.order-data-calendar {
     margin-right: 10px;
 }
 
-.billboard-information-close {
+.order-data-deny {
     width: 40%;
     height: 40px;
     border: 1px solid black;
     border-radius: 8px;
-    margin-top: 15px;
+    margin: 15px 10px;
     background: #FF4343;
     color: white;
 }
 
-.billboard-information-send {
-    background: #F8BC43;
+.order-data-close {
     width: 40%;
     height: 40px;
     border: 1px solid black;
     border-radius: 8px;
-    margin-top: 15px;
+    margin: 15px 10px;
+    background: orange;
 }
 
-.billboard-information-block .manage-buttons {
-    width: 80%;
+.order-data-send {
+    background: #349911;
+    color: white;
+    width: 40%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 15px 10px;
+}
+
+.order-data-block .manage-buttons {
     display: flex;
-    justify-content: space-around;
     align-items: stretch;
-    align-self: flex-end;
+    justify-content: space-between;
 }
 
 .billboard-picture {
@@ -184,9 +197,29 @@
     border-radius: 8px;
 }
 
-.billboard-information-pictures {
+.order-data-pictures {
     box-sizing: border-box;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+}
+
+.order-data-block .order-price-block
+{
+    margin: 30px 0;
+}
+
+.download-uploaded-pictures
+{
+    display: inline-block;
+    width: 60%;
+    border: 1px solid black;
+    border-radius: 8px;
+    background: #F8BC43;
+    height: 50px;
+    font-family: Roboto, sans-serif !important;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    text-align: center;
 }

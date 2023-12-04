@@ -17,47 +17,38 @@ function Dashboard() {
     const [selectedBillboard, setSelectedBillboard] = useState({});
     const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
 
-    function handleSetSurface(surface)
-    {
+    function handleSetSurface(surface) {
     }
 
-    function handleSetTariff(tariff)
-    {
-
-    }
-
-    function handleSetBillboardType(billboardType)
-    {
+    function handleSetTariff(tariff) {
 
     }
 
-    function handleSetStartDate(startDate)
-    {
+    function handleSetBillboardType(billboardType) {
 
     }
 
-    function handleSetEndDate(endDate)
-    {
+    function handleSetStartDate(startDate) {
 
     }
 
-    function handleCreateBillboard(billboard)
-    {
+    function handleSetEndDate(endDate) {
+
     }
 
-    function selectBillboard(billboardId)
-    {
-        const billboard = billboards.find(e=>e.id===billboardId);
+    function handleCreateBillboard(billboard) {
+    }
+
+    function selectBillboard(billboardId) {
+        const billboard = billboards.find(e => e.id === billboardId);
         setSelectedBillboard(billboard);
         setHideBillboardInfo(false);
     }
 
-    useEffect(()=>
-    {
+    useEffect(() => {
         GetBillboardList()
-            .then(e=>e.json())
-            .then(e=>
-            {
+            .then(e => e.json())
+            .then(e => {
                 setBillboards(e);
                 setSelectedBillboards(e);
             });
@@ -65,7 +56,8 @@ function Dashboard() {
     return (
         <div className="dashboard-content">
             <Header title={"Dashboard"}/>
-            <CreateBillboard hide={hideCreatePanel} setHide={setHideCreatePanel} handleNewBillboard={handleCreateBillboard} />
+            <CreateBillboard hide={hideCreatePanel} setHide={setHideCreatePanel}
+                             handleNewBillboard={handleCreateBillboard}/>
             <BillboardInformation
                 billboardId={selectedBillboard.id}
                 billboardType={selectedBillboard.billboardType}
@@ -82,10 +74,14 @@ function Dashboard() {
                 setHide={setHideBillboardInfo}
             />
             <Sidebar>
-                <DashboardControlPanel handleSelectSurface={handleSetSurface} handleSelectExposure={handleSetBillboardType} handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate} handleSelectEndDate={handleSetEndDate} />
-                <Map markBillboards={selectedBillboards} onSelectBillboard={selectBillboard} />
+                <DashboardControlPanel handleSelectSurface={handleSetSurface}
+                                       handleSelectExposure={handleSetBillboardType}
+                                       handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate}
+                                       handleSelectEndDate={handleSetEndDate}/>
+                <Map markBillboards={selectedBillboards} onSelectBillboard={selectBillboard}/>
                 <div className="create-billboard-panel-button-block" hidden={isClientView}>
-                    <button className="create-billboard-panel-button" onClick={e=>setHideCreatePanel(!hideCreatePanel)}>
+                    <button className="create-billboard-panel-button"
+                            onClick={e => setHideCreatePanel(!hideCreatePanel)}>
                         Создать билборд
                     </button>
                 </div>

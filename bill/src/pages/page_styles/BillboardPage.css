@@ -1,5 +1,4 @@
-.billboard-block
-{
+.billboard-block {
     display: flex;
     flex-direction: column;
 }

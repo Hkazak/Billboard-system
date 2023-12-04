@@ -16,41 +16,40 @@ function ManagerPage() {
     const [managers, setManagers] = useState([]);
     const [hideCreateManagerPanel, setHideCreateManagerPanel] = useState(true);
 
-    function handleSearch(e)
-    {
+    function handleSearch(e) {
         setSearchText(e.target.value);
     }
 
-    function handleCreateManagerPanelVisible(e)
-    {
+    function handleCreateManagerPanelVisible(e) {
         setHideCreateManagerPanel(!hideCreateManagerPanel);
     }
 
-    function handleNewManager(manager)
-    {
+    function handleNewManager(manager) {
         setManagers([...managers, manager]);
     }
 
-    useEffect(()=>
-    {
+    useEffect(() => {
         GetManagersList()
-            .then(e=>e.json())
-            .then(e=>setManagers(e));
+            .then(e => e.json())
+            .then(e => setManagers(e));
     }, []);
     return (
         <div className="manager-block">
-            <Header title="Управление аккаунтами" />
-            <CreateManager hide={hideCreateManagerPanel} setHide={setHideCreateManagerPanel} handleNewManager={handleNewManager} />
+            <Header title="Управление аккаунтами"/>
+            <CreateManager hide={hideCreateManagerPanel} setHide={setHideCreateManagerPanel}
+                           handleNewManager={handleNewManager}/>
             <Sidebar>
-                <ControlPanel isClientView={false} handleSearch={handleSearch} placeholderSearchText="Название" handleCreateItem={handleCreateManagerPanelVisible} createButtonText="Создать менеджера" />
+                <ControlPanel isClientView={false} handleSearch={handleSearch} placeholderSearchText="Название"
+                              handleCreateItem={handleCreateManagerPanelVisible} createButtonText="Создать менеджера"/>
                 {
-                    managers.filter(e=>(e.firstName + e.middleName + e.lastName + e.email + e.phone).includes(searchText))
-                        .map(e=><ManagerInfo firstName={e.firstName} middleName={e.middleName} lastName={e.lastName} email={e.email} phone={e.phone} status={e.status} key={e.id} id={e.id}/>)
+                    managers.filter(e => (e.firstName + e.middleName + e.lastName + e.email + e.phone).includes(searchText))
+                        .map(e => <ManagerInfo firstName={e.firstName} middleName={e.middleName} lastName={e.lastName}
+                                               email={e.email} phone={e.phone} status={e.status} key={e.id} id={e.id}/>)
                 }
             </Sidebar>
         </div>
     );
-  
+
 
 }
 

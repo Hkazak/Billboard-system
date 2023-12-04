@@ -3,8 +3,7 @@ import {baseUrl, LS} from "../Consts";
 export const createTariffEndpoint = `${baseUrl}/Tariffs`;
 export const getTariffListEndpoint = `${baseUrl}/Tariffs`;
 
-export async function SendTariff(title, startTime, endTime, price)
-{
+export async function SendTariff(title, startTime, endTime, price) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         title: title,
@@ -25,7 +24,7 @@ export async function SendTariff(title, startTime, endTime, price)
     return await fetch(createTariffEndpoint, requestInfo);
 }
 
-export async function GetTariffs(){
+export async function GetTariffs() {
     const accessToken = localStorage.getItem(LS.accessToken);
     const response = await fetch(getTariffListEndpoint, {
         method: 'GET',

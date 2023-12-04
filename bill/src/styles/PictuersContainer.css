@@ -1,0 +1,19 @@
+.pictures-container {
+    width: 90%;
+    margin: 10px 5%;
+    display: flex;
+    overflow-x: auto;
+}
+
+.pictures-container img {
+    border-radius: 8px;
+    border: 1px solid black;
+    margin-right: 5px;
+}
+
+.uploaded-image {
+    min-width: 105px;
+    min-height: 105px;
+    max-width: 105px;
+    max-height: 105px;
+}

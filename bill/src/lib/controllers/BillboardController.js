@@ -1,4 +1,4 @@
-import { LS, baseUrl } from "../Consts";
+import {LS, baseUrl} from "../Consts";
 
 export const createBillboardEndpoint = `${baseUrl}/Billboards`;
 export const getBillboardListEndpoint = `${baseUrl}/Billboards`;
@@ -15,7 +15,7 @@ export async function CreateBillboardRequest(name, address, description, groupOf
         "penalty": penalty,
         "height": height,
         "width": width,
-        "pictures": pictures.map(e=>e.data.split(',')[1])
+        "pictures": pictures.map(e => e.data.split(',')[1])
     };
     const accessToken = localStorage.getItem(LS.accessToken);
 
@@ -49,8 +49,7 @@ export function GetBillboardList() {
     });
 }
 
-export function GetShortBillboardList()
-{
+export function GetShortBillboardList() {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestInfo = {
         method: 'GET',

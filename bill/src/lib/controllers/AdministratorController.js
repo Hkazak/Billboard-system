@@ -1,10 +1,10 @@
-import { LS, baseUrl } from "../Consts";
+import {LS, baseUrl} from "../Consts";
 
 export const adminAuthorizationEndpoint = `${baseUrl}/Users/sign-in`;
 export const createManagerEndpoint = `${baseUrl}/Managers`;
 export const getManagersEndpoint = `${baseUrl}/Managers`;
 
-export async function AuthorizeAdmin(userEmail, userPassword){
+export async function AuthorizeAdmin(userEmail, userPassword) {
     let body = {
         'email': userEmail,
         'password': userPassword

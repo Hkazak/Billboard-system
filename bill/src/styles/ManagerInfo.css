@@ -1,11 +1,9 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
-.manager-information-block
-{
+.manager-information-block {
     background: #52AABC;
     display: flex;
     width: 98%;
@@ -16,8 +14,7 @@
     align-items: center;
 }
 
-.manager-inactive-status
-{
+.manager-inactive-status {
     width: 17px;
     height: 17px;
     border-radius: 50%;
@@ -28,8 +25,7 @@
     flex-grow: 1;
 }
 
-.manager-active-status
-{
+.manager-active-status {
     width: 17px;
     height: 17px;
     border-radius: 50%;
@@ -40,30 +36,26 @@
     flex-grow: 1;
 }
 
-.manager-information
-{
+.manager-information {
     display: inline-block;
     flex-grow: 300;
     margin: 0 0 0 15px;
 }
 
-.manager-information-span
-{
+.manager-information-span {
     font-size: 20px;
     font-family: Inter, sans-serif;
     font-weight: 400;
     line-height: 24px;
 }
 
-.control-buttons
-{
+.control-buttons {
     display: inline-flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.control-button
-{
+.control-button {
     background: #F8BC43;
     border: none;
     border-radius: 8px;

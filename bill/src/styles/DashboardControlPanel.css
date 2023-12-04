@@ -1,5 +1,4 @@
-.control-panel-options-list
-{
+.control-panel-options-list {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -8,16 +7,14 @@
     padding: 0;
 }
 
-.control-panel-options-list-item
-{
+.control-panel-options-list-item {
     list-style-type: none;
     display: inline-flex;
     margin: 0;
     padding: 0;
 }
 
-.control-panel-input
-{
+.control-panel-input {
     border: none;
     background: white;
     border-radius: 8px;

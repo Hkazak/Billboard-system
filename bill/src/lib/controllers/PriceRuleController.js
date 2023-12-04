@@ -3,8 +3,7 @@ import {baseUrl, LS} from "../Consts";
 export const getPriceRuleListEndpoint = `${baseUrl}/PriceRules`;
 export const createPriceRuleEndpoint = `${baseUrl}/PriceRules`;
 
-export function GetPriceRulesList()
-{
+export function GetPriceRulesList() {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestInfo = {
         method: 'GET',
@@ -18,8 +17,7 @@ export function GetPriceRulesList()
     return fetch(getPriceRuleListEndpoint, requestInfo);
 }
 
-export function CreatePriceRuleRequest(surfaceId, billboardType, price)
-{
+export function CreatePriceRuleRequest(surfaceId, billboardType, price) {
     const accessToken = localStorage.getItem(LS.accessToken);
     const requestBody = {
         billboardSurfaceId: surfaceId,
