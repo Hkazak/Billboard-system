@@ -32,20 +32,6 @@ function Dashboard() {
         setSelectedBillboardType(billboardType);
     }
 
-    function handleSetStartDate(startDate) {
-        if(startDate)
-        {
-            console.log(startDate);
-        }
-    }
-
-    function handleSetEndDate(endDate) {
-        if(endDate)
-        {
-
-        }
-    }
-
     function handleCreateBillboard(billboard) {
         setBillboards([...billboards, billboard]);
         setSelectedBillboards([...billboards, billboard]);
@@ -98,8 +84,8 @@ function Dashboard() {
             <Sidebar>
                 <DashboardControlPanel handleSelectSurface={handleSetSurface}
                                        handleSelectExposure={handleSetBillboardType}
-                                       handleSelectTariff={handleSetTariff} handleSelectStartDate={handleSetStartDate}
-                                       handleSelectEndDate={handleSetEndDate}/>
+                                       handleSelectTariff={handleSetTariff}
+                />
                 <Map markBillboards={selectedBillboards} onSelectBillboard={selectBillboard}/>
                 <div className="create-billboard-panel-button-block" hidden={isClientView}>
                     <button className="create-billboard-panel-button"

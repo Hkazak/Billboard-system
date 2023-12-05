@@ -9,8 +9,6 @@ function DashboardControlPanel({
                                    handleSelectSurface,
                                    handleSelectExposure,
                                    handleSelectTariff,
-                                   handleSelectStartDate,
-                                   handleSelectEndDate
                                }) {
     const [surfacesList, setSurfacesList] = useState([]);
     const [exposureTypeList, setExposureTypeList] = useState([]);
@@ -52,14 +50,6 @@ function DashboardControlPanel({
                         {tariffsList.map(tariff => <option key={tariff.id}
                                                            className="control-panel-input-option">{tariff.title}</option>)}
                     </select>
-                </li>
-                <li className="control-panel-options-list-item">
-                    <input type="date" name="start-date" className="control-panel-input"
-                           onChange={ev => handleSelectStartDate(ev.target.valueAsDate)}/>
-                </li>
-                <li className="control-panel-options-list-item">
-                    <input type="date" name="end-date" className="control-panel-input"
-                           onChange={ev => handleSelectEndDate(ev.target.valueAsDate)}/>
                 </li>
             </ul>
         </div>
