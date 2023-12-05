@@ -9,11 +9,14 @@ import GroupOfTariffs from "../components/GroupOfTariffs";
 import Header from "../components/Header";
 import CreateGroupOfTariff from "../components/CreateGroupOfTariff";
 import ControlPanel from "../components/ControlPanel";
+import PaginationPanel from "../components/PaginationPanel";
 
 function TariffGroup() {
     const [groups, setGroups] = useState([]);
     const [hideCreateGroupOfTariffsBlock, setHideCreateGroupOfTariffsBlock] = useState(true);
     const [searchText, setSearchText] = useState('');
+    const [page, setPage] = useState(0);
+    const [pageSize, setPageSize] = useState(0);
     const navigate = useNavigate();
     useEffect(() => {
         refreshGroupOfTariffsList();
@@ -45,8 +48,10 @@ function TariffGroup() {
             <Sidebar>
                 <ControlPanel handleCreateItem={handleCreateGroupOfTariffsBlock} handleSearch={handleSearch}
                               createButtonText={"Новая группа"} placeholderSearchText={"Название"}/>
-                {groups.filter(e => e.name.includes(searchText)).map(g => <GroupOfTariffs name={g.name} key={g.id}
-                                                                                          tariffs={g.tariffs}/>)}
+                <PaginationPanel onPageChange={setPage} onPageSizeChange={setPageSize} />
+                {groups.filter(e => e?.name?.toLowerCase()?.includes(searchText?.toLowerCase()))
+                    .slice((page - 1) * pageSize, page * pageSize)
+                    .map(g => <GroupOfTariffs name={g.name} key={g.id} tariffs={g.tariffs}/>)}
             </Sidebar>
         </div>
     )

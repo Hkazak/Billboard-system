@@ -1,0 +1,45 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.pagination-control-panel {
+    background: #52AABC;
+    border: 1px solid #52AABC;
+    border-bottom-left-radius: 16px;
+    padding: 5px 25px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination-control-panel-size-input
+{
+    border: 1px solid black;
+    border-radius: 8px;
+    outline: none;
+    max-width: 75px;
+    text-align: center;
+}
+
+.pagination-control-panel-size-text
+{
+    font-family: Inter, sans-serif;
+    margin: 0 5px;
+}
+
+.pagination-control-panel-page-input
+{
+    border: 1px solid black;
+    border-radius: 8px;
+    outline: none;
+    max-width: 40px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.pagination-panel-arrow-icon
+{
+    rotate: 180deg;
+}

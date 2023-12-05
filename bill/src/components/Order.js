@@ -71,15 +71,19 @@ function Order({
         }
     }
 
-    function handleApprove(ev) {
+    async function handleApprove(ev) {
         ev.preventDefault();
-        ApproveOrderRequest(id)
-            .then(e => {
-                if (e.ok) {
-                    onChange(id, 'InProgress');
-                    setHide(true);
-                }
-            });
+        const response = await ApproveOrderRequest(id);
+        if(response.ok)
+        {
+            onChange(id, 'InProgress');
+            setHide(true);
+        }
+        else
+        {
+            const json = await response.json();
+            alert(json.errorMessage);
+        }
     }
 
     function handleCancel(ev) {

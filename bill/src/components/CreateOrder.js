@@ -16,10 +16,15 @@ function CreateOrder({price, billboardId, tariffId, startDate, endDate, isClient
         if (response.ok) {
             const order = await response.json();
             const paymentResponse = await CreatePaymentRequest(order.id);
-            const payment = await paymentResponse.json();
             if (paymentResponse.ok) {
+                const payment = await paymentResponse.json();
                 window.open(payment.checkoutUrl, '_blank');
             }
+        }
+        else
+        {
+            const json = await response.json();
+            alert(json.errorMessage);
         }
     }
 

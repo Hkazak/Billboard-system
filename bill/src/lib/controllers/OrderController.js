@@ -38,7 +38,7 @@ export function CreateOrderRequest(billboardId, startDate, endDate, tariffId, fi
         tariffId: tariffId,
         startDate: startDateString,
         endDate: endDateString,
-        files: files
+        files: files.map(e=>e.data.split(',')[1])
     };
     const requestInfo = {
         method: 'POST',

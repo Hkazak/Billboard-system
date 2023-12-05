@@ -7,6 +7,7 @@ import {GetOrdersListRequest} from "../lib/controllers/OrderController";
 import Order from "../components/Order";
 import {LS} from "../lib/Consts";
 import {DateObject} from "react-multi-date-picker";
+import PaginationPanel from "../components/PaginationPanel";
 
 function OrderPage() {
     const [orders, setOrders] = useState([]);
@@ -35,6 +36,8 @@ function OrderPage() {
     const [hideOrderInformation, setHideOrderInformation] = useState(true);
     const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
     const [dateRange, setDateRange] = useState([]);
+    const [pageSize, setPageSize] = useState(0);
+    const [page, setPage] = useState(0);
 
     function handleStatusChanged(e) {
         if (e.target.selectedIndex === -1) {
@@ -110,7 +113,8 @@ function OrderPage() {
             <Sidebar>
                 <OrdersControlPanel placeholderSearchText={"Название"} handleSearch={e => setSearchText(e.target.value)}
                                     onStatusSet={handleStatusChanged}/>
-                {orders.filter(e => e?.status?.includes(selectedStatus)).filter(e => e?.name?.toLowerCase()?.includes(searchText)).map(e =>
+                <PaginationPanel onPageSizeChange={setPageSize} onPageChange={setPage} />
+                {orders.filter(e => e?.status?.includes(selectedStatus)).filter(e => e?.name?.toLowerCase()?.includes(searchText)).slice((page - 1) * pageSize, page * pageSize).map(e =>
                     <OrderInformation
                         key={e.id}
                         id={e.id}

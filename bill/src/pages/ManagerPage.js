@@ -8,6 +8,7 @@ import Sidebar from "../components/SideBar";
 import {GetManagersList} from "../lib/controllers/AdministratorController";
 import ManagerInfo from "../components/ManagerInfo";
 import CreateManager from "../components/CreateManager";
+import PaginationPanel from "../components/PaginationPanel";
 
 const data = [];
 
@@ -15,6 +16,8 @@ function ManagerPage() {
     const [searchText, setSearchText] = useState('');
     const [managers, setManagers] = useState([]);
     const [hideCreateManagerPanel, setHideCreateManagerPanel] = useState(true);
+    const [page, setPage] = useState(0);
+    const [pageSize, setPageSize] = useState(0);
 
     function handleSearch(e) {
         setSearchText(e.target.value);
@@ -41,8 +44,10 @@ function ManagerPage() {
             <Sidebar>
                 <ControlPanel isClientView={false} handleSearch={handleSearch} placeholderSearchText="Название"
                               handleCreateItem={handleCreateManagerPanelVisible} createButtonText="Создать менеджера"/>
+                <PaginationPanel onPageChange={setPage} onPageSizeChange={setPageSize} />
                 {
                     managers.filter(e => (e.firstName + e.middleName + e.lastName + e.email + e.phone).includes(searchText))
+                        .slice((page - 1) * pageSize, page * pageSize)
                         .map(e => <ManagerInfo firstName={e.firstName} middleName={e.middleName} lastName={e.lastName}
                                                email={e.email} phone={e.phone} status={e.status} key={e.id} id={e.id}/>)
                 }
