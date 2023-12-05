@@ -11,7 +11,6 @@ function Map({markBillboards, onSelectBillboard}) {
     const [mapLat, setMapLat] = useState(43.234824749685316);
     const [mapZoom, setMapZoom] = useState(12);
     const markers = useRef({});
-    const markedBillboards = useRef(new Set());
     const map = useRef({});
     const apiKey = 'n80YGBrqqDTp0tuSQsbh5OCuXu9cSwuJ';
 
@@ -48,22 +47,33 @@ function Map({markBillboards, onSelectBillboard}) {
             center: [mapLng, mapLat],
             zoom: mapZoom
         });
+        map.current.on('move', (e)=>{
+            const center = e.target.getCenter();
+            setMapLat(center.lat)
+            setMapLng(center.lng);
+            setMapZoom(e.target.getZoom());
+        });
+        map.current.on('zoom', (e)=>{
+            const center = e.target.getCenter();
+            setMapLat(center.lat)
+            setMapLng(center.lng);
+            setMapZoom(e.target.getZoom());
+        });
 
-        return () => map.current.remove();
-    }, [mapLng, mapLat, mapZoom]);
+        for(const billboard of markBillboards)
+        {
+            createMarkerForBillboard(billboard)
+                .then(e=>e.addTo(map.current));
+        }
+
+        return () => {
+            map.current.off('zoom');
+            map.current.off('move');
+            map.current.remove();
+        };
+    }, [markBillboards]);
     return (
         <div className="map-container" ref={mapContainer}>
-            {markBillboards.map(e => {
-                if (!markedBillboards.current.has(e.id)) {
-                    createMarkerForBillboard(e)
-                        .then(e1 => {
-                            e1.addTo(map.current);
-                            console.log('added', e.id);
-                            markedBillboards.current.add(e.id);
-                        })
-                }
-                return <div id={`billboard-${e.id}`} key={e.id}/>
-            })}
         </div>
     );
 }

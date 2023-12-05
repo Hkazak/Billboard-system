@@ -22,6 +22,7 @@ export async function AuthorizeAdmin(userEmail, userPassword) {
         body: JSON.stringify(body)
     });
 
+    localStorage.setItem(LS.userRole, 'admin');
     return response;
 }
 

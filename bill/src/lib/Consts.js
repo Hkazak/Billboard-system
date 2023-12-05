@@ -6,5 +6,6 @@ export const localStorageForgotPasswordEmail = 'forgotPassword:email';
 export const LS = {
     forgotPasswordEmail: 'forgotPassword:email',
     accessToken: 'accessToken',
-    isClient: 'isClient'
+    isClient: 'isClient',
+    userRole: 'userRole'
 };

@@ -13,69 +13,83 @@ import {
     UserAuthorizationRoute
 } from '../Paths';
 import "../styles/Sidebar.css";
+import {LS} from "../lib/Consts";
 
 
 const Sidebar = ({children}) => {
+    const userRole = localStorage.getItem(LS.userRole);
     const menuItem = [
         {
             path: DashboardRoute,
             name: "Dashboard",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['client', 'manager']
         },
         {
             path: UserAuthorizationRoute,
             name: "Авторизация",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['client', 'manager', 'admin']
         },
         {
             path: BillboardsRoute,
             name: "Билборды",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: []
         },
         {
             path: CreateManagerRoute,
             name: "Менеджеры",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['admin']
         },
         {
             path: ManagerAuthRoute,
             name: "Авторизация Менеджера",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['client', 'manager', 'admin']
         },
         {
             path: AdminAuthRoute,
             name: "Авторизация Администратора",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['client', 'manager', 'admin']
         },
         {
             path: TariffRoute,
             name: "Тарифы",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['manager']
         },
         {
             path: DiscountRoute,
             name: "Акции",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['manager']
         },
         {
             path: PriceRuleRoute,
             name: "Цена изготовление",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['manager']
         },
         {
             path: TariffGroupRoute,
             name: "Группы тарифов",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['manager']
         },
         {
             path: SurfaceRoute,
             name: "Виды поверхности",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['manager']
         },
         {
             path: OrdersRoute,
             name: "Заказы",
-            icon: <FaTh/>
+            icon: <FaTh/>,
+            allowed: ['manager', 'client']
         }
     ]
     const [offsetTop, setOffsetTop] = useState(0);
@@ -89,7 +103,7 @@ const Sidebar = ({children}) => {
         <div className="container">
             <div className="sidebar" style={{minHeight: `${minPageHeight - offsetTop}px`}}>
                 {
-                    menuItem.map((item, index) => (
+                    menuItem.filter(e=>e.allowed.includes(userRole)).map((item, index) => (
                         <NavLink to={item.path} key={index} className="link">
                             <div className="link-text">{item.name}</div>
                         </NavLink>

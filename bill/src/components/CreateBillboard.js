@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import {GetGroupOfTariffsList} from "../lib/controllers/TariffGroupController";
 import {getBillboardSurfacesList} from "../lib/controllers/TarrifsController";
 import {GetBillboardTypes} from "../lib/controllers/BillboardTypesController";
@@ -44,7 +44,6 @@ function CreateBillboard({hide = true, setHide, handleNewBillboard, isClientView
             .then(e => e.json())
             .then(e => setBillboardTypesList(e));
     }, []);
-
     return (
         <form className="create-billboard-block" hidden={hide || isClientView}>
             <span className="create-billboard-title">

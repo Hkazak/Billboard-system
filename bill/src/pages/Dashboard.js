@@ -16,27 +16,39 @@ function Dashboard() {
     const [hideBillboardInfo, setHideBillboardInfo] = useState(true);
     const [selectedBillboard, setSelectedBillboard] = useState({});
     const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
+    const [selectedSurface, setSelectedSurface] = useState(null);
+    const [selectedBillboardType, setSelectedBillboardType] = useState(null);
+    const [selectedTariff, setSelectedTariff] = useState(null);
 
     function handleSetSurface(surface) {
+        setSelectedSurface(surface);
     }
 
     function handleSetTariff(tariff) {
-
+        setSelectedTariff(tariff);
     }
 
     function handleSetBillboardType(billboardType) {
-
+        setSelectedBillboardType(billboardType);
     }
 
     function handleSetStartDate(startDate) {
-
+        if(startDate)
+        {
+            console.log(startDate);
+        }
     }
 
     function handleSetEndDate(endDate) {
+        if(endDate)
+        {
 
+        }
     }
 
     function handleCreateBillboard(billboard) {
+        setBillboards([...billboards, billboard]);
+        setSelectedBillboards([...billboards, billboard]);
     }
 
     function selectBillboard(billboardId) {
@@ -51,8 +63,18 @@ function Dashboard() {
             .then(e => {
                 setBillboards(e);
                 setSelectedBillboards(e);
+                setSelectedSurface([]);
             });
     }, []);
+
+    useEffect(()=>{
+        const allBillboards = [...billboards];
+        const filteredBillboards = allBillboards
+            .filter(e=>e?.billboardSurface?.toLowerCase()?.includes(selectedSurface?.surface?.toLowerCase() ?? ''))
+            .filter(e=>e?.billboardType?.toLowerCase()?.includes(selectedBillboardType?.toLowerCase() ?? ''))
+            .filter(e=>e?.groupOfTariffs?.tariffs?.map(e=>e.id)?.some(e=>e.includes(selectedTariff?.id ?? '')));
+        setSelectedBillboards(filteredBillboards);
+    }, [selectedTariff, selectedSurface, selectedBillboardType]);
     return (
         <div className="dashboard-content">
             <Header title={"Dashboard"}/>

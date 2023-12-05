@@ -25,6 +25,7 @@ export async function AuthorizeManager(userEmail, userPassword) {
         body: JSON.stringify(body)
     });
 
+    localStorage.setItem(LS.userRole, 'manager');
     return response;
 }
 

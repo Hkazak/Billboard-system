@@ -25,6 +25,7 @@ export async function RegisterUser(userName, userEmail, userPassword, userConfir
         body: JSON.stringify(body)
     });
 
+    localStorage.setItem(LS.userRole, 'client');
     return response;
 }
 
@@ -46,6 +47,7 @@ export async function AuthorizeUser(userEmail, userPassword) {
         body: JSON.stringify(body)
     });
 
+    localStorage.setItem(LS.userRole, 'client');
     return response;
 }
 
