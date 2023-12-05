@@ -15,15 +15,14 @@ import {useEffect, useRef, useState} from "react";
 function Order({
                    id,
                    name,
-                   billboardId,
+                   status,
                    billboardPictures,
                    billboardDescription,
                    billboardType,
                    discount,
                    uploadedFiles,
                    tariff,
-                   startDate,
-                   endDate,
+                   dateRange,
                    price,
                    billboardSurface,
                    width,
@@ -32,16 +31,14 @@ function Order({
                    hide,
                    setHide,
                    onChange,
-                   setPrice
+                   setPrice,
+                   setDateRange
                }) {
-
-    const [orderStartDate, setOrderStartDate] = useState({day: 1, month: 1, year: 1970});
-    const [orderEndDate, setOrderEndDate] = useState({day: 1, month: 1, year: 1970});
-    const selectedRange = useRef([]);
     const [changed, setChanged] = useState(false);
 
     function handleChangeRange(range) {
         if (range.length === 2) {
+            console.log(status);
             const start = range[0].toDate().toLocaleDateString('ru-RU')
                 .replaceAll('.', '-')
                 .replaceAll('/', '-');
@@ -49,9 +46,7 @@ function Order({
                 .replaceAll('.', '-')
                 .replaceAll('/', '-');
             setChanged(true);
-            setOrderStartDate(toDate(start));
-            setOrderEndDate(toDate(end));
-            selectedRange.current = [new DateObject().set(toDate(start)), new DateObject().set(toDate(end))];
+            setDateRange([new DateObject().set(toDate(start)), new DateObject().set(toDate(end))]);
             RecalculatePriceRequest(id, range[0].toDate(), range[1].toDate())
                 .then(e => e.json())
                 .then(e => setPrice(e));
@@ -66,7 +61,6 @@ function Order({
     function handleHide(e) {
         e.preventDefault();
         e.target.form.reset();
-        selectedRange.current = [new DateObject().set(orderStartDate), new DateObject().set(orderEndDate)];
         setHide(true);
     }
 
@@ -102,18 +96,11 @@ function Order({
 
     function handleChange(ev) {
         ev.preventDefault();
-        ChangePriceRequest(id, new DateObject().set(orderStartDate).toDate(), new DateObject().set(orderEndDate).toDate())
+        ChangePriceRequest(id, ...dateRange.map(e => new DateObject().set(e).toDate()))
             .then(e => e.json())
             .then(e => window.open(e.checkoutUrl, '_blank'));
     }
 
-    useEffect(() => {
-        const start = toDate(startDate);
-        const end = toDate(endDate);
-        setOrderStartDate(start);
-        setOrderEndDate(end);
-        selectedRange.current = [new DateObject().set(start), new DateObject().set(end)];
-    }, []);
     return (
         <form className="order-data-block" hidden={hide}>
             <div className="order-data-pictures">
@@ -158,7 +145,7 @@ function Order({
                     <div className="order-data-calendars">
                         <Calendar className="order-data-calendar" weekStartDayIndex={1}
                                   range readOnly={!isClientView}
-                                  value={selectedRange.current}
+                                  value={dateRange}
                                   onChange={handleChangeRange}
                         />
                     </div>
@@ -175,7 +162,7 @@ function Order({
                     <button className="order-data-send" hidden={!changed} onClick={handleChange}>
                         Подтвердить изменения
                     </button>
-                    <button className="order-data-deny" onClick={handleCancel}>
+                    <button className="order-data-deny" onClick={handleCancel} hidden={status !== 'Submitted'}>
                         {isClientView ? 'Отменить заказ' : 'Отклонить заказ'}
                     </button>
                     <button className="order-data-close" onClick={handleHide}>Закрыть</button>

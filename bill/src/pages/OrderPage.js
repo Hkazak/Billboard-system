@@ -6,6 +6,7 @@ import OrderInformation from "../components/OrderInformation";
 import {GetOrdersListRequest} from "../lib/controllers/OrderController";
 import Order from "../components/Order";
 import {LS} from "../lib/Consts";
+import {DateObject} from "react-multi-date-picker";
 
 function OrderPage() {
     const [orders, setOrders] = useState([]);
@@ -26,15 +27,14 @@ function OrderPage() {
         billboards: []
     });
     const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
     const [billboardSurface, setBillboardSurface] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [price, setPrice] = useState({rentPrice: 0, penaltyPrice: 0, productPrice: 0});
-    const [billboardId, setBillboardId] = useState('');
+    const [orderStatus, setOrderStatus] = useState('');
     const [hideOrderInformation, setHideOrderInformation] = useState(true);
     const [isClientView, setIsClientView] = useState(localStorage.getItem(LS.isClient) === 'true');
+    const [dateRange, setDateRange] = useState([]);
 
     function handleStatusChanged(e) {
         if (e.target.selectedIndex === -1) {
@@ -42,6 +42,11 @@ function OrderPage() {
         } else {
             setSelectedStatus(e.target.options[e.target.selectedIndex].id);
         }
+    }
+
+    function toDate(dateString) {
+        const dateParts = dateString.split('-');
+        return {day: parseInt(dateParts[0]), month: parseInt(dateParts[1]), year: parseInt(dateParts[2])};
     }
 
     function handleSelectOrder(orderId) {
@@ -55,13 +60,14 @@ function OrderPage() {
         setBillboardType(order.billboardType);
         setDiscount(order.discount);
         setUploadedFiles(order.uploadedFiles);
-        setStartDate(order.startDate);
-        setEndDate(order.endDate);
         setBillboardSurface(order.billboardSurface);
         setWidth(order.width);
         setHeight(order.height);
-        setBillboardId(order.billboardId);
+        setOrderStatus(order.status);
         setPrice({rentPrice: order.rentPrice, penaltyPrice: order.penaltyPrice, productPrice: order.productPrice});
+        const start = toDate(order.startDate);
+        const end = toDate(order.endDate);
+        setDateRange([new DateObject().set(start), new DateObject().set(end)]);
         setHideOrderInformation(false);
     }
 
@@ -89,9 +95,8 @@ function OrderPage() {
                 price={price}
                 discount={discount}
                 billboardType={billboardType}
-                startDate={startDate}
-                endDate={endDate}
-                billboardId={billboardId}
+                dateRange={dateRange}
+                status={orderStatus}
                 billboardSurface={billboardSurface}
                 billboardDescription={billboardDescription}
                 billboardPictures={billboardPictures}
@@ -100,6 +105,7 @@ function OrderPage() {
                 setHide={setHideOrderInformation}
                 onChange={handleChangeStatus}
                 setPrice={setPrice}
+                setDateRange={setDateRange}
             />
             <Sidebar>
                 <OrdersControlPanel placeholderSearchText={"Название"} handleSearch={e => setSearchText(e.target.value)}
